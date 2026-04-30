@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TT Group of Companies - Corporate Website Case Study · No Name Productions</title>
+  <meta name="description" content="Case study for TT Group of Companies: turning multi-service complexity into a clear, structured, and credible digital experience." />
+  <style>
+    :root{
+      --bg:#f3f6fb;
+      --paper:#ffffff;
+      --ink:#111827;
+      --muted:#5b6474;
+      --line:rgba(17,24,39,.10);
+      --line-strong:rgba(17,24,39,.18);
+      --navy:#0f172a;
+      --slate:#334155;
+      --steel:#64748b;
+      --blue:#dc2626;
+      --cyan:#ef4444;
+      --shadow:0 24px 60px rgba(17,24,39,.10);
+      --soft:0 10px 28px rgba(17,24,39,.06);
+      --wrap:1180px;
+      --pad:clamp(18px,2.4vw,30px);
+      --radius:24px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      line-height:1.65;
+      background:
+        radial-gradient(900px 600px at 8% 0%, rgba(220,38,38,.10), transparent 60%),
+        radial-gradient(900px 600px at 92% 10%, rgba(239,68,68,.08), transparent 60%),
+        linear-gradient(180deg,#f3f6fb 0%, #fbfdff 100%);
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.12;
+      mix-blend-mode:multiply;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='130'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='130' height='130' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E");
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(var(--wrap), calc(100% - (var(--pad) * 2)));margin-inline:auto}
+
+    h1,h2,h3{margin:0;font-family:inherit;letter-spacing:-.03em}
+    h1{font-size:clamp(2.8rem,6vw,5.2rem);line-height:.92;font-weight:800}
+    h2{font-size:clamp(1.9rem,4vw,3rem);line-height:.98;font-weight:800}
+    h3{font-size:1.25rem;line-height:1.08;font-weight:800}
+    p{margin:0}
+
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;
+      font-size:.78rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)
+    }
+    .eyebrow::before{content:"";width:30px;height:2px;border-radius:999px;background:currentColor}
+
+    .topbar{
+      position:sticky;top:0;z-index:100;
+      background:rgba(243,246,251,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar__row{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;min-width:0}
+    .brand__text{display:flex;flex-direction:column;line-height:1;min-width:0}
+    .brand__name{font-size:1rem;color:var(--ink)}
+    .brand__sub{font-size:.72rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted)}
+    .crumb{font-size:.88rem;color:var(--muted)}
+    .crumb strong{color:var(--ink)}
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:12px 18px;border-radius:999px;border:1px solid var(--line-strong);
+      background:#fff;box-shadow:var(--soft);font-weight:700;transition:transform .16s ease, box-shadow .16s ease
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+    .btn--primary{background:linear-gradient(135deg,var(--blue),#b91c1c);color:#fff;border-color:transparent}
+
+    .progressWrap{height:3px;background:rgba(0,0,0,.04)}
+    .progressBar{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--steel));transition:width .08s linear}
+
+    .section{padding:clamp(56px,7vw,96px) 0}
+    .sectionHead{margin-bottom:24px}
+    .sectionLead{max-width:72ch;color:var(--muted);margin-top:12px;font-size:1.02rem;line-height:1.82}
+
+    .hero{padding-top:clamp(74px,9vw,120px)}
+    .hero__grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:start}
+    .hero__lead{max-width:62ch;color:var(--muted);font-size:1.06rem;line-height:1.85;margin-top:18px}
+    .hero__actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:30px}
+    .stat{padding:16px;border-radius:18px;background:rgba(255,255,255,.8);border:1px solid var(--line);box-shadow:var(--soft)}
+    .stat strong{display:block;font-size:1rem}
+    .stat span{display:block;margin-top:6px;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+    .panel,.card,.band{border-radius:var(--radius)}
+    .panel{padding:24px;background:linear-gradient(180deg,var(--navy),#1e293b);color:#fff;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .panel::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg, transparent, transparent 18px, rgba(255,255,255,.03) 18px, rgba(255,255,255,.03) 20px)}
+    .panel > *{position:relative;z-index:1}
+    .panel p{color:rgba(255,255,255,.72);line-height:1.78}
+
+    .grid-2,.grid-3,.metricGrid{display:grid;gap:16px}
+    .grid-2{grid-template-columns:1fr 1fr}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .metricGrid{grid-template-columns:repeat(4,1fr)}
+
+    .card{padding:22px;background:rgba(255,255,255,.9);border:1px solid var(--line);box-shadow:var(--soft)}
+    .card p{color:var(--muted);margin-top:10px;line-height:1.78}
+
+    .list{margin:14px 0 0;padding-left:18px;color:var(--muted);display:grid;gap:8px}
+
+    .timeline{display:grid;gap:12px}
+    .step{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start;padding:16px;border-radius:18px;background:#fff;border:1px solid var(--line)}
+    .stepNum{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-weight:800;background:rgba(220,38,38,.12);color:var(--blue)}
+    .step p{color:var(--muted);margin-top:6px;line-height:1.7}
+
+    .band{padding:22px;background:linear-gradient(135deg,#260b0b,#7f1d1d);color:#fff;box-shadow:var(--shadow)}
+    .metric{padding:16px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}
+    .metric strong{display:block;font-size:1.35rem;line-height:1}
+    .metric span{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+
+    .siteLink{display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-weight:800;margin-top:14px}
+    .siteLink:hover{text-decoration:underline}
+
+    .shotGrid{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;align-items:start}
+    .shotGrid__stack{display:grid;gap:16px}
+    .shotCard{border-radius:20px;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:var(--soft)}
+    .shotCard__img{width:100%;display:block;aspect-ratio:1.25;object-fit:cover;background:#f1f5f9}
+    .shotCard--lead .shotCard__img{aspect-ratio:1.5}
+    .shotCard__body{padding:14px 16px 16px}
+    .shotCard__body strong{display:block;font-size:1rem}
+    .shotCard__body p{margin-top:6px;color:var(--muted);font-size:.9rem;line-height:1.7}
+
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .56s ease, transform .56s ease}
+    .reveal.is-in{opacity:1;transform:none}
+    .reveal--delay1{transition-delay:.08s}
+    .reveal--delay2{transition-delay:.16s}
+
+    .footer{padding:24px 0 40px;color:var(--muted)}
+    .footer__row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line);padding-top:18px}
+    .footer__links{display:flex;gap:16px;flex-wrap:wrap}
+
+    @media (max-width: 1040px){
+      .hero__grid,.grid-2,.grid-3,.metricGrid{grid-template-columns:1fr 1fr}
+      .shotGrid{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 760px){
+      h1{font-size:clamp(2.2rem,10vw,3.6rem)}
+      h2{font-size:clamp(1.7rem,8vw,2.5rem)}
+      .hero__grid,.grid-2,.grid-3,.metricGrid,.stats,.shotGrid{grid-template-columns:1fr}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .reveal{opacity:1;transform:none;transition:none}
+      *{scroll-behavior:auto !important}
+    }
+  
+    /* Global accessibility and responsive baseline */
+    .skip-link{
+      position:absolute;
+      left:12px;
+      top:-48px;
+      z-index:9999;
+      background:#111;
+      color:#fff;
+      padding:10px 12px;
+      border-radius:10px;
+      font-weight:700;
+      text-decoration:none;
+    }
+    .skip-link:focus{top:12px}
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    [tabindex]:focus-visible{
+      outline:3px solid #2563eb;
+      outline-offset:3px;
+      border-radius:6px;
+    }
+
+    img,video,canvas,svg{max-width:100%;height:auto}
+
+    @media (max-width: 900px){
+      .topbar__row{flex-wrap:wrap}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="topbar">
+    <div class="wrap topbar__row">
+      <a class="brand" href="index.html" aria-label="No Name Productions home">
+        <span class="brand__text">
+          <span class="brand__name">No Name Productions</span>
+          <span class="brand__sub">Creative Studio</span>
+        </span>
+      </a>
+      <div class="crumb">Case Study / <strong>TT Group of Companies</strong></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn" href="index.html#work">Back to work</a>
+        <a class="btn btn--primary" href="https://ttgroupofcompanies.netlify.app/" target="_blank" rel="noopener noreferrer">Visit live website</a>
+      </div>
+    </div>
+    <div class="progressWrap" aria-hidden="true">
+      <div class="progressBar" data-progress></div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="section hero">
+      <div class="wrap hero__grid">
+        <div class="reveal">
+          <div class="eyebrow">Corporate Website Case Study</div>
+          <h1>TT Group of Companies</h1>
+          <p class="hero__lead">Structuring complexity into a clear digital experience for a multi-vertical business spanning logistics, consulting, and business services.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#overview">Explore case study</a>
+            <a class="btn" href="https://ttgroupofcompanies.netlify.app/" target="_blank" rel="noopener noreferrer">Open built website</a>
+          </div>
+          <div class="stats">
+            <div class="stat"><strong>Multi-vertical</strong><span>business model</span></div>
+            <div class="stat"><strong>Clarity-first</strong><span>content strategy</span></div>
+            <div class="stat"><strong>Responsive</strong><span>cross-device design</span></div>
+            <div class="stat"><strong>Credibility-led</strong><span>corporate direction</span></div>
+          </div>
+        </div>
+
+        <aside class="panel reveal reveal--delay1">
+          <div class="eyebrow" style="color:#fecaca">Overview</div>
+          <h2 style="font-size:clamp(1.8rem,3.6vw,2.6rem)">From complexity to clarity</h2>
+          <p style="margin-top:12px">The objective was to transform a complex company structure into a clear, accessible, and credible digital experience. Instead of saying everything at once, the website organizes information around what users need to understand first.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="overview" class="section">
+      <div class="wrap grid-3">
+        <article class="card reveal">
+          <div class="eyebrow">The Problem</div>
+          <h3>Lack of clear positioning</h3>
+          <p>Services overlapped and hierarchy was weak, making it hard for users to understand what the company does and why to trust it.</p>
+          <ul class="list">
+            <li>Unclear value proposition</li>
+            <li>Confusing service boundaries</li>
+            <li>Weak first impression</li>
+          </ul>
+        </article>
+        <article class="card reveal reveal--delay1">
+          <div class="eyebrow">The Goal</div>
+          <h3>Build a digestible system</h3>
+          <p>Create a website structure that separates services clearly while maintaining a single professional brand language.</p>
+          <ul class="list">
+            <li>Clear segmentation without fragmentation</li>
+            <li>Faster relevance recognition</li>
+            <li>Consistent cross-section design</li>
+          </ul>
+        </article>
+        <article class="card reveal reveal--delay2">
+          <div class="eyebrow">Insight</div>
+          <h3>Users filter, not explore</h3>
+          <p>Visitors ask “Is this relevant to me?” within seconds. If clarity is missing, they leave before discovering the full offer.</p>
+          <ul class="list">
+            <li>Reduce ambiguity</li>
+            <li>Increase clarity</li>
+            <li>Prioritize recognition over exploration</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap grid-2">
+        <article class="card reveal">
+          <div class="eyebrow">Strategy</div>
+          <h2>Clarity over creativity</h2>
+          <p>Communication-first decisions shaped both UI and content. The architecture clearly separates core services, supporting offerings, and company overview in a structure similar to global multi-division corporate sites.</p>
+          <a class="siteLink" href="https://www.ttgroupglobal.com/" target="_blank" rel="noopener noreferrer">Reference pattern: ttgroupglobal.com →</a>
+        </article>
+        <article class="card reveal reveal--delay1">
+          <div class="eyebrow">Navigation</div>
+          <h2>Guided service discovery</h2>
+          <p>Navigation was designed to move users across divisions without confusion, so they can quickly identify relevant services and continue deeper.</p>
+          <div class="timeline" style="margin-top:12px">
+            <div class="step"><div class="stepNum">1</div><div><h3>Overview</h3><p>Establish company context.</p></div></div>
+            <div class="step"><div class="stepNum">2</div><div><h3>Services</h3><p>Segment offerings clearly.</p></div></div>
+            <div class="step"><div class="stepNum">3</div><div><h3>Details</h3><p>Layer deeper information.</p></div></div>
+            <div class="step"><div class="stepNum">4</div><div><h3>Contact</h3><p>Drive conversion actions.</p></div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div class="eyebrow">Design Approach</div>
+          <h2>Clean corporate visual direction</h2>
+          <p class="sectionLead">A neutral palette, strong typographic hierarchy, and consistent spacing system were used to create trust and readability across all sections.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card reveal">
+            <h3>UI direction</h3>
+            <p>Neutral color system with clear heading contrast and visual consistency.</p>
+          </article>
+          <article class="card reveal reveal--delay1">
+            <h3>UX principles</h3>
+            <p>Reduce decision fatigue by presenting information in logical layers.</p>
+          </article>
+          <article class="card reveal reveal--delay2">
+            <h3>Information design</h3>
+            <p>Each section answers a specific user question before moving to the next.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap band reveal">
+        <div class="metricGrid">
+          <div class="metric"><strong>01</strong><span>Multi-service structured layout</span></div>
+          <div class="metric"><strong>02</strong><span>Clear service segmentation</span></div>
+          <div class="metric"><strong>03</strong><span>Responsive design system</span></div>
+          <div class="metric"><strong>04</strong><span>Contact-focused conversion flow</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div class="eyebrow">Website Visuals</div>
+          <h2>Section snapshots from the TT Group website</h2>
+          <p class="sectionLead">A similar visual showcase section to present the website itself. It highlights key areas users see: landing experience, company story, recognition, and content-led trust sections.</p>
+          <a class="siteLink" href="https://ttgroupofcompanies.netlify.app/" target="_blank" rel="noopener noreferrer">Open live website →</a>
+        </div>
+
+        <div class="shotGrid">
+          <article class="shotCard shotCard--lead reveal">
+            <img class="shotCard__img" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fttgroupofcompanies.netlify.app%2F?w=1400" alt="TT Group website homepage screenshot" />
+            <div class="shotCard__body">
+              <strong>Homepage</strong>
+              <p>First-screen brand presence and entry points into the corporate narrative.</p>
+            </div>
+          </article>
+
+          <div class="shotGrid__stack">
+            <article class="shotCard reveal reveal--delay1">
+              <img class="shotCard__img" src="https://ttgroupofcompanies.netlify.app/images/locations.jpeg" alt="TT Group website who we are section visual" />
+              <div class="shotCard__body">
+                <strong>Who We Are Section</strong>
+                <p>Company background and credibility-focused storytelling block.</p>
+              </div>
+            </article>
+
+            <article class="shotCard reveal reveal--delay2">
+              <img class="shotCard__img" src="https://ttgroupofcompanies.netlify.app/images/recognition.png" alt="TT Group recognition section screenshot" />
+              <div class="shotCard__body">
+                <strong>Recognition Section</strong>
+                <p>Leadership and recognition-focused content supporting brand trust.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap grid-2">
+        <article class="card reveal">
+          <div class="eyebrow">Challenges</div>
+          <h2>Managing complexity without fragmentation</h2>
+          <p>Multiple services increase cognitive load. The design challenge was to separate offerings without making the brand feel disconnected.</p>
+          <ul class="list">
+            <li>Managing complexity across verticals</li>
+            <li>Avoiding brand fragmentation</li>
+            <li>Maintaining visual consistency</li>
+          </ul>
+        </article>
+        <article class="card reveal reveal--delay1">
+          <div class="eyebrow">Solutions</div>
+          <h2>Modular and repeatable section logic</h2>
+          <p>A modular section system and consistent visual patterns were introduced to simplify scanning and reduce unnecessary content.</p>
+          <ul class="list">
+            <li>Modular section architecture</li>
+            <li>Consistent heading and spacing rhythm</li>
+            <li>Clarity-first page copy</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="outcome">
+      <div class="wrap grid-2">
+        <article class="panel reveal">
+          <div class="eyebrow" style="color:#fecaca">Outcome</div>
+          <h2 style="font-size:clamp(1.9rem,3.5vw,2.8rem)">Structured, professional, and easy to navigate</h2>
+          <p style="margin-top:12px">The final website now communicates offerings clearly, improves understanding within seconds, and builds credibility through consistency. It reflects how modern multi-service businesses position themselves: organized, scalable, and user-focused.</p>
+        </article>
+
+        <article class="card reveal reveal--delay1">
+          <div class="eyebrow">Reflection</div>
+          <h2>Complex businesses need better structure, not more content</h2>
+          <p class="sectionLead">Simplifying the experience and focusing on clarity made the website more effective without making it more complicated.</p>
+          <div class="timeline" style="margin-top:12px">
+            <div class="step"><div class="stepNum">1</div><div><h3>Next: SEO depth</h3><p>Create deeper service pages for discoverability.</p></div></div>
+            <div class="step"><div class="stepNum">2</div><div><h3>Next: Case studies</h3><p>Add proof content for each vertical.</p></div></div>
+            <div class="step"><div class="stepNum">3</div><div><h3>Next: Analytics</h3><p>Track user flow and optimize conversion paths.</p></div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__row">
+      <p>Credits: Design and development by Your Name</p>
+      <div class="footer__links">
+        <a href="index.html#work">Work</a>
+        <a href="https://ttgroupofcompanies.netlify.app/" target="_blank" rel="noopener noreferrer">Live website</a>
+        <a href="#overview">Top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const progress = document.querySelector('[data-progress]');
+      const revealEls = document.querySelectorAll('.reveal');
+
+      const updateProgress = () => {
+        const doc = document.documentElement;
+        const max = doc.scrollHeight - doc.clientHeight;
+        const value = max > 0 ? (doc.scrollTop / max) * 100 : 0;
+        if (progress) progress.style.width = `${Math.max(0, Math.min(100, value))}%`;
+      };
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+
+      if (!prefersReduced && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+        revealEls.forEach(el => io.observe(el));
+      } else {
+        revealEls.forEach(el => el.classList.add('is-in'));
+      }
+    })();
+  </script>
+</body>
+</html>
+
+
+

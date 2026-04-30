@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Canvas</title>
+<meta name="description" content="A curated Digital Canvas of social media posters and isometric illustrations for the No Name Productions graphic design portfolio." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f2eb;
+  --surface: #ffffff;
+  --ink: #151515;
+  --ink-soft: #5b5b5b;
+  --line: rgba(21, 21, 21, 0.1);
+  --accent: #7c3aed;
+  --accent-2: #f59e0b;
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
+  --shadow-soft: 0 14px 34px rgba(0, 0, 0, 0.06);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(900px 600px at 10% 0%, rgba(124, 58, 237, 0.11), transparent 60%),
+    radial-gradient(900px 600px at 90% 10%, rgba(245, 158, 11, 0.08), transparent 60%),
+    linear-gradient(180deg, var(--bg), #fbf9f4 100%);
+  line-height: 1.6;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+}
+
+body.modal-open { overflow: hidden; }
+
+a { color: inherit; text-decoration: none; }
+
+button { font: inherit; cursor: pointer; }
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -44px;
+  z-index: 10000;
+  background: #111827;
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.skip-link:focus { top: 12px; }
+
+h1, h2, h3 {
+  margin: 0;
+  font-family: "Space Grotesk", Inter, sans-serif;
+  letter-spacing: -0.03em;
+}
+
+h1 { font-size: clamp(2.4rem, 6vw, 5rem); line-height: 0.96; }
+h2 { font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1; }
+h3 { font-size: 1.2rem; line-height: 1.08; }
+
+.wrap {
+  width: min(1180px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(246, 242, 235, 0.92);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 76px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.brand__mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
+  flex: 0 0 auto;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 14px 28px rgba(124, 58, 237, 0.20);
+  position: relative;
+}
+
+.brand__mark::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+  min-width: 0;
+}
+
+.brand__name {
+  font-weight: 800;
+  font-size: 0.98rem;
+  color: var(--ink);
+}
+
+.brand__sub {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink-soft);
+}
+
+.topbar__crumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  flex-wrap: wrap;
+}
+
+.topbar__crumb strong { color: var(--ink); }
+
+.topbar__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.top-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: var(--shadow-soft);
+}
+
+.top-btn--primary {
+  background: linear-gradient(135deg, var(--accent), #9f67ff);
+  color: #fff;
+  border-color: transparent;
+}
+
+.hero {
+  padding: clamp(96px, 10vw, 130px) 0 32px;
+}
+
+.hero__panel {
+  display: grid;
+  gap: 18px;
+  padding: 28px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(16px);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 30px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.hero p {
+  max-width: 68ch;
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+  line-height: 1.8;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.filterBar__label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.filterChip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.84);
+  color: var(--ink);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.filterChip:hover {
+  transform: translateY(-1px);
+}
+
+.filterChip.is-active,
+.filterChip[aria-selected="true"] {
+  background: linear-gradient(135deg, var(--accent), #9f67ff);
+  color: #fff;
+  border-color: transparent;
+}
+
+.topicSection {
+  padding: 8px 0 14px;
+}
+
+.topicSection.is-hidden {
+  display: none;
+}
+
+.topicSection__header {
+  width: min(1300px, calc(100% - 2rem));
+  margin: 0 auto 0.75rem;
+  display: grid;
+  gap: 10px;
+}
+
+.topicSection__header p {
+  max-width: 68ch;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.stat {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid var(--line);
+}
+
+.stat strong {
+  display: block;
+  font-size: 1.1rem;
+  font-family: "Space Grotesk", Inter, sans-serif;
+}
+
+.stat span {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+}
+
+.gallery {
+  column-count: 4;
+  column-gap: 1rem;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 1rem 1rem 3rem;
+}
+
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  background: var(--surface);
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+.gallery-item figure { position: relative; }
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gallery-item figcaption {
+  padding: 14px 16px 16px;
+}
+
+.gallery-item figcaption strong {
+  display: block;
+  font-size: 0.96rem;
+}
+
+.gallery-item figcaption span {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+  padding: 24px;
+  z-index: 2000;
+}
+
+.lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox__frame {
+  position: relative;
+  width: min(1100px, 100%);
+  max-height: 92vh;
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+}
+
+.lightbox img {
+  max-width: 100%;
+  max-height: 72vh;
+  border-radius: 20px;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.16);
+  display: none;
+}
+
+.lightbox__thumbnails {
+  width: min(100%, 1120px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 20px;
+  overflow-x: auto;
+  background: transparent;
+  border-radius: 20px;
+  box-shadow: none;
+}
+
+.lightbox__thumbnail {
+  width: 82px;
+  height: 82px;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  padding: 0;
+  background: transparent;
+}
+
+.lightbox__thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  max-height: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.lightbox__thumbnail:hover {
+  transform: scale(1.04);
+  border-color: rgba(255, 255, 255, 0.72);
+}
+
+.lightbox__thumbnail.is-active {
+  border-color: var(--accent-2);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.38);
+}
+
+.spinner {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--accent);
+  animation: spin 1s linear infinite;
+}
+
+.lightbox .close,
+.lightbox .fullscreen,
+.lightbox .prev,
+.lightbox .next {
+  position: absolute;
+  border: none;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--ink);
+  border-radius: 999px;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow-soft);
+}
+
+.close { top: -4px; right: -4px; }
+.fullscreen { top: -4px; right: 52px; }
+.prev { left: -8px; top: 50%; transform: translateY(-50%); }
+.next { right: -8px; top: 50%; transform: translateY(-50%); }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 1100px) {
+  .gallery { column-count: 3; }
+}
+
+@media (max-width: 800px) {
+  .gallery { column-count: 2; }
+  .stats { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 520px) {
+  .lightbox__thumbnails { padding: 14px; }
+  .lightbox__thumbnail { width: 66px; height: 66px; }
+  .gallery { column-count: 1; }
+  .hero__panel { padding: 22px; }
+  .lightbox { padding: 16px; }
+  .lightbox .close,
+  .lightbox .fullscreen,
+  .lightbox .prev,
+  .lightbox .next { width: 42px; height: 42px; }
+  .topbar__row { flex-wrap: wrap; padding: 12px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="topbar">
+  <div class="wrap topbar__row">
+    <a class="brand" href="index.html" aria-label="No Name Productions Home">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__text">
+        <span class="brand__name">No Name Productions</span>
+        <span class="brand__sub">Creative Studio</span>
+      </span>
+    </a>
+
+    <nav class="topbar__crumb" aria-label="Breadcrumb">
+      <a href="index.html#work">Work</a>
+      <span>›</span>
+      <strong>Digital Canvas</strong>
+    </nav>
+
+    <div class="topbar__actions">
+      <a class="top-btn" href="index.html#work">← Back to Work</a>
+      <a class="top-btn top-btn--primary" href="index.html">Home</a>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+  <section class="hero" aria-label="Digital Canvas case study">
+    <div class="wrap hero__panel">
+      <p class="eyebrow">Case Study · Graphic Design</p>
+      <h1>Digital Canvas</h1>
+      <p>A split showcase of social media posters and isometric illustrations. Use the section buttons to switch between the two groups, similar to the filter chips on the selected work section in the home page.</p>
+      <div class="stats" aria-label="Gallery summary">
+        <div class="stat"><strong>17</strong><span>Total visuals</span></div>
+        <div class="stat"><strong>2</strong><span>Selectable sections</span></div>
+        <div class="stat"><strong>Accessible</strong><span>Keyboard lightbox support</span></div>
+      </div>
+      <div class="filterBar" aria-label="Digital Canvas section filters">
+        <span class="filterBar__label">Select Section</span>
+        <button class="filterChip is-active" type="button" data-section="posters" role="tab" aria-selected="true">Social Media Posters</button>
+        <button class="filterChip" type="button" data-section="isometrics" role="tab" aria-selected="false">Isometric Illustrations</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="topicSection" data-section-panel="posters" aria-labelledby="posters-heading">
+    <div class="topicSection__header wrap">
+      <p class="eyebrow">Section 01</p>
+      <h2 id="posters-heading">Social Media Posters</h2>
+      <p>Campaign posters, seasonal promotions, and social-first graphics selected from the portfolio assets.</p>
+    </div>
+    <section class="gallery" id="gallery-posters" aria-label="Social media poster gallery">
+    <div class="gallery-item">
+      <figure>
+        <img src="assests/img/Gallery/3rzw.jpg" loading="lazy" width="600" height="800" alt="Social media poster 3rzw">
+        <figcaption><strong>3rzw</strong><span>Poster artwork</span></figcaption>
+      </figure>
+    </div>
+    <div class="gallery-item">
+      <figure>
+        <img src="assests/img/Gallery/Christmas 2.jpg" loading="lazy" width="600" height="700" alt="Christmas poster variant 2">
+        <figcaption><strong>Christmas 2</strong><span>Seasonal campaign</span></figcaption>
+      </figure>
+    </div>
+    <div class="gallery-item">
+      <figure>
+        <img src="assests/img/Gallery/Christmas.jpg" loading="lazy" width="600" height="900" alt="Christmas poster">
+        <figcaption><strong>Christmas</strong><span>Seasonal campaign</span></figcaption>
+      </figure>
+    </div>
+    <div class="gallery-item">
+      <figure>
+        <img src="assests/img/Gallery/Construction Poster.png" loading="lazy" width="600" height="750" alt="Construction poster">
+        <figcaption><strong>Construction Poster</strong><span>Industry promotion</span></figcaption>
+      </figure>
+    </div>
+    <div class="gallery-item">
+      <figure>
+        <img src="assests/img/Gallery/Diwali 1.jpg" loading="lazy" width="600" height="850" alt="Diwali poster">
+        <figcaption><strong>Diwali 1</strong><span>Festival campaign</span></figcaption>
+      </figure>
+    </div>
+    <div class="gallery-item">
+      <figure>
+        <img src="assests/img/Gallery/EV Pongal Poster.png" loading="lazy" width="600" height="780" alt="EV Pongal poster">
+        <figcaption><strong>EV Pongal Poster</strong><span>Festival promotion</span></figcaption>
+      </figure>
+    </div>
+    <div class="gallery-item">
+      <figure>
+        <img src="assests/img/Gallery/EV Poster 02.png" loading="lazy" width="600" height="760" alt="EV poster 02">
+        <figcaption><strong>EV Poster 02</strong><span>Social poster</span></figcaption>
+      </figure>
+    </div>
+    <div class="gallery-item">
+      <figure>
+        <img src="assests/img/Gallery/EV Poster 04.png" loading="lazy" width="600" height="880" alt="EV poster 04">
+        <figcaption><strong>EV Poster 04</strong><span>Social poster</span></figcaption>
+      </figure>
+    </div>
+    <div class="gallery-item">
+      <figure>
+        <img src="assests/img/Gallery/EV Poster 05.png" loading="lazy" width="600" height="810" alt="EV poster 05">
+        <figcaption><strong>EV Poster 05</strong><span>Social poster</span></figcaption>
+      </figure>
+    </div>
+    <div class="gallery-item">
+      <figure>
+        <img src="assests/img/Gallery/EV Poster 06.png" loading="lazy" width="600" height="790" alt="EV poster 06">
+        <figcaption><strong>EV Poster 06</strong><span>Social poster</span></figcaption>
+      </figure>
+    </div>
+    <div class="gallery-item">
+      <figure>
+        <img src="assests/img/Gallery/EV Poster 10.png" loading="lazy" width="600" height="830" alt="EV poster 10">
+        <figcaption><strong>EV Poster 10</strong><span>Social poster</span></figcaption>
+      </figure>
+    </div>
+    <div class="gallery-item">
+      <figure>
+        <img src="assests/img/Gallery/Juneteenth.jpg" loading="lazy" width="600" height="820" alt="Juneteenth poster">
+        <figcaption><strong>Juneteenth</strong><span>Campaign artwork</span></figcaption>
+      </figure>
+    </div>
+    </section>
+  </section>
+
+  <section class="topicSection is-hidden" data-section-panel="isometrics" aria-labelledby="isometrics-heading">
+    <div class="topicSection__header wrap">
+      <p class="eyebrow">Section 02</p>
+      <h2 id="isometrics-heading">Isometric Illustrations</h2>
+      <p>Spatial illustrations and built-environment visuals that add a more technical rhythm to the page.</p>
+    </div>
+    <section class="gallery" id="gallery-isometrics" aria-label="Isometric illustration gallery">
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/iso/Power Plant Isometric.jpg" loading="lazy" width="600" height="800" alt="Power plant isometric illustration">
+          <figcaption><strong>Power Plant</strong><span>Isometric illustration</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/iso/House Isometric.jpg" loading="lazy" width="600" height="720" alt="House isometric illustration">
+          <figcaption><strong>House</strong><span>Isometric illustration</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/iso/City Isometric.jpg" loading="lazy" width="600" height="820" alt="City isometric illustration">
+          <figcaption><strong>City</strong><span>Urban isometric scene</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/iso/Center Management Isometric.jpg" loading="lazy" width="600" height="780" alt="Center management isometric illustration">
+          <figcaption><strong>Center Management</strong><span>Systems illustration</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/iso/260630_Island Isometric_SID.jpg" loading="lazy" width="600" height="790" alt="Island isometric illustration">
+          <figcaption><strong>Island</strong><span>Isometric landscape</span></figcaption>
+        </figure>
+      </div>
+    </section>
+  </section>
+</main>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Image viewer">
+  <div class="lightbox__frame">
+    <div class="spinner" id="spinner" aria-hidden="true"></div>
+    <button class="close" type="button" aria-label="Close image">×</button>
+    <button class="fullscreen" type="button" aria-label="Enter fullscreen">⤢</button>
+    <button class="prev" type="button" aria-label="Previous image">&#10094;</button>
+    <button class="next" type="button" aria-label="Next image">&#10095;</button>
+    <img id="lightboxImg" alt="">
+    <div class="lightbox__thumbnails" id="lightboxThumbnails" aria-label="Image thumbnails"></div>
+  </div>
+</div>
+
+<script>
+const galleryItems = [...document.querySelectorAll('.gallery-item')].map(item => {
+  const image = item.querySelector('img');
+  const title = item.querySelector('figcaption strong')?.textContent || image?.alt || '';
+  const meta = item.querySelector('figcaption span')?.textContent || '';
+  return { item, image, title, meta };
+});
+const images = galleryItems.map(entry => entry.image);
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxThumbnails = document.getElementById('lightboxThumbnails');
+const spinner = document.getElementById('spinner');
+const closeBtn = document.querySelector('.close');
+const fullscreenBtn = document.querySelector('.fullscreen');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+const backBtn = document.getElementById('backBtn');
+const filterChips = [...document.querySelectorAll('.filterChip[data-section]')];
+const sectionPanels = [...document.querySelectorAll('.topicSection[data-section-panel]')];
+const galleryPanes = [...document.querySelectorAll('.gallery')];
+
+let currentIndex = 0;
+let lastFocus = null;
+
+function initThumbnails() {
+  lightboxThumbnails.innerHTML = '';
+
+  galleryItems.forEach((entry, index) => {
+    const thumb = document.createElement('button');
+    thumb.type = 'button';
+    thumb.className = 'lightbox__thumbnail';
+    thumb.setAttribute('aria-label', `Open ${entry.title}`);
+    thumb.innerHTML = `<img src="${entry.image.src}" alt="${entry.image.alt}" />`;
+    thumb.addEventListener('click', () => {
+      currentIndex = index;
+      loadImage();
+    });
+    lightboxThumbnails.appendChild(thumb);
+  });
+}
+
+function waitForImage(image) {
+  if (typeof image.decode === 'function') {
+    return image.decode().catch(() => {});
+  }
+  if (image.complete) return Promise.resolve();
+  return new Promise(resolve => {
+    image.onload = () => resolve();
+    image.onerror = () => resolve();
+  });
+}
+
+function preloadAdjacent() {
+  [currentIndex + 1, currentIndex - 1].forEach(indexValue => {
+    const index = (indexValue + images.length) % images.length;
+    const preload = new Image();
+    preload.src = images[index].src;
+  });
+}
+
+function loadImage() {
+  spinner.style.display = 'block';
+  lightboxImg.style.display = 'none';
+
+  const image = new Image();
+  image.src = images[currentIndex].src;
+  image.alt = images[currentIndex].alt;
+
+  waitForImage(image).then(() => {
+    lightboxImg.src = image.src;
+    lightboxImg.alt = image.alt;
+    spinner.style.display = 'none';
+    lightboxImg.style.display = 'block';
+    document.querySelectorAll('.lightbox__thumbnail').forEach((thumb, idx) => {
+      thumb.classList.toggle('is-active', idx === currentIndex);
+    });
+    const activeThumbnail = document.querySelectorAll('.lightbox__thumbnail')[currentIndex];
+    if (activeThumbnail) {
+      activeThumbnail.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+    preloadAdjacent();
+  });
+}
+
+function openModal(trigger) {
+  lastFocus = trigger;
+  document.body.classList.add('modal-open');
+  lightbox.classList.add('active');
+  lightbox.setAttribute('aria-hidden', 'false');
+  loadImage();
+  closeBtn.focus();
+}
+
+function closeModal() {
+  lightbox.classList.remove('active');
+  lightbox.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+  if (lastFocus) lastFocus.focus();
+}
+
+function nextImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  loadImage();
+}
+
+function prevImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  loadImage();
+}
+
+function setActiveSection(sectionName) {
+  filterChips.forEach(chip => {
+    const isActive = chip.dataset.section === sectionName;
+    chip.classList.toggle('is-active', isActive);
+    chip.setAttribute('aria-selected', String(isActive));
+  });
+
+  sectionPanels.forEach(panel => {
+    panel.classList.toggle('is-hidden', panel.dataset.sectionPanel !== sectionName);
+  });
+}
+
+function updateFullscreenButton() {
+  const isFullscreen = Boolean(document.fullscreenElement);
+  fullscreenBtn.setAttribute('aria-label', isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen');
+  fullscreenBtn.textContent = isFullscreen ? '⤡' : '⤢';
+}
+
+galleryPanes.forEach(galleryPane => {
+  galleryPane.addEventListener('click', event => {
+    const target = event.target.closest('.gallery-item img');
+    if (!target) return;
+    currentIndex = images.indexOf(target);
+    openModal(target);
+  });
+});
+
+initThumbnails();
+
+filterChips.forEach(chip => {
+  chip.addEventListener('click', () => setActiveSection(chip.dataset.section));
+});
+
+closeBtn.addEventListener('click', closeModal);
+fullscreenBtn.addEventListener('click', async () => {
+  const frame = document.querySelector('.lightbox__frame');
+
+  try {
+    if (document.fullscreenElement) {
+      await document.exitFullscreen();
+    } else if (frame?.requestFullscreen) {
+      await frame.requestFullscreen();
+    }
+  } catch (error) {
+    console.warn('Fullscreen toggle failed', error);
+  }
+
+  updateFullscreenButton();
+});
+nextBtn.addEventListener('click', nextImage);
+prevBtn.addEventListener('click', prevImage);
+
+lightbox.addEventListener('click', event => {
+  if (event.target === lightbox) closeModal();
+});
+
+document.addEventListener('keydown', event => {
+  if (!lightbox.classList.contains('active')) return;
+  if (event.key === 'Escape') closeModal();
+  if (event.key === 'ArrowRight') nextImage();
+  if (event.key === 'ArrowLeft') prevImage();
+});
+
+let startX = 0;
+lightbox.addEventListener('touchstart', event => {
+  startX = event.changedTouches[0].screenX;
+});
+lightbox.addEventListener('touchend', event => {
+  const diff = startX - event.changedTouches[0].screenX;
+  if (Math.abs(diff) > 50) {
+    diff > 0 ? nextImage() : prevImage();
+  }
+});
+
+document.addEventListener('fullscreenchange', updateFullscreenButton);
+
+backBtn.addEventListener('click', () => {
+  if (lightbox.classList.contains('active')) {
+    closeModal();
+  } else {
+    window.history.back();
+  }
+});
+</script>
+
+</body>
+</html>

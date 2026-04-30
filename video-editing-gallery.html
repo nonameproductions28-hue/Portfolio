@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Editing Gallery</title>
+<meta name="description" content="A curated video editing gallery for the No Name Productions portfolio, with hover previews and a viewer for each edit." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f2eb;
+  --bg-2: #fbf9f4;
+  --surface: rgba(255, 255, 255, 0.85);
+  --surface-2: rgba(255, 255, 255, 0.92);
+  --ink: #151515;
+  --ink-soft: #5b5b5b;
+  --line: rgba(21, 21, 21, 0.12);
+  --accent: #f97316;
+  --accent-2: #ef4444;
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.14);
+  --shadow-soft: 0 14px 34px rgba(0, 0, 0, 0.10);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(900px 600px at 12% 0%, rgba(249, 115, 22, 0.12), transparent 60%),
+    radial-gradient(900px 600px at 90% 12%, rgba(239, 68, 68, 0.10), transparent 60%),
+    linear-gradient(180deg, var(--bg), var(--bg-2) 100%);
+  line-height: 1.6;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: linear-gradient(rgba(21,21,21,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(21,21,21,0.04) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+body.viewer-open { overflow: hidden; }
+
+a { color: inherit; text-decoration: none; }
+
+button { font: inherit; cursor: pointer; }
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -44px;
+  z-index: 10000;
+  background: #111827;
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.skip-link:focus { top: 12px; }
+
+h1, h2, h3 {
+  margin: 0;
+  font-family: "Space Grotesk", Inter, sans-serif;
+  letter-spacing: -0.03em;
+}
+
+h1 { font-size: clamp(2.4rem, 6vw, 5rem); line-height: 0.95; }
+h2 { font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1; }
+h3 { font-size: 1.08rem; line-height: 1.1; }
+
+.wrap {
+  width: min(1180px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(246, 242, 235, 0.9);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 76px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.brand__mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
+  flex: 0 0 auto;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 14px 28px rgba(249, 115, 22, 0.25);
+  position: relative;
+}
+
+.brand__mark::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.36);
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+  min-width: 0;
+}
+
+.brand__name {
+  font-weight: 800;
+  font-size: 0.98rem;
+  color: var(--ink);
+}
+
+.brand__sub {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink-soft);
+}
+
+.topbar__crumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  flex-wrap: wrap;
+}
+
+.topbar__crumb strong { color: var(--ink); }
+
+.topbar__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.top-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: var(--shadow-soft);
+}
+
+.top-btn--primary {
+  background: linear-gradient(135deg, var(--accent), #fb923c);
+  color: #fff;
+  border-color: transparent;
+}
+
+.hero {
+  padding: clamp(96px, 10vw, 130px) 0 32px;
+}
+
+.hero__panel {
+  display: grid;
+  gap: 18px;
+  padding: 28px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(18px);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fdba74;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 30px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.hero p {
+  max-width: 68ch;
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+  line-height: 1.85;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.stat {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid var(--line);
+}
+
+.stat strong {
+  display: block;
+  font-size: 1.1rem;
+  font-family: "Space Grotesk", Inter, sans-serif;
+}
+
+.stat span {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem 1rem 3rem;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+.gallery-item:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+.gallery-item figure { position: relative; }
+
+.gallery-item video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  background: #000;
+}
+
+.landscape video { aspect-ratio: 16 / 9; }
+.portrait video { aspect-ratio: 9 / 16; }
+
+.gallery-item::after {
+  content: "▶";
+  position: absolute;
+  inset: auto auto 20px 20px;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: 1.1rem;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.55);
+}
+
+.gallery-item figcaption {
+  position: absolute;
+  inset: auto 16px 16px 88px;
+  color: #fff;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.55);
+}
+
+.gallery-item figcaption strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.gallery-item figcaption span {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+  padding: 24px;
+  z-index: 2000;
+}
+
+.viewer.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.viewer__shell {
+  position: relative;
+  width: min(1120px, 100%);
+  display: grid;
+  gap: 14px;
+}
+
+.viewer__video {
+  width: 100%;
+  max-height: 78vh;
+  border-radius: 24px;
+  background: #000;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+}
+
+.viewer__thumbnails {
+  width: min(100%, 1120px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 0 0;
+  overflow-x: auto;
+  background: transparent;
+}
+
+.viewer__thumbnail {
+  width: 92px;
+  height: 92px;
+  border-radius: 12px;
+  border: 3px solid transparent;
+  overflow: hidden;
+  cursor: pointer;
+  flex: 0 0 auto;
+  padding: 0;
+  background: transparent;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.viewer__thumbnail video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #000;
+}
+
+.viewer__thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  background: #000;
+}
+
+.viewer__thumbnail:hover {
+  transform: scale(1.04);
+  border-color: rgba(255, 255, 255, 0.72);
+}
+
+.viewer__thumbnail.is-active {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.38);
+}
+
+.viewer .close,
+.viewer .prev,
+.viewer .next {
+  position: absolute;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #151515;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow-soft);
+  z-index: 12;
+}
+
+.close { top: 14px; right: 14px; }
+.prev { left: -8px; top: 50%; transform: translateY(-50%); }
+.next { right: -8px; top: 50%; transform: translateY(-50%); }
+
+@media (max-width: 800px) {
+  .stats { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 560px) {
+  .gallery { grid-template-columns: 1fr; }
+  .hero__panel { padding: 22px; }
+  .viewer { padding: 16px; }
+  .viewer .close,
+  .viewer .prev,
+  .viewer .next { width: 42px; height: 42px; }
+  .viewer__thumbnail { width: 72px; height: 72px; }
+  .topbar__row { flex-wrap: wrap; padding: 12px 0; }
+  .close { top: 8px; right: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="topbar">
+  <div class="wrap topbar__row">
+    <a class="brand" href="index.html" aria-label="No Name Productions Home">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__text">
+        <span class="brand__name">No Name Productions</span>
+        <span class="brand__sub">Creative Studio</span>
+      </span>
+    </a>
+
+    <nav class="topbar__crumb" aria-label="Breadcrumb">
+      <a href="index.html#work">Work</a>
+      <span>›</span>
+      <strong>Video Editing Gallery</strong>
+    </nav>
+
+    <div class="topbar__actions">
+      <a class="top-btn" href="index.html#work">← Back to Work</a>
+      <a class="top-btn top-btn--primary" href="index.html">Home</a>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+  <section class="hero">
+    <div class="wrap hero__panel">
+      <p class="eyebrow">Video editing gallery</p>
+      <h1>Video Editing</h1>
+      <p>Short-form edits, social promos, and motion-led clips pulled from the portfolio assets. Hover on desktop for a quick preview, then open a clip to inspect pacing, framing, and composition in more detail.</p>
+      <div class="stats" aria-label="Gallery summary">
+        <div class="stat"><strong>5</strong><span>Video edits</span></div>
+        <div class="stat"><strong>Hover</strong><span>Desktop preview playback</span></div>
+        <div class="stat"><strong>Viewer</strong><span>Keyboard and touch support</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery" id="gallery" aria-label="Video editing gallery">
+    <article class="gallery-item landscape" data-title="Sympo" data-format="Landscape social edit">
+      <figure>
+        <video src="assests/img/videos/Sympo.mp4" muted loop preload="metadata" playsinline></video>
+        <figcaption><strong>Sympo</strong><span>Landscape social edit</span></figcaption>
+      </figure>
+    </article>
+
+    <article class="gallery-item landscape" data-title="Video" data-format="Landscape social edit">
+      <figure>
+        <video src="assests/img/videos/Video.mp4" muted loop preload="metadata" playsinline></video>
+        <figcaption><strong>Video</strong><span>Landscape social edit</span></figcaption>
+      </figure>
+    </article>
+
+    <article class="gallery-item landscape" data-title="Showreel" data-format="Landscape showreel">
+      <figure>
+        <video src="assests/img/videos/Showreel.mp4" muted loop preload="metadata" playsinline></video>
+        <figcaption><strong>Showreel</strong><span>Landscape showreel</span></figcaption>
+      </figure>
+    </article>
+
+    <article class="gallery-item landscape" data-title="Malasiya" data-format="Landscape campaign cut">
+      <figure>
+        <video src="assests/img/videos/Malasiya.mp4" muted loop preload="metadata" playsinline></video>
+        <figcaption><strong>Malasiya</strong><span>Landscape campaign cut</span></figcaption>
+      </figure>
+    </article>
+
+    <article class="gallery-item portrait" data-title="Ingenious" data-format="Portrait reel">
+      <figure>
+        <video src="assests/img/videos/Ingenious.mp4" muted loop preload="metadata" playsinline></video>
+        <figcaption><strong>Ingenious</strong><span>Portrait reel</span></figcaption>
+      </figure>
+    </article>
+  </section>
+</main>
+
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Video viewer">
+  <div class="viewer__shell">
+    <button class="close" type="button" aria-label="Close video">×</button>
+    <button class="prev" type="button" aria-label="Previous video">&#10094;</button>
+    <button class="next" type="button" aria-label="Next video">&#10095;</button>
+    <video class="viewer__video" id="viewerVideo" controls playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture></video>
+    <div class="viewer__thumbnails" id="viewerThumbnails" aria-label="Video thumbnails"></div>
+  </div>
+</div>
+
+<script>
+const items = [...document.querySelectorAll('.gallery-item')];
+const viewer = document.getElementById('viewer');
+const viewerVideo = document.getElementById('viewerVideo');
+const viewerThumbnails = document.getElementById('viewerThumbnails');
+const closeBtn = document.querySelector('.close');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+
+let currentIndex = 0;
+let lastFocus = null;
+
+function createVideoThumbnail(source, seekTime = 0.2) {
+  return new Promise((resolve, reject) => {
+    const tempVideo = document.createElement('video');
+    tempVideo.preload = 'metadata';
+    tempVideo.muted = true;
+    tempVideo.playsInline = true;
+    tempVideo.src = source;
+
+    const cleanup = () => {
+      tempVideo.pause();
+      tempVideo.removeAttribute('src');
+      tempVideo.load();
+    };
+
+    const captureFrame = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = tempVideo.videoWidth || 320;
+        canvas.height = tempVideo.videoHeight || 180;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) throw new Error('Canvas context unavailable');
+        ctx.drawImage(tempVideo, 0, 0, canvas.width, canvas.height);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.86);
+        cleanup();
+        resolve(dataUrl);
+      } catch (error) {
+        cleanup();
+        reject(error);
+      }
+    };
+
+    tempVideo.addEventListener('error', () => {
+      cleanup();
+      reject(new Error('Failed to load video'));
+    }, { once: true });
+
+    tempVideo.addEventListener('loadeddata', () => {
+      if (tempVideo.duration && Number.isFinite(tempVideo.duration)) {
+        tempVideo.addEventListener('seeked', captureFrame, { once: true });
+        tempVideo.currentTime = Math.min(seekTime, Math.max(tempVideo.duration - 0.05, 0));
+      } else {
+        captureFrame();
+      }
+    }, { once: true });
+  });
+}
+
+function createFallbackThumbnailVideo(source) {
+  const fallbackVideo = document.createElement('video');
+  fallbackVideo.src = source;
+  fallbackVideo.muted = true;
+  fallbackVideo.playsInline = true;
+  fallbackVideo.preload = 'metadata';
+  fallbackVideo.loop = false;
+  fallbackVideo.setAttribute('aria-hidden', 'true');
+
+  fallbackVideo.addEventListener('loadeddata', () => {
+    if (fallbackVideo.duration && Number.isFinite(fallbackVideo.duration)) {
+      fallbackVideo.currentTime = Math.min(0.2, Math.max(fallbackVideo.duration - 0.05, 0));
+    }
+  }, { once: true });
+
+  fallbackVideo.addEventListener('seeked', () => {
+    fallbackVideo.pause();
+  }, { once: true });
+
+  return fallbackVideo;
+}
+
+function initThumbnails() {
+  viewerThumbnails.innerHTML = '';
+
+  items.forEach((item, index) => {
+    const source = item.querySelector('video').getAttribute('src');
+    const thumb = document.createElement('button');
+    thumb.type = 'button';
+    thumb.className = 'viewer__thumbnail';
+    thumb.setAttribute('aria-label', `Open ${item.dataset.title || 'video'}`);
+    const thumbImage = document.createElement('img');
+    thumbImage.alt = `${item.dataset.title || 'Video'} thumbnail`;
+    thumbImage.decoding = 'async';
+    thumb.appendChild(thumbImage);
+
+    createVideoThumbnail(source).then(dataUrl => {
+      thumbImage.src = dataUrl;
+    }).catch(() => {
+      thumb.replaceChildren(createFallbackThumbnailVideo(source));
+    });
+
+    thumb.addEventListener('click', () => {
+      currentIndex = index;
+      setViewer(currentIndex);
+    });
+
+    thumb.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        currentIndex = index;
+        setViewer(currentIndex);
+      }
+    });
+
+    viewerThumbnails.appendChild(thumb);
+  });
+}
+
+const prefersHover = window.matchMedia('(hover: hover)').matches;
+
+function setViewer(index) {
+  currentIndex = (index + items.length) % items.length;
+  const item = items[currentIndex];
+  const source = item.querySelector('video').getAttribute('src');
+  viewerVideo.pause();
+  viewerVideo.src = source;
+  viewerVideo.muted = false;
+  viewerVideo.loop = false;
+  viewerVideo.currentTime = 0;
+  viewerVideo.playbackRate = 1;
+  viewerVideo.play().catch(() => {});
+
+  document.querySelectorAll('.viewer__thumbnail').forEach((thumb, idx) => {
+    thumb.classList.toggle('is-active', idx === currentIndex);
+  });
+
+  const activeThumbnail = document.querySelectorAll('.viewer__thumbnail')[currentIndex];
+  if (activeThumbnail) {
+    activeThumbnail.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+}
+
+function openViewer(trigger) {
+  lastFocus = trigger;
+  document.body.classList.add('viewer-open');
+  viewer.classList.add('active');
+  viewer.setAttribute('aria-hidden', 'false');
+  setViewer(currentIndex);
+  closeBtn.focus();
+}
+
+function closeViewer() {
+  viewer.classList.remove('active');
+  viewer.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('viewer-open');
+  viewerVideo.pause();
+  viewerVideo.removeAttribute('src');
+  viewerVideo.load();
+  if (lastFocus) lastFocus.focus();
+}
+
+function nextVideo() {
+  setViewer(currentIndex + 1);
+}
+
+function prevVideo() {
+  setViewer(currentIndex - 1);
+}
+
+items.forEach((item, index) => {
+  const video = item.querySelector('video');
+
+  item.setAttribute('tabindex', '0');
+  item.setAttribute('role', 'button');
+  item.setAttribute('aria-label', `Open ${item.dataset.title || 'video'} in fullscreen viewer`);
+
+  item.addEventListener('mouseenter', () => {
+    if (!prefersHover) return;
+    video.currentTime = 0;
+    video.play().catch(() => {});
+  });
+
+  item.addEventListener('mouseleave', () => {
+    video.pause();
+    video.currentTime = 0;
+  });
+
+  item.addEventListener('click', () => {
+    currentIndex = index;
+    openViewer(item);
+  });
+
+  item.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      currentIndex = index;
+      openViewer(item);
+    }
+  });
+});
+
+initThumbnails();
+
+closeBtn.addEventListener('click', closeViewer);
+nextBtn.addEventListener('click', nextVideo);
+prevBtn.addEventListener('click', prevVideo);
+
+viewer.addEventListener('click', event => {
+  if (event.target === viewer) closeViewer();
+});
+
+document.addEventListener('keydown', event => {
+  if (!viewer.classList.contains('active')) return;
+  if (event.key === 'Escape') closeViewer();
+  if (event.key === 'ArrowRight') nextVideo();
+  if (event.key === 'ArrowLeft') prevVideo();
+});
+</script>
+
+</body>
+</html>

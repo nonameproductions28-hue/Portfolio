@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CINEMA - Accessible OTT Platform</title>
+    <meta name="description" content="CINEMA is an accessibility-first OTT platform prototype with keyboard navigation, assistive settings, and WCAG-aware interactions.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #9D4EDD;
+            --primary-light: #C77DFF;
+            --accent: #00D9FF;
+            --accent-dark: #00A3CC;
+            --bg-dark: #0A0E27;
+            --bg-darker: #050812;
+            --surface: #1A1F3A;
+            --surface-light: #2D3561;
+            --text: #FFFFFF;
+            --text-muted: #C5CEDC;
+            --success: #4ADE80;
+            --error: #F87171;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Layout */
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 60px;
+            background: var(--bg-darker);
+            border-right: 2px solid var(--accent);
+            padding: 20px 0;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            z-index: 1000;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-items {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 1;
+        }
+
+        .nav-item {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--text-muted);
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .nav-item:hover {
+            color: var(--accent);
+            background: rgba(0, 217, 255, 0.1);
+        }
+
+        .nav-item.active {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: rgba(0, 217, 255, 0.15);
+        }
+
+        .main-content {
+            margin-left: 60px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--surface) 100%);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--surface-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-light);
+            letter-spacing: 2px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 25px;
+            margin-left: 30px;
+        }
+
+        .nav-tab {
+            color: var(--text-muted);
+            cursor: pointer;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+            font-size: 14px;
+            border-top: 0;
+            border-left: 0;
+            border-right: 0;
+            background: transparent;
+        }
+
+        .nav-tab:hover,
+        .nav-tab.active {
+            color: var(--text);
+            border-bottom-color: var(--accent);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .search-box {
+            background: var(--surface);
+            border: 1px solid var(--surface-light);
+            padding: 8px 15px;
+            border-radius: 25px;
+            color: var(--text);
+            width: 200px;
+        }
+
+        .search-box::placeholder {
+            color: var(--text-muted);
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .icon-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+            background: var(--surface);
+            color: var(--accent);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .icon-btn:hover {
+            background: var(--surface-light);
+            transform: scale(1.1);
+        }
+
+        .profile-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 2px solid var(--accent);
+        }
+
+        /* Screens */
+        .screen {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Home Screen */
+        .hero {
+            height: 500px;
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.2) 0%, rgba(0, 217, 255, 0.1) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23050812" width="1200" height="600"/><circle cx="300" cy="150" r="100" fill="%239D4EDD" opacity="0.05"/><circle cx="900" cy="400" r="150" fill="%2300D9FF" opacity="0.03"/></svg>');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding: 60px 30px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 400px;
+            height: 100%;
+            background: linear-gradient(to left, rgba(157, 78, 221, 0.1), transparent);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 50%;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero-title span {
+            color: var(--primary-light);
+        }
+
+        .hero-description {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 8px;
+            border: none;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--text);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: var(--bg-dark);
+        }
+
+        /* Content Sections */
+        .section {
+            padding: 40px 30px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid var(--surface-light);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.15);
+        }
+
+        .card-image {
+            width: 100%;
+            aspect-ratio: 9/12;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .card-content {
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .card-info {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .card-rating {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .card-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: auto;
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        /* Cast Carousel */
+        .cast-section {
+            padding: 40px 30px;
+        }
+
+        .cast-carousel {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scroll-behavior: smooth;
+        }
+
+        .cast-card {
+            min-width: 120px;
+            text-align: center;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .cast-card:hover {
+            transform: scale(1.05);
+        }
+
+        .cast-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 10px;
+            border: 2px solid var(--accent);
+        }
+
+        .cast-name {
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .cast-role {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+
+        /* Profile Selection */
+        .profile-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 60px);
+            padding: 40px;
+            text-align: center;
+        }
+
+        .profile-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .profile-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 50px;
+            font-size: 16px;
+        }
+
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+            max-width: 800px;
+        }
+
+        .profile-option {
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .profile-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            margin: 0 auto 15px;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .profile-option:hover .profile-circle {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+
+        .profile-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text);
+        }
+
+        .add-profile {
+            border: 2px dashed var(--surface-light);
+            border-radius: 50%;
+            width: 140px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            margin: 0 auto 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--text-muted);
+        }
+
+        .add-profile:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Accessibility Panel */
+        .accessibility-panel {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 380px;
+            height: 100vh;
+            background: var(--surface);
+            border-left: 2px solid var(--accent);
+            padding: 30px 20px;
+            transition: right 0.3s;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .accessibility-panel.open {
+            right: 0;
+        }
+
+        .accessibility-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.7);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 998;
+        }
+
+        .accessibility-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .panel-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .setting-group {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--surface-light);
+        }
+
+        .setting-group:last-child {
+            border-bottom: none;
+        }
+
+        .setting-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .setting-icon {
+            font-size: 18px;
+        }
+
+        .setting-description {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .toggle {
+            position: relative;
+            width: 50px;
+            height: 28px;
+            background: var(--surface-light);
+            border-radius: 14px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .toggle.on {
+            background: var(--accent);
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: left 0.3s;
+        }
+
+        .toggle.on::after {
+            left: 24px;
+        }
+
+        .subtitle-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .subtitle-btn {
+            padding: 10px 15px;
+            border: 1px solid var(--surface-light);
+            background: transparent;
+            color: var(--text);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .subtitle-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .subtitle-btn:hover {
+            border-color: var(--accent);
+        }
+
+        .apply-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: var(--text);
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .apply-btn:hover {
+            background: var(--primary-light);
+        }
+
+        /* Details Page */
+        .details-page {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.1) 0%, rgba(0, 217, 255, 0.05) 100%);
+        }
+
+        .details-hero {
+            height: 350px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .details-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, var(--bg-dark) 0%, transparent 100%);
+        }
+
+        .details-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+            position: relative;
+            z-index: 2;
+            margin-top: -100px;
+        }
+
+        .details-header {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .details-poster {
+            width: 200px;
+            height: 280px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            flex-shrink: 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .details-info h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .details-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .details-description {
+            max-width: 600px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        .details-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-tabs {
+                display: none;
+            }
+
+            .cards-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .profiles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                height: 60px;
+                width: 100%;
+                flex-direction: row;
+                padding: 0 20px;
+                bottom: 0;
+                top: auto;
+                border-right: none;
+                border-top: 2px solid var(--accent);
+            }
+
+            .main-content {
+                margin-left: 0;
+                margin-bottom: 60px;
+            }
+
+            .hero {
+                height: 350px;
+                padding: 30px 20px;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .section {
+                padding: 25px 15px;
+            }
+
+            .cards-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 15px;
+            }
+
+            .profiles-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .accessibility-panel {
+                width: 100%;
+                right: -100%;
+            }
+        }
+
+        /* Globast-style keyboard visibility */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible,
+        [tabindex]:focus-visible {
+            outline: 3px solid #2563eb;
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+
+        .skip-link {
+            position: absolute;
+            left: 12px;
+            top: -48px;
+            z-index: 10000;
+            background: #111;
+            color: #fff;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .skip-link:focus {
+            top: 12px;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 10000;
+        }
+
+        /* Category Buttons */
+        .categories {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            padding: 0 30px;
+        }
+
+        .category-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--surface-light);
+            background: transparent;
+            color: var(--text);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .category-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .category-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .screen-header {
+            padding: 10px 30px 0;
+        }
+
+        .screen-note {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+
+        .empty-state {
+            display: none;
+            margin: 0 30px 25px;
+            padding: 18px;
+            border: 1px dashed var(--surface-light);
+            border-radius: 10px;
+            color: var(--text-muted);
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .empty-state.show {
+            display: block;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="layout">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" role="navigation" aria-label="Main navigation">
+            <button class="logo" type="button" title="CINEMA Home" aria-label="Go to home" data-screen-jump="home">C</button>
+            <div class="nav-items">
+                <button class="nav-item active" data-screen="home" title="Home" aria-label="Home">
+                    🏠
+                </button>
+                <button class="nav-item" data-screen="search" title="Search" aria-label="Search">
+                    🔍
+                </button>
+                <button class="nav-item" data-screen="library" title="Library" aria-label="My Library">
+                    📚
+                </button>
+                <button class="nav-item" data-screen="settings" title="Settings" aria-label="Settings">
+                    ⚙️
+                </button>
+            </div>
+            <button class="icon-btn" id="accessibility-toggle" title="Accessibility Settings" aria-label="Accessibility Settings">
+                ♿
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content" id="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <div class="header-brand">CINEMA</div>
+                    <div class="nav-tabs" role="tablist" aria-label="Content categories">
+                        <button class="nav-tab active" data-tab="movies" type="button" role="tab" aria-selected="true" aria-controls="home">Movies</button>
+                        <button class="nav-tab" data-tab="series" type="button" role="tab" aria-selected="false" aria-controls="series">TV Shows</button>
+                        <button class="nav-tab" data-tab="originals" type="button" role="tab" aria-selected="false" aria-controls="library">Originals</button>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <label class="visually-hidden" for="search-input">Search titles</label>
+                    <input id="search-input" type="text" class="search-box" placeholder="Quick search..." aria-label="Search content" aria-describedby="search-help">
+                    <span id="search-help" class="visually-hidden">Type to filter titles and open the search screen. Press slash to focus search quickly.</span>
+                    <div class="header-icons">
+                        <button class="icon-btn" title="Notifications" aria-label="Notifications">🔔</button>
+                        <button class="profile-avatar" id="profile-btn" type="button" title="User Profile" aria-label="Open profile selection">👤</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Home Screen -->
+            <div id="home" class="screen active" role="region" aria-labelledby="home-title" tabindex="-1">
+                <!-- Hero Section -->
+                <section class="hero">
+                    <div class="hero-content">
+                        <div class="hero-badge">Action</div>
+                        <h1 id="home-title" class="hero-title">Captain <span>America</span></h1>
+                        <p class="hero-description">
+                            Steve Rogers transforms into the ultimate super-soldier. Experience the epic action as he battles evil forces threatening world peace.
+                        </p>
+                        <div class="hero-actions">
+                            <button class="btn btn-primary" id="play-btn">
+                                ▶ PLAY NOW
+                            </button>
+                            <button class="btn btn-secondary">
+                                ➕ MY LIST
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recently Watched -->
+                <section class="section">
+                    <h2 class="section-title">Recently Watched</h2>
+                    <div class="cards-grid">
+                        <div class="card" role="button" tabindex="0">
+                            <div class="card-image">🎬</div>
+                            <div class="card-content">
+                                <div class="card-title">Interstellar Void</div>
+                                <div class="card-info">
+                                    <span class="card-rating">8.1</span>
+                                    <span>Sci-Fi</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" role="button" tabindex="0">
+                            <div class="card-image">🎭</div>
+                            <div class="card-content">
+                                <div class="card-title">The Last Grove</div>
+                                <div class="card-info">
+                                    <span class="card-rating">7.9</span>
+                                    <span>Drama</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" role="button" tabindex="0">
+                            <div class="card-image">🌊</div>
+                            <div class="card-content">
+                                <div class="card-title">Midnight Tide</div>
+                                <div class="card-info">
+                                    <span class="card-rating">8.3</span>
+                                    <span>Thriller</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" role="button" tabindex="0">
+                            <div class="card-image">🎪</div>
+                            <div class="card-content">
+                                <div class="card-title">Director's Cut</div>
+                                <div class="card-info">
+                                    <span class="card-rating">8.5</span>
+                                    <span>Documentary</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Trending Categories -->
+                <section class="section">
+                    <h2 class="section-title">Trending Categories</h2>
+                    <div class="cards-grid">
+                        <div class="card" role="button" tabindex="0">
+                            <div class="card-image">🚀</div>
+                            <div class="card-badge">TRENDING</div>
+                            <div class="card-content">
+                                <div class="card-title">Sci-Fi</div>
+                                <div class="card-info">Beyond the stars and into the future</div>
+                            </div>
+                        </div>
+                        <div class="card" role="button" tabindex="0">
+                            <div class="card-image">😱</div>
+                            <div class="card-badge">TOP</div>
+                            <div class="card-content">
+                                <div class="card-title">Thrillers</div>
+                                <div class="card-info">Edge-of-your-seat suspense</div>
+                            </div>
+                        </div>
+                        <div class="card" role="button" tabindex="0">
+                            <div class="card-image">📚</div>
+                            <div class="card-content">
+                                <div class="card-title">Documentaries</div>
+                                <div class="card-info">The world as it really is</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- New Releases -->
+                <section class="section">
+                    <h2 class="section-title">New Releases</h2>
+                    <div class="cards-grid">
+                        <div class="card" role="button" tabindex="0">
+                            <div class="card-image">🌟</div>
+                            <div class="card-badge">NEW</div>
+                            <div class="card-content">
+                                <div class="card-title">Chasing Light</div>
+                                <div class="card-info">
+                                    <span class="card-rating">9.0</span>
+                                </div>
+                                <div class="card-meta">Drama • 1h 45m</div>
+                            </div>
+                        </div>
+                        <div class="card" role="button" tabindex="0">
+                            <div class="card-image">💡</div>
+                            <div class="card-badge">NEW</div>
+                            <div class="card-content">
+                                <div class="card-title">Binary Soul</div>
+                                <div class="card-info">
+                                    <span class="card-rating">8.7</span>
+                                </div>
+                                <div class="card-meta">Sci-Fi • 2h 10m</div>
+                            </div>
+                        </div>
+                        <div class="card" role="button" tabindex="0">
+                            <div class="card-image">🎬</div>
+                            <div class="card-badge">NEW</div>
+                            <div class="card-content">
+                                <div class="card-title">Peak Paradox</div>
+                                <div class="card-info">
+                                    <span class="card-rating">8.9</span>
+                                </div>
+                                <div class="card-meta">Mystery • 1h 58m</div>
+                            </div>
+                        </div>
+                        <div class="card" role="button" tabindex="0">
+                            <div class="card-image">🌈</div>
+                            <div class="card-badge">NEW</div>
+                            <div class="card-content">
+                                <div class="card-title">The Abyss</div>
+                                <div class="card-info">
+                                    <span class="card-rating">8.6</span>
+                                </div>
+                                <div class="card-meta">Thriller • 2h 5m</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Search Screen -->
+            <div id="search" class="screen" role="region" aria-labelledby="search-title" tabindex="-1">
+                <section class="screen-header">
+                    <h2 id="search-title" class="section-title">Search</h2>
+                    <p class="screen-note">Use the quick search input in the header to filter titles instantly.</p>
+                </section>
+
+                <section class="section" style="padding-top: 15px;">
+                    <h3 style="font-size: 16px; margin-bottom: 16px; color: var(--accent);">Results</h3>
+                    <div class="cards-grid" data-search-grid>
+                        <div class="card" role="button" tabindex="0" data-title="Captain America" data-genre="Action">
+                            <div class="card-image">🛡️</div>
+                            <div class="card-content">
+                                <div class="card-title">Captain America</div>
+                                <div class="card-info"><span class="card-rating">8.4</span><span>Action</span></div>
+                                <div class="card-meta">Movie • 2h 5m</div>
+                            </div>
+                        </div>
+                        <div class="card" role="button" tabindex="0" data-title="Neon Echoes" data-genre="Sci-Fi">
+                            <div class="card-image">🌆</div>
+                            <div class="card-content">
+                                <div class="card-title">Neon Echoes</div>
+                                <div class="card-info"><span class="card-rating">8.8</span><span>Sci-Fi</span></div>
+                                <div class="card-meta">Series • 1 Season</div>
+                            </div>
+                        </div>
+                        <div class="card" role="button" tabindex="0" data-title="Interstellar Void" data-genre="Sci-Fi">
+                            <div class="card-image">🎬</div>
+                            <div class="card-content">
+                                <div class="card-title">Interstellar Void</div>
+                                <div class="card-info"><span class="card-rating">8.1</span><span>Sci-Fi</span></div>
+                                <div class="card-meta">Movie • 1h 55m</div>
+                            </div>
+                        </div>
+                        <div class="card" role="button" tabindex="0" data-title="The Last Grove" data-genre="Drama">
+                            <div class="card-image">🎭</div>
+                            <div class="card-content">
+                                <div class="card-title">The Last Grove</div>
+                                <div class="card-info"><span class="card-rating">7.9</span><span>Drama</span></div>
+                                <div class="card-meta">Movie • 1h 48m</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="empty-state" id="search-empty" aria-live="polite" role="status">No matches found. Try a different title or genre.</p>
+                </section>
+            </div>
+
+            <!-- Library Screen -->
+            <div id="library" class="screen" role="region" aria-labelledby="library-title" tabindex="-1">
+                <section class="screen-header">
+                    <h2 id="library-title" class="section-title">My Library</h2>
+                    <p class="screen-note">Continue watching and keep your saved list in one place.</p>
+                </section>
+
+                <section class="section" style="padding-top: 15px;">
+                    <h3 style="font-size: 16px; margin-bottom: 16px; color: var(--accent);">Continue Watching</h3>
+                    <div class="cards-grid">
+                        <div class="card" role="button" tabindex="0" data-title="Midnight Tide" data-genre="Thriller">
+                            <div class="card-image">🌊</div>
+                            <div class="card-content">
+                                <div class="card-title">Midnight Tide</div>
+                                <div class="card-info"><span class="card-rating">8.3</span><span>Thriller</span></div>
+                                <div class="card-meta">67% watched</div>
+                            </div>
+                        </div>
+                        <div class="card" role="button" tabindex="0" data-title="Binary Soul" data-genre="Sci-Fi">
+                            <div class="card-image">💡</div>
+                            <div class="card-content">
+                                <div class="card-title">Binary Soul</div>
+                                <div class="card-info"><span class="card-rating">8.7</span><span>Sci-Fi</span></div>
+                                <div class="card-meta">23% watched</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section" style="padding-top: 0;">
+                    <h3 style="font-size: 16px; margin-bottom: 16px; color: var(--accent);">Saved List</h3>
+                    <div class="cards-grid">
+                        <div class="card" role="button" tabindex="0" data-title="The Abyss" data-genre="Thriller">
+                            <div class="card-image">🌈</div>
+                            <div class="card-content">
+                                <div class="card-title">The Abyss</div>
+                                <div class="card-info"><span class="card-rating">8.6</span><span>Thriller</span></div>
+                                <div class="card-meta">Movie • Watchlist</div>
+                            </div>
+                        </div>
+                        <div class="card" role="button" tabindex="0" data-title="Quantum Shift" data-genre="Sci-Fi">
+                            <div class="card-image">💫</div>
+                            <div class="card-content">
+                                <div class="card-title">Quantum Shift</div>
+                                <div class="card-info"><span class="card-rating">9.2</span><span>Sci-Fi</span></div>
+                                <div class="card-meta">Series • Watchlist</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Profile Selection Screen -->
+            <div id="profiles" class="screen" role="region" aria-labelledby="profiles-title" tabindex="-1">
+                <div class="profile-screen">
+                    <h1 id="profiles-title" class="profile-title">Who is watching?</h1>
+                    <p class="profile-subtitle">Choose a profile to start streaming</p>
+
+                    <div class="profiles-grid">
+                        <div class="profile-option" data-profile="alex">
+                            <div class="profile-circle">👨</div>
+                            <div class="profile-name">Alex</div>
+                        </div>
+                        <div class="profile-option" data-profile="sarah">
+                            <div class="profile-circle">👩</div>
+                            <div class="profile-name">Sarah</div>
+                        </div>
+                        <div class="profile-option" data-profile="kids">
+                            <div class="profile-circle">🚀</div>
+                            <div class="profile-name">Kids</div>
+                        </div>
+                        <div class="profile-option" data-profile="guest">
+                            <div class="profile-circle">👤</div>
+                            <div class="profile-name">Guest</div>
+                        </div>
+                    </div>
+
+                    <div class="profile-option" style="margin-top: 30px;">
+                        <div class="add-profile">+</div>
+                        <div class="profile-name">Add Profile</div>
+                    </div>
+
+                    <button class="btn btn-secondary" style="margin-top: 40px;">
+                        ✏️ EDIT PROFILE
+                    </button>
+                </div>
+            </div>
+
+            <!-- Series Screen -->
+            <div id="series" class="screen" role="region" aria-labelledby="series-title" tabindex="-1">
+                <section class="hero">
+                    <div class="hero-content">
+                        <div class="hero-badge">New Series</div>
+                        <h1 id="series-title" class="hero-title">Neon <span>Echoes</span></h1>
+                        <p class="hero-description">
+                            Dive into a cyberpunk world where AI consciousness awakens. A thrilling series about connection in a digital age.
+                        </p>
+                        <div class="hero-actions">
+                            <button class="btn btn-primary">▶ WATCH NOW</button>
+                            <button class="btn btn-secondary">➕ MY LIST</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">Popular Series</h2>
+                    <div class="categories">
+                        <button class="category-btn active">All Series</button>
+                        <button class="category-btn">Sci-Fi</button>
+                        <button class="category-btn">Drama</button>
+                        <button class="category-btn">Thriller</button>
+                        <button class="category-btn">Documentary</button>
+                    </div>
+                    <div class="cards-grid">
+                        <div class="card" role="button" tabindex="0">
+                            <div class="card-image">🎯</div>
+                            <div class="card-badge">TOP</div>
+                            <div class="card-content">
+                                <div class="card-title">The Void</div>
+                                <div class="card-info">
+                                    <span class="card-rating">8.9</span>
+                                    <span>Sci-Fi</span>
+                                </div>
+                                <div class="card-meta">3 Seasons • 36 Ep</div>
+                            </div>
+                        </div>
+                        <div class="card" role="button" tabindex="0">
+                            <div class="card-image">⛰️</div>
+                            <div class="card-content">
+                                <div class="card-title">Silent Peak</div>
+                                <div class="card-info">
+                                    <span class="card-rating">7.4</span>
+                                    <span>Drama</span>
+                                </div>
+                                <div class="card-meta">1 Season • 8 Ep</div>
+                            </div>
+                        </div>
+                        <div class="card" role="button" tabindex="0">
+                            <div class="card-image">💫</div>
+                            <div class="card-content">
+                                <div class="card-title">Quantum Shift</div>
+                                <div class="card-info">
+                                    <span class="card-rating">9.2</span>
+                                    <span>Sci-Fi</span>
+                                </div>
+                                <div class="card-meta">2 Seasons • 20 Ep</div>
+                            </div>
+                        </div>
+                        <div class="card" role="button" tabindex="0">
+                            <div class="card-image">👑</div>
+                            <div class="card-content">
+                                <div class="card-title">The Archives</div>
+                                <div class="card-info">
+                                    <span class="card-rating">8.1</span>
+                                    <span>Drama</span>
+                                </div>
+                                <div class="card-meta">2 Seasons • 22 Ep</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Details Page -->
+            <div id="details" class="screen" role="region" aria-labelledby="details-title" tabindex="-1">
+                <div class="details-page">
+                    <div class="details-hero"></div>
+                    <div class="details-content">
+                        <button class="btn btn-secondary back-btn" style="margin-bottom: 20px;">← BACK</button>
+                        <div class="details-header">
+                            <div class="details-poster"></div>
+                            <div class="details-info">
+                                <h1 id="details-title">Captain America</h1>
+                                <div class="details-meta">
+                                    <span class="meta-item">🏷️ Action</span>
+                                    <span class="meta-item">⏱️ 2h 5m</span>
+                                    <span class="meta-item">📅 2024</span>
+                                    <span class="meta-item">⭐ 8.4</span>
+                                    <span class="meta-item">4K</span>
+                                    <span class="meta-item">CC</span>
+                                </div>
+                                <p class="details-description">
+                                    Steve Rogers, a rejected military soldier transforms into super-soldier Captain America after taking a dose of a "Super-Soldier serum". But being Captain America comes at a price as he attempts to take down a war monger and a terrorist organization.
+                                </p>
+                                <div class="details-actions">
+                                    <button class="btn btn-primary">▶ PLAY NOW</button>
+                                    <button class="btn btn-secondary">➕ ADD TO LIST</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cast Section -->
+                        <div class="cast-section">
+                            <h2 class="section-title">Cast & Crew</h2>
+                            <div class="cast-carousel">
+                                <div class="cast-card">
+                                    <div class="cast-avatar">👨</div>
+                                    <div class="cast-name">Chris Evans</div>
+                                    <div class="cast-role">Steve Rogers</div>
+                                </div>
+                                <div class="cast-card">
+                                    <div class="cast-avatar">👩</div>
+                                    <div class="cast-name">Hayley Atwell</div>
+                                    <div class="cast-role">Peggy Carter</div>
+                                </div>
+                                <div class="cast-card">
+                                    <div class="cast-avatar">👨‍🦱</div>
+                                    <div class="cast-name">Sebastian Stan</div>
+                                    <div class="cast-role">Bucky Barnes</div>
+                                </div>
+                                <div class="cast-card">
+                                    <div class="cast-avatar">👴</div>
+                                    <div class="cast-name">Tommy Lee Jones</div>
+                                    <div class="cast-role">Colonel Phillips</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Storyline -->
+                        <section class="section">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                                <div>
+                                    <h3 style="font-size: 18px; margin-bottom: 15px; color: var(--accent);">Storyline</h3>
+                                    <p style="font-size: 14px; line-height: 1.6; color: var(--text-muted);">
+                                        During World War II, Steve Rogers is a sickly man from Brooklyn who's transformed into super-soldier Captain America to aid in the war effort. Rogers must stop the Red Skull.
+                                    </p>
+                                </div>
+                                <div>
+                                    <h3 style="font-size: 18px; margin-bottom: 15px; color: var(--accent);">Production</h3>
+                                    <div style="font-size: 13px; color: var(--text-muted); display: flex; flex-direction: column; gap: 10px;">
+                                        <div><strong>Director:</strong> Joe Johnston</div>
+                                        <div><strong>Release:</strong> July 22, 2011</div>
+                                        <div><strong>Language:</strong> English</div>
+                                        <div><strong>Budget:</strong> $140M</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Screen -->
+            <div id="settings" class="screen" role="region" aria-labelledby="settings-title" tabindex="-1">
+                <section class="section">
+                    <h2 id="settings-title" class="section-title">Settings</h2>
+                    <div style="max-width: 600px;">
+                        <div class="setting-group">
+                            <h3 style="margin-bottom: 15px;">Account</h3>
+                            <button class="btn btn-secondary" style="width: 100%;">MANAGE ACCOUNT</button>
+                        </div>
+                        <div class="setting-group">
+                            <h3 style="margin-bottom: 15px;">Playback</h3>
+                            <label style="display: block; margin-bottom: 10px;">
+                                <input type="checkbox" style="margin-right: 10px;"> Auto-play next episode
+                            </label>
+                            <label style="display: block;">
+                                <input type="checkbox" style="margin-right: 10px;" checked> Download quality: High
+                            </label>
+                        </div>
+                        <div class="setting-group">
+                            <h3 style="margin-bottom: 15px;">Privacy</h3>
+                            <button class="btn btn-secondary" style="width: 100%;">VIEW PRIVACY SETTINGS</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility Panel -->
+    <div class="accessibility-overlay" id="accessibility-overlay" hidden></div>
+    <div class="accessibility-panel" id="accessibility-panel" role="dialog" aria-modal="true" aria-labelledby="accessibility-title" aria-describedby="accessibility-description">
+        <div class="panel-header">
+            <h2 class="panel-title" id="accessibility-title">Accessibility</h2>
+            <button class="close-btn" id="close-accessibility" type="button" aria-label="Close accessibility panel">&times;</button>
+        </div>
+        <p id="accessibility-description" class="visually-hidden">Configure audio description, subtitle language, visual settings, and voice navigation.</p>
+
+        <div class="setting-group">
+            <div class="setting-label">
+                <span class="setting-icon">👁️</span>
+                Audio Description
+            </div>
+            <p class="setting-description">Narrative description of visual elements for the visually impaired.</p>
+            <button class="toggle" id="audio-desc-toggle" type="button" role="switch" aria-checked="false" aria-label="Toggle audio description"></button>
+        </div>
+
+        <div class="setting-group">
+            <div class="setting-label">
+                <span class="setting-icon">📝</span>
+                Subtitle Language
+            </div>
+            <p class="setting-description">Choose your preferred reading language.</p>
+            <div class="subtitle-options" role="radiogroup" aria-label="Subtitle language">
+                <button class="subtitle-btn active" type="button" data-language="en" role="radio" aria-checked="true">English (CC)</button>
+                <button class="subtitle-btn" type="button" data-language="es" role="radio" aria-checked="false">Spanish</button>
+                <button class="subtitle-btn" type="button" data-language="fr" role="radio" aria-checked="false">French</button>
+                <button class="subtitle-btn" type="button" data-language="zh" role="radio" aria-checked="false">Chinese (Mandarin)</button>
+                <button class="subtitle-btn" type="button" data-language="ja" role="radio" aria-checked="false">Japanese</button>
+            </div>
+        </div>
+
+        <div class="setting-group">
+            <div class="setting-label">
+                <span class="setting-icon">🎨</span>
+                Visual Settings
+            </div>
+            <p class="setting-description">Customize visual experience.</p>
+            <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span>High Contrast</span>
+                <button class="toggle" id="high-contrast-toggle" type="button" role="switch" aria-checked="false" aria-label="Toggle high contrast"></button>
+            </label>
+            <label style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Large Text</span>
+                <button class="toggle" id="large-text-toggle" type="button" role="switch" aria-checked="false" aria-label="Toggle large text"></button>
+            </label>
+        </div>
+
+        <div class="setting-group">
+            <div class="setting-label">
+                <span class="setting-icon">🎤</span>
+                Voice Navigation
+            </div>
+            <p class="setting-description">Control playback using voice commands.</p>
+            <label style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Status: <strong id="voice-status">DISABLED</strong></span>
+                <button class="toggle" id="voice-nav-toggle" type="button" role="switch" aria-checked="false" aria-label="Toggle voice navigation"></button>
+            </label>
+        </div>
+
+        <button class="apply-btn" id="apply-accessibility" type="button">APPLY SETTINGS</button>
+
+        <p style="font-size: 11px; color: var(--text-muted); margin-top: 15px; text-align: center;">
+            These settings are applied globally across all CINEMA content.
+        </p>
+    </div>
+
+    <div id="global-status" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <script>
+        const STORAGE_KEY = 'cinema-ott-settings-v1';
+
+        const defaultState = {
+            currentScreen: 'home',
+            audioDescription: false,
+            subtitleLanguage: 'en',
+            highContrast: false,
+            largeText: false,
+            voiceNavigation: false,
+            currentProfile: null
+        };
+
+        const savedState = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+        const state = savedState ? { ...defaultState, ...savedState } : { ...defaultState };
+
+        const screenElements = document.querySelectorAll('.screen');
+        const navItems = document.querySelectorAll('.nav-item');
+        const accessibilityPanel = document.getElementById('accessibility-panel');
+        const accessibilityOverlay = document.getElementById('accessibility-overlay');
+        const accessibilityToggle = document.getElementById('accessibility-toggle');
+        const closeAccessibility = document.getElementById('close-accessibility');
+        const audioDescToggle = document.getElementById('audio-desc-toggle');
+        const highContrastToggle = document.getElementById('high-contrast-toggle');
+        const largeTextToggle = document.getElementById('large-text-toggle');
+        const voiceNavToggle = document.getElementById('voice-nav-toggle');
+        const applyAccessibilityBtn = document.getElementById('apply-accessibility');
+        const subtitleBtns = document.querySelectorAll('.subtitle-btn');
+        const profileOptions = document.querySelectorAll('.profile-option');
+        const navTabs = document.querySelectorAll('.nav-tab');
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const playBtn = document.getElementById('play-btn');
+        const profileBtn = document.getElementById('profile-btn');
+        const backBtn = document.querySelector('.back-btn');
+        const logoBtn = document.querySelector('[data-screen-jump="home"]');
+        const searchInput = document.querySelector('.search-box');
+        const searchScreenCards = document.querySelectorAll('[data-search-grid] .card');
+        const searchEmpty = document.getElementById('search-empty');
+        const voiceStatus = document.getElementById('voice-status');
+        const liveStatus = document.getElementById('global-status');
+        const panelFocusable = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+        let lastFocusedElement = null;
+
+        function persistState() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function updateNavActive(screenId) {
+            navItems.forEach(item => {
+                const active = item.dataset.screen === screenId;
+                item.classList.toggle('active', active);
+                item.setAttribute('aria-current', active ? 'page' : 'false');
+            });
+        }
+
+        function switchScreen(screenId) {
+            screenElements.forEach(el => {
+                const active = el.id === screenId;
+                el.classList.toggle('active', active);
+                el.setAttribute('aria-hidden', String(!active));
+            });
+            const screen = document.getElementById(screenId);
+            if (!screen) {
+                return;
+            }
+            state.currentScreen = screenId;
+            updateNavActive(screenId);
+
+            const screenTitle = screen.querySelector('h1, h2');
+            if (screenTitle) {
+                screenTitle.setAttribute('tabindex', '-1');
+                screenTitle.focus();
+            } else {
+                screen.focus();
+            }
+            persistState();
+        }
+
+        function setToggleState(toggleElement, isOn) {
+            toggleElement.classList.toggle('on', isOn);
+            toggleElement.setAttribute('aria-checked', String(isOn));
+        }
+
+        function applyHighContrast() {
+            const root = document.documentElement;
+            if (state.highContrast) {
+                root.style.setProperty('--primary', '#7C3AED');
+                root.style.setProperty('--primary-light', '#A78BFA');
+                root.style.setProperty('--accent', '#22D3EE');
+                root.style.setProperty('--bg-dark', '#000000');
+                root.style.setProperty('--bg-darker', '#000000');
+                root.style.setProperty('--surface', '#111827');
+                root.style.setProperty('--surface-light', '#374151');
+                root.style.setProperty('--text', '#FFFFFF');
+                root.style.setProperty('--text-muted', '#E5E7EB');
+            } else {
+                root.style.setProperty('--primary', '#9D4EDD');
+                root.style.setProperty('--primary-light', '#C77DFF');
+                root.style.setProperty('--accent', '#00D9FF');
+                root.style.setProperty('--bg-dark', '#0A0E27');
+                root.style.setProperty('--bg-darker', '#050812');
+                root.style.setProperty('--surface', '#1A1F3A');
+                root.style.setProperty('--surface-light', '#2D3561');
+                root.style.setProperty('--text', '#FFFFFF');
+                root.style.setProperty('--text-muted', '#C5CEDC');
+            }
+        }
+
+        function applyLargeText() {
+            document.body.style.fontSize = state.largeText ? '18px' : '16px';
+        }
+
+        function applySubtitleSelection() {
+            subtitleBtns.forEach(btn => {
+                const active = btn.dataset.language === state.subtitleLanguage;
+                btn.classList.toggle('active', active);
+                btn.setAttribute('aria-checked', String(active));
+            });
+        }
+
+        function applyVoiceStatus() {
+            voiceStatus.textContent = state.voiceNavigation ? 'ENABLED' : 'DISABLED';
+        }
+
+        function normalizeCardMetadata() {
+            document.querySelectorAll('.card').forEach(card => {
+                if (!card.dataset.title) {
+                    const titleEl = card.querySelector('.card-title');
+                    card.dataset.title = titleEl ? titleEl.textContent.trim() : '';
+                }
+                if (!card.dataset.genre) {
+                    const infoText = card.querySelector('.card-info')?.textContent || '';
+                    card.dataset.genre = infoText.replace(/\s+/g, ' ').trim();
+                }
+            });
+        }
+
+        function filterSearchResults(query) {
+            const q = query.trim().toLowerCase();
+            let visibleCount = 0;
+
+            searchScreenCards.forEach(card => {
+                const title = (card.dataset.title || '').toLowerCase();
+                const genre = (card.dataset.genre || '').toLowerCase();
+                const visible = q.length === 0 || title.includes(q) || genre.includes(q);
+                card.style.display = visible ? '' : 'none';
+                if (visible) {
+                    visibleCount += 1;
+                }
+            });
+
+            if (searchEmpty) {
+                searchEmpty.classList.toggle('show', visibleCount === 0);
+            }
+        }
+
+        function showNotification(message) {
+            if (liveStatus) {
+                liveStatus.textContent = message;
+            }
+
+            const notification = document.createElement('div');
+            notification.setAttribute('role', 'status');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        function announceStatus(message) {
+            if (liveStatus) {
+                liveStatus.textContent = message;
+            }
+        }
+
+        function bindCardBehavior() {
+            document.querySelectorAll('.card').forEach(card => {
+                card.removeAttribute('aria-label');
+                card.addEventListener('click', () => {
+                    switchScreen('details');
+                });
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        switchScreen('details');
+                    }
+                });
+            });
+        }
+
+        function getFocusableInPanel() {
+            return [...accessibilityPanel.querySelectorAll(panelFocusable)].filter(el => !el.hasAttribute('disabled'));
+        }
+
+        function openAccessibilityPanel() {
+            lastFocusedElement = document.activeElement;
+            accessibilityOverlay.hidden = false;
+            accessibilityOverlay.classList.add('open');
+            accessibilityPanel.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            const focusables = getFocusableInPanel();
+            (focusables[0] || closeAccessibility).focus();
+        }
+
+        function closeAccessibilityPanel() {
+            accessibilityPanel.classList.remove('open');
+            accessibilityOverlay.classList.remove('open');
+            accessibilityOverlay.hidden = true;
+            document.body.style.overflow = '';
+            if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+                lastFocusedElement.focus();
+            } else {
+                accessibilityToggle.focus();
+            }
+        }
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                switchScreen(item.dataset.screen);
+            });
+        });
+
+        navTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                navTabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                tab.classList.add('active');
+                tab.setAttribute('aria-selected', 'true');
+                if (tab.dataset.tab === 'series') {
+                    switchScreen('series');
+                } else if (tab.dataset.tab === 'originals') {
+                    switchScreen('library');
+                } else {
+                    switchScreen('home');
+                }
+            });
+        });
+
+        navTabs.forEach((tab, index) => {
+            tab.addEventListener('keydown', (e) => {
+                if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') {
+                    return;
+                }
+                e.preventDefault();
+                const dir = e.key === 'ArrowRight' ? 1 : -1;
+                const next = (index + dir + navTabs.length) % navTabs.length;
+                navTabs[next].focus();
+                navTabs[next].click();
+            });
+        });
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-pressed', 'false');
+                });
+                btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
+            });
+        });
+
+        accessibilityToggle.addEventListener('click', openAccessibilityPanel);
+        accessibilityOverlay.addEventListener('click', closeAccessibilityPanel);
+
+        closeAccessibility.addEventListener('click', closeAccessibilityPanel);
+
+        audioDescToggle.addEventListener('click', () => {
+            state.audioDescription = !state.audioDescription;
+            setToggleState(audioDescToggle, state.audioDescription);
+            persistState();
+        });
+
+        highContrastToggle.addEventListener('click', () => {
+            state.highContrast = !state.highContrast;
+            setToggleState(highContrastToggle, state.highContrast);
+            applyHighContrast();
+            persistState();
+        });
+
+        largeTextToggle.addEventListener('click', () => {
+            state.largeText = !state.largeText;
+            setToggleState(largeTextToggle, state.largeText);
+            applyLargeText();
+            persistState();
+        });
+
+        voiceNavToggle.addEventListener('click', () => {
+            state.voiceNavigation = !state.voiceNavigation;
+            setToggleState(voiceNavToggle, state.voiceNavigation);
+            applyVoiceStatus();
+            persistState();
+        });
+
+        subtitleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                state.subtitleLanguage = btn.dataset.language;
+                applySubtitleSelection();
+                persistState();
+            });
+        });
+
+        applyAccessibilityBtn.addEventListener('click', () => {
+            closeAccessibilityPanel();
+            showNotification('Accessibility settings applied!');
+        });
+
+        profileOptions.forEach(option => {
+            if (!option.dataset.profile) {
+                return;
+            }
+            option.setAttribute('role', 'button');
+            option.setAttribute('tabindex', '0');
+            option.setAttribute('aria-label', `Select profile ${option.dataset.profile}`);
+            option.addEventListener('click', () => {
+                state.currentProfile = option.dataset.profile;
+                persistState();
+                switchScreen('home');
+                showNotification(`Profile selected: ${option.dataset.profile}`);
+            });
+            option.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    option.click();
+                }
+            });
+        });
+
+        if (profileBtn) {
+            const openProfiles = () => switchScreen('profiles');
+            profileBtn.addEventListener('click', openProfiles);
+            profileBtn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openProfiles();
+                }
+            });
+        }
+
+        logoBtn?.addEventListener('click', () => switchScreen('home'));
+
+        playBtn?.addEventListener('click', () => {
+            switchScreen('details');
+            showNotification('Playing: Captain America');
+        });
+
+        backBtn?.addEventListener('click', () => {
+            switchScreen('home');
+        });
+
+        searchInput?.addEventListener('input', (e) => {
+            const value = e.target.value || '';
+            filterSearchResults(value);
+            if (state.currentScreen !== 'search') {
+                switchScreen('search');
+            }
+            announceStatus('Search results updated');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab' && accessibilityPanel.classList.contains('open')) {
+                const focusables = getFocusableInPanel();
+                if (!focusables.length) {
+                    e.preventDefault();
+                    return;
+                }
+                const first = focusables[0];
+                const last = focusables[focusables.length - 1];
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
+                return;
+            }
+
+            if (e.key === 'Escape') {
+                if (accessibilityPanel.classList.contains('open')) {
+                    closeAccessibilityPanel();
+                }
+            } else if (e.altKey && e.shiftKey && e.key.toLowerCase() === 'a') {
+                e.preventDefault();
+                if (accessibilityPanel.classList.contains('open')) {
+                    closeAccessibilityPanel();
+                } else {
+                    openAccessibilityPanel();
+                }
+            } else if (
+                e.key === '/' &&
+                document.activeElement !== searchInput &&
+                !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)
+            ) {
+                e.preventDefault();
+                searchInput?.focus();
+            }
+        });
+
+        normalizeCardMetadata();
+        bindCardBehavior();
+        setToggleState(audioDescToggle, state.audioDescription);
+        setToggleState(highContrastToggle, state.highContrast);
+        setToggleState(largeTextToggle, state.largeText);
+        setToggleState(voiceNavToggle, state.voiceNavigation);
+        applySubtitleSelection();
+        applyVoiceStatus();
+        applyHighContrast();
+        applyLargeText();
+        filterSearchResults('');
+        categoryBtns.forEach((btn, index) => btn.setAttribute('aria-pressed', index === 0 ? 'true' : 'false'));
+        switchScreen(state.currentScreen);
+
+        console.log('CINEMA OTT Platform Ready');
+    </script>
+</body>
+</html>

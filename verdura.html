@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Verdura — Premium UX Case Study</title>
+  <meta name="description" content="Premium UX case study for Verdura, a VR botany learning platform designed to combat plant blindness through immersive educational experiences." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f6fbf7; --paper:#fff; --ink:#11151a; --muted:#61706a;
+      --line:rgba(17,21,26,.08); --line-strong:rgba(17,21,26,.14);
+      --forest:#166534; --leaf:#22c55e; --mint:#86efac; --teal:#06b6d4; --amber:#f59e0b;
+      --dark:#08140d; --dark-2:#102019;
+      --shadow:0 24px 60px rgba(12,28,18,.12); --soft:0 10px 30px rgba(12,28,18,.06);
+      --wrap:1180px; --radius:24px; --pad:clamp(18px,2.4vw,30px);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{
+      margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);line-height:1.65;
+      background:
+        radial-gradient(900px 520px at 8% 0%, rgba(34,197,94,.11), transparent 60%),
+        radial-gradient(700px 420px at 92% 10%, rgba(6,182,212,.08), transparent 60%),
+        linear-gradient(180deg,var(--bg),#fff);
+    }
+    a{text-decoration:none;color:inherit}
+    .wrap{width:min(var(--wrap), calc(100% - var(--pad)*2)); margin-inline:auto}
+    .topbar{position:sticky;top:0;z-index:100;background:rgba(246,251,247,.78);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+    .topbar__row{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800}
+    .brand__mark{width:38px;height:38px;border-radius:14px;background:linear-gradient(135deg,var(--forest),var(--leaf));box-shadow:0 16px 30px rgba(22,101,52,.24);position:relative}
+    .brand__mark:after{content:"";position:absolute;inset:8px;border-radius:10px;border:1px solid rgba(255,255,255,.42)}
+    .crumb{font-size:.88rem;color:var(--muted)} .crumb strong{color:var(--ink)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:999px;font-weight:700;border:1px solid var(--line-strong);background:#fff;box-shadow:var(--soft);transition:.18s ease}
+    .btn:hover{transform:translateY(-2px)} .btn--primary{background:linear-gradient(135deg,var(--forest),var(--leaf));color:#fff;border-color:transparent}
+    .hero,.section{padding:54px 0}
+    .hero{padding-top:86px}
+    .hero__grid,.grid-2,.grid-3,.chartGrid,.screenGrid,.impactGrid{display:grid;gap:18px}
+    .hero__grid{grid-template-columns:1.08fr .92fr;align-items:start}
+    .grid-2{grid-template-columns:1fr 1fr}.grid-3{grid-template-columns:repeat(3,1fr)}
+    .chartGrid{grid-template-columns:1.1fr .9fr}.screenGrid{grid-template-columns:repeat(3,1fr)}.impactGrid{grid-template-columns:repeat(4,1fr)}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:18px;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--forest)}
+    .eyebrow::before{content:"";width:28px;height:2px;background:currentColor;border-radius:999px}
+    h1,h2,h3{font-family:Manrope,Inter,sans-serif;margin:0;letter-spacing:-.03em}
+    h1{font-size:clamp(2.8rem,6vw,5.2rem);line-height:.95} h2{font-size:clamp(1.8rem,3.5vw,3rem);line-height:1} h3{font-size:1.18rem}
+    .lead,.sectionLead,.card p{color:var(--muted)} .lead{font-size:1.05rem;max-width:64ch;margin-top:18px} .sectionLead{max-width:70ch;margin-top:10px}
+    .heroPanel,.card,.chartWrap,.screen,.impactBand{border-radius:28px}
+    .heroPanel{
+      padding:28px;background:linear-gradient(180deg,var(--dark),var(--dark-2));color:#fff;box-shadow:0 34px 80px rgba(8,20,13,.24);position:relative;overflow:hidden
+    }
+    .heroPanel::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 18px,rgba(255,255,255,.03) 18px,rgba(255,255,255,.03) 20px)}
+    .heroPanel>*{position:relative;z-index:1}
+    .heroStats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
+    .stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:16px}
+    .stat__num{display:block;font-size:1.35rem;font-weight:800}.stat__label{display:block;margin-top:6px;font-size:.74rem;color:rgba(255,255,255,.72);text-transform:uppercase;letter-spacing:.1em}
+    .card,.chartWrap,.screen{background:rgba(255,255,255,.9);border:1px solid var(--line);box-shadow:var(--soft)}
+    .card,.chartWrap{padding:22px}
+    .pill{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(34,197,94,.10);color:var(--forest);font-size:.74rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .timeline{display:grid;gap:12px}
+    .step{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:start;padding:16px;border-radius:20px;border:1px solid var(--line);background:#fff}
+    .stepNum{width:42px;height:42px;border-radius:14px;background:rgba(34,197,94,.12);display:grid;place-items:center;font-weight:800;color:var(--forest)}
+    .insight{padding:14px 16px;border-radius:18px;background:rgba(34,197,94,.08);border:1px dashed rgba(34,197,94,.28);color:#1f4530;font-size:.94rem}
+    .bars{display:grid;gap:16px;margin-top:18px}
+    .barRow{display:grid;grid-template-columns:170px 1fr 54px;gap:12px;align-items:center}
+    .barLabel{font-size:.9rem;color:var(--muted)} .track{height:12px;background:#ecf2ed;border-radius:999px;overflow:hidden}
+    .fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--forest),var(--leaf));transition:width 1.2s cubic-bezier(.22,1,.36,1)}
+    .fill.teal{background:linear-gradient(90deg,var(--teal),#67e8f9)} .fill.amber{background:linear-gradient(90deg,var(--amber),#fcd34d)} .val{font-weight:800;text-align:right}
+    .ringArea{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+    .ringCard{border:1px solid var(--line);border-radius:22px;padding:18px;background:#fff}
+    .ring{width:122px;height:122px;margin:0 auto 12px;position:relative;border-radius:50%;background:conic-gradient(var(--clr) 0deg, var(--clr) calc(var(--pct)*3.6deg), #ecf2ed calc(var(--pct)*3.6deg), #ecf2ed 360deg)}
+    .ring:after{content:"";position:absolute;inset:15px;background:#fff;border-radius:50%;box-shadow:inset 0 0 0 1px var(--line)}
+    .ring span{position:absolute;inset:0;display:grid;place-items:center;z-index:1;font-size:1.25rem;font-weight:800}
+    .screen{overflow:hidden}
+    .screen__top{padding:10px 14px;font-size:.72rem;font-weight:800;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;background:#fbfffb;border-bottom:1px solid var(--line)}
+    .vrFrame{
+      margin:18px auto;width:100%;max-width:360px;min-height:380px;border-radius:24px;overflow:hidden;background:linear-gradient(180deg,#0e2617,#123120);box-shadow:0 18px 40px rgba(8,20,13,.18)
+    }
+    .scene{padding:18px;min-height:380px;color:#fff;position:relative;overflow:hidden}
+    .scene::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 20%, rgba(134,239,172,.16), transparent 28%), radial-gradient(circle at 20% 80%, rgba(6,182,212,.14), transparent 30%)}
+    .scene>*{position:relative;z-index:1}
+    .vrCard{padding:16px;border-radius:18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08)}
+    .chipRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .chipMini{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.10);font-size:.72rem;font-weight:800}
+    .ecos{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+    .ecoTile{aspect-ratio:1;border-radius:14px;background:linear-gradient(135deg,#14442a,#1b6c41);display:flex;align-items:flex-end;padding:10px;font-size:.72rem;font-weight:800}
+    .quizCard{margin-top:14px;padding:14px;border-radius:18px;background:rgba(255,255,255,.08)}
+    .option{padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.08);margin-top:8px;font-size:.8rem}
+    .option.good{background:rgba(34,197,94,.22)}
+    .impactBand{padding:24px;background:linear-gradient(135deg,#0f172a,#123624);color:#fff;box-shadow:0 24px 60px rgba(15,23,42,.18)}
+    .impact{padding:18px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+    .impact strong{display:block;font-size:1.5rem}.impact span{font-size:.76rem;text-transform:uppercase;color:rgba(255,255,255,.72);letter-spacing:.1em}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease, transform .6s ease}
+    .reveal.in{opacity:1;transform:none}
+    @media (max-width:1020px){
+      .hero__grid,.grid-2,.grid-3,.chartGrid,.screenGrid{grid-template-columns:1fr}
+      .heroStats,.impactGrid,.ringArea{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:720px){
+      .heroStats,.impactGrid,.ringArea{grid-template-columns:1fr}
+      .barRow{grid-template-columns:1fr}
+    }
+  
+    /* Global accessibility and responsive baseline */
+    .skip-link{
+      position:absolute;
+      left:12px;
+      top:-48px;
+      z-index:9999;
+      background:#111;
+      color:#fff;
+      padding:10px 12px;
+      border-radius:10px;
+      font-weight:700;
+      text-decoration:none;
+    }
+    .skip-link:focus{top:12px}
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    [tabindex]:focus-visible{
+      outline:3px solid #2563eb;
+      outline-offset:3px;
+      border-radius:6px;
+    }
+
+    img,video,canvas,svg{max-width:100%;height:auto}
+
+    @media (max-width: 900px){
+      .topbar__row{flex-wrap:wrap}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="topbar">
+    <div class="wrap topbar__row">
+      <a class="brand" href="index.html"><span><span class="brand__nameMain">No Name</span><span class="brand__nameSub">Productions</span></span></a>
+      <div class="crumb">Case Study / <strong>Verdura</strong></div>
+      <div style="display:flex;gap:10px"><a class="btn" href="index.html#work">← Work</a><a class="btn btn--primary" href="index.html#contact">Hire Us</a></div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div class="reveal">
+          <div class="eyebrow">Premium VR Learning Case Study</div>
+          <h1>Verdura</h1>
+          <p class="lead">A VR botany learning platform built to fight <strong>plant blindness</strong> by making plant science immersive, explorable, and memorable. Through iterative prototyping and validation, the final concept improved recall by <strong>40%</strong> and significantly increased engagement compared with static learning methods.</p>
+          <div class="heroStats">
+            <div class="stat"><span class="stat__num">28</span><span class="stat__label">Participants</span></div>
+            <div class="stat"><span class="stat__num">VR</span><span class="stat__label">Immersive medium</span></div>
+            <div class="stat"><span class="stat__num">3</span><span class="stat__label">Iterations</span></div>
+            <div class="stat"><span class="stat__num">+40%</span><span class="stat__label">Recall lift</span></div>
+          </div>
+        </div>
+
+        <aside class="heroPanel reveal">
+          <span class="pill">Project Summary</span>
+          <h2 style="margin-top:14px;font-size:1.55rem">Turning botany from overlooked to unforgettable</h2>
+          <p style="color:rgba(255,255,255,.72); margin-top:10px">Most botany education still depends on diagrams, textbooks, and static environments. Verdura reimagined the experience as a spatial learning journey where students could enter ecosystems, inspect plants, and test knowledge inside the same world.</p>
+          <div style="display:grid;gap:12px;margin-top:18px">
+            <div class="vrCard"><strong>Problem</strong><div style="color:rgba(255,255,255,.78);margin-top:6px;font-size:.94rem">Students struggle to notice, remember, and care about plant life.</div></div>
+            <div class="vrCard"><strong>Approach</strong><div style="color:rgba(255,255,255,.78);margin-top:6px;font-size:.94rem">Use VR immersion, guided narration, and interactive exploration to raise attention and recall.</div></div>
+            <div class="vrCard"><strong>Result</strong><div style="color:rgba(255,255,255,.78);margin-top:6px;font-size:.94rem">More memorable learning, stronger engagement, and better knowledge testing outcomes.</div></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap grid-2">
+        <div class="card reveal">
+          <div class="eyebrow">Problem</div>
+          <h2>Botany had an engagement problem, not just a curriculum problem</h2>
+          <p class="sectionLead">Plant blindness describes the tendency to overlook plants in everyday life and undervalue their importance. In educational contexts, this translates into low interest, weak recall, and poor emotional connection to subject matter that feels abstract and distant.</p>
+        </div>
+        <div class="card reveal">
+          <div class="eyebrow">Opportunity</div>
+          <h2>Immersion could make plants impossible to ignore</h2>
+          <p class="sectionLead">VR offered a fundamentally different learning mode: one where students could move through ecosystems, inspect details in context, and connect explanation with experience. The product opportunity was to turn observation into participation.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="research">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div class="eyebrow">Research</div>
+          <h2>Building the experience around how people actually learn</h2>
+          <p class="sectionLead">The research combined educational framing, user testing, prototype comparison, and interaction validation. The goal was not just to make a visually impressive VR app, but to prove that immersion improved comprehension and recall.</p>
+        </div>
+        <div class="timeline">
+          <div class="step reveal"><div class="stepNum">01</div><div><h3>Problem framing</h3><p>Reviewed literature around plant blindness and science education to define where traditional learning breaks down: low salience, low emotional engagement, and low transfer into memory.</p></div></div>
+          <div class="step reveal"><div class="stepNum">02</div><div><h3>User group definition</h3><p>Validated the concept with 28 participants across students and educators to represent both learning and teaching perspectives.</p></div></div>
+          <div class="step reveal"><div class="stepNum">03</div><div><h3>Lo-fi interaction testing</h3><p>Rapid paper and journey prototypes mapped the core loop: enter an environment, inspect a plant, receive contextual explanation, then test understanding.</p></div></div>
+          <div class="step reveal"><div class="stepNum">04</div><div><h3>VR prototype iteration</h3><p>Built and refined environment cards, plant interaction cues, narration flows, and quiz mechanics based on usability pain points.</p></div></div>
+          <div class="step reveal"><div class="stepNum">05</div><div><h3>Outcome validation</h3><p>Measured recall, exploration time, and participant preference to understand whether immersion created a stronger learning effect than static content.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap chartGrid">
+        <div class="chartWrap reveal">
+          <div class="eyebrow">Animated Charts</div>
+          <h2>What improved with immersion</h2>
+          <div class="bars">
+            <div class="barRow"><div class="barLabel">Recall improvement</div><div class="track"><div class="fill" data-width="40"></div></div><div class="val">40%</div></div>
+            <div class="barRow"><div class="barLabel">Engagement time</div><div class="track"><div class="fill teal" data-width="68"></div></div><div class="val">68%</div></div>
+            <div class="barRow"><div class="barLabel">Preference for interactive mode</div><div class="track"><div class="fill" data-width="89"></div></div><div class="val">89%</div></div>
+            <div class="barRow"><div class="barLabel">Knowledge test completion</div><div class="track"><div class="fill amber" data-width="84"></div></div><div class="val">84%</div></div>
+          </div>
+        </div>
+        <div class="chartWrap reveal">
+          <div class="eyebrow">Learning Signal</div>
+          <h2>Why Verdura worked</h2>
+          <div class="ringArea">
+            <div class="ringCard">
+              <div class="ring" style="--pct:89; --clr: var(--forest)"><span>89%</span></div>
+              <h3 style="text-align:center">Preferred interactive learning</h3>
+              <p style="text-align:center;color:var(--muted)">Most users chose immersion over static instruction.</p>
+            </div>
+            <div class="ringCard">
+              <div class="ring" style="--pct:84; --clr: var(--teal)"><span>84%</span></div>
+              <h3 style="text-align:center">Quiz completion</h3>
+              <p style="text-align:center;color:var(--muted)">Testing felt like part of the experience, not a break from it.</p>
+            </div>
+          </div>
+          <div class="insight" style="margin-top:14px"><strong>Key UX insight:</strong> users remembered more not simply because the content was visual, but because the environment made information contextual, discoverable, and personally navigable.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div class="eyebrow">Premium Storytelling Flow</div>
+          <h2>From exploration to explanation to testing</h2>
+          <p class="sectionLead">Verdura was designed as a three-part learning system: enter a world, learn through discovery, then reinforce through action. Each layer had to feel educational without feeling instructional in a traditional sense.</p>
+        </div>
+
+        <div class="screenGrid">
+          <article class="screen reveal">
+            <div class="screen__top">Home / Environment Selection</div>
+            <div class="vrFrame">
+              <div class="scene">
+                <div style="font-size:1.2rem;font-weight:800">Hello Jack</div>
+                <div style="font-size:.82rem;color:rgba(255,255,255,.72);margin-top:6px;max-width:220px">Step into a world where plants come alive. Choose an ecosystem to explore.</div>
+                <div class="chipRow">
+                  <div class="chipMini">Plant evolution</div>
+                  <div class="chipMini">Virtual environment</div>
+                  <div class="chipMini">Quiz</div>
+                </div>
+                <div class="ecos">
+                  <div class="ecoTile">Coral Reef</div>
+                  <div class="ecoTile">Rainforest</div>
+                  <div class="ecoTile">Alpine Meadow</div>
+                  <div class="ecoTile">Marine Grass</div>
+                </div>
+              </div>
+            </div>
+            <div style="padding:0 20px 22px">
+              <h3>Clear entry into curiosity</h3>
+              <p>The home screen framed learning as exploration, not menu navigation.</p>
+            </div>
+          </article>
+
+          <article class="screen reveal">
+            <div class="screen__top">Immersive Environment / Guided Learning</div>
+            <div class="vrFrame">
+              <div class="scene">
+                <div style="font-size:1.1rem;font-weight:800">Coral Reef Ecosystem</div>
+                <div style="font-size:.8rem;color:rgba(255,255,255,.72);margin-top:6px;max-width:220px">A narrated underwater environment where users inspect plants and corals in context.</div>
+                <div style="margin-top:16px;padding:16px;border-radius:18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08)">
+                  <div style="font-size:.74rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)">Interaction</div>
+                  <div style="margin-top:8px;font-size:.88rem">Touch a highlighted plant to zoom in, reveal facts, and hear narrated explanation.</div>
+                </div>
+                <div class="chipRow">
+                  <div class="chipMini">Guided narration</div>
+                  <div class="chipMini">Zoom interaction</div>
+                  <div class="chipMini">Contextual facts</div>
+                </div>
+              </div>
+            </div>
+            <div style="padding:0 20px 22px">
+              <h3>Learning in context</h3>
+              <p>Information became more memorable because it was tied to environment, scale, and action.</p>
+            </div>
+          </article>
+
+          <article class="screen reveal">
+            <div class="screen__top">Quiz / Reinforcement</div>
+            <div class="vrFrame">
+              <div class="scene">
+                <div style="font-size:.78rem;color:rgba(255,255,255,.72);font-weight:800;letter-spacing:.1em;text-transform:uppercase">Question 01 / 15</div>
+                <div class="quizCard">
+                  <div style="font-size:1rem;font-weight:700">Which ecosystem condition helps marine plants produce oxygen bubbles?</div>
+                  <div class="option good">High light availability</div>
+                  <div class="option">Cold volcanic vents</div>
+                  <div class="option">Low salinity shock</div>
+                </div>
+                <div style="margin-top:14px;height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden">
+                  <div style="width:22%;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--leaf),var(--mint))"></div>
+                </div>
+              </div>
+            </div>
+            <div style="padding:0 20px 22px">
+              <h3>Testing without breaking immersion</h3>
+              <p>Assessment felt like a natural continuation of exploration instead of a separate academic mode.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="impact">
+      <div class="wrap impactBand reveal">
+        <div class="eyebrow" style="color:#bbf7d0">Impact</div>
+        <h2 style="color:#fff">Verdura proved that immersive science learning can raise both attention and retention</h2>
+        <p style="color:rgba(255,255,255,.72); max-width:72ch; margin-top:12px">The final product direction showed that VR is most powerful when it is not just visually impressive, but structurally educational. By merging exploration, explanation, and reinforcement into one seamless journey, Verdura made plant learning feel consequential and memorable.</p>
+        <div class="impactGrid" style="margin-top:18px">
+          <div class="impact"><strong>+40%</strong><span>Recall improvement</span></div>
+          <div class="impact"><strong>+68%</strong><span>Engagement time</span></div>
+          <div class="impact"><strong>89%</strong><span>Interactive preference</span></div>
+          <div class="impact"><strong>84%</strong><span>Quiz completion</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          entry.target.querySelectorAll('.fill').forEach(bar=>bar.style.width = bar.dataset.width + '%');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.18});
+    document.querySelectorAll('.reveal, .chartWrap').forEach(el=>observer.observe(el));
+  </script>
+</body>
+</html>
+
+

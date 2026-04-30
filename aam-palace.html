@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AAM Palace - Premium Event Venue Case Study · No Name Productions</title>
+  <meta name="description" content="AAM Palace case study for a premium marriage hall and event destination website designed to communicate scale, luxury, and conversion clearly." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <style>
+    :root{
+      --bg:#f7f1e8;
+      --paper:#ffffff;
+      --ink:#18110d;
+      --muted:#6a5f57;
+      --line:rgba(24,17,13,.10);
+      --line-strong:rgba(24,17,13,.18);
+      --gold:#c79445;
+      --amber:#f1b661;
+      --copper:#b86a3d;
+      --plum:#5b3526;
+      --deep:#140d0a;
+      --deep-2:#231613;
+      --shadow:0 24px 60px rgba(20,13,10,.12);
+      --soft:0 12px 30px rgba(20,13,10,.06);
+      --wrap:1180px;
+      --pad:clamp(18px,2.4vw,30px);
+      --radius:28px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      line-height:1.65;
+      background:
+        radial-gradient(900px 600px at 10% 0%, rgba(199,148,69,.16), transparent 60%),
+        radial-gradient(800px 500px at 90% 10%, rgba(184,106,61,.12), transparent 60%),
+        linear-gradient(180deg, #f7f1e8 0%, #fcf8f2 100%);
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.16;
+      mix-blend-mode:multiply;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(var(--wrap), calc(100% - (var(--pad) * 2)));margin-inline:auto}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;
+      font-size:.78rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)
+    }
+    .eyebrow::before{content:"";width:28px;height:2px;border-radius:999px;background:currentColor}
+    .eyebrow--dark{color:var(--copper)}
+
+    h1,h2,h3{margin:0;letter-spacing:-.03em;font-family:inherit;font-weight:800}
+    h1{font-size:clamp(3.2rem,6.8vw,6.8rem);line-height:.9}
+    h2{font-size:clamp(2rem,4vw,3.4rem);line-height:.95}
+    h3{font-size:1.4rem;line-height:1.05}
+    p{margin:0}
+
+    .topbar{
+      position:sticky;top:0;z-index:100;
+      background:rgba(247,241,232,.84);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar__row{
+      min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:16px;
+    }
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;min-width:0}
+    .brand__text{display:flex;flex-direction:column;line-height:1;min-width:0}
+    .brand__name{font-size:1rem;color:var(--ink)}
+    .brand__sub{font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;color:var(--muted)}
+    .crumb{font-size:.88rem;color:var(--muted)}
+    .crumb strong{color:var(--ink)}
+    .topbar__actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:12px 18px;border-radius:999px;border:1px solid var(--line-strong);
+      background:#fff;box-shadow:var(--soft);font-weight:700;transition:transform .16s ease, box-shadow .16s ease, background .16s ease
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+    .btn--primary{background:linear-gradient(135deg,var(--gold),#d8a95f);color:#fff;border-color:transparent}
+    .btn--primary:hover{background:linear-gradient(135deg,#b57f31,#c89445)}
+    .btn--ghost{background:rgba(255,255,255,.76)}
+    .btn--light{background:#fff;color:var(--ink)}
+
+    .progressWrap{height:3px;background:rgba(0,0,0,.04)}
+    .progressBar{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--amber),var(--copper));transition:width .08s linear}
+
+    .section{padding:clamp(56px,7vw,96px) 0}
+    .section--tight{padding:28px 0}
+    .sectionHead{margin-bottom:26px}
+    .sectionLead{max-width:68ch;color:var(--muted);margin-top:12px;font-size:1.03rem;line-height:1.82}
+    .sectionLead--light{color:rgba(255,255,255,.72)}
+    .sectionLink{display:inline-flex;align-items:center;gap:8px;margin-top:14px;color:var(--copper);font-weight:800}
+    .sectionLink:hover{text-decoration:underline}
+
+    .hero{padding-top:clamp(70px,8vw,118px);overflow:hidden}
+    .hero__grid{display:grid;grid-template-columns:1.08fr .92fr;gap:22px;align-items:start}
+    .hero__content{position:relative;z-index:1}
+    .hero__title{max-width:11ch}
+    .hero__lead{max-width:62ch;color:var(--muted);font-size:1.06rem;line-height:1.9;margin-top:18px}
+    .hero__actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .hero__stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:30px}
+    .stat,.card,.panel,.screen,.metricBand,.callout{border-radius:var(--radius)}
+    .stat{padding:16px 18px;background:rgba(255,255,255,.72);border:1px solid var(--line);box-shadow:var(--soft)}
+    .stat__num{display:block;font-size:1.12rem;font-weight:800;color:var(--ink);line-height:1.15}
+    .stat__label{display:block;margin-top:6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+
+    .panel{
+      position:relative;overflow:hidden;background:linear-gradient(180deg,var(--deep),var(--deep-2));
+      color:#fff;box-shadow:0 34px 80px rgba(20,13,10,.24);padding:24px
+    }
+    .panel::before{
+      content:"";position:absolute;inset:0;
+      background:repeating-linear-gradient(-45deg, transparent, transparent 18px, rgba(255,255,255,.03) 18px, rgba(255,255,255,.03) 20px)
+    }
+    .panel__inner{position:relative;z-index:1;display:grid;gap:14px}
+    .panel__tag{
+      display:inline-flex;padding:7px 11px;border-radius:999px;background:rgba(199,148,69,.16);color:#f3d3a3;
+      font-size:.74rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;width:fit-content
+    }
+    .panel__lead{color:rgba(255,255,255,.72);font-size:.98rem;line-height:1.8;max-width:52ch}
+    .panelCards{display:grid;gap:12px;margin-top:4px}
+    .panelCard{padding:16px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+    .panelCard strong{display:block;font-size:1.02rem}
+    .panelCard p{margin-top:6px;color:rgba(255,255,255,.72);font-size:.92rem;line-height:1.7}
+
+    .grid-3,.grid-2,.featureGrid,.screenGrid,.metricGrid{display:grid;gap:18px}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .grid-2{grid-template-columns:1fr 1fr}
+    .featureGrid{grid-template-columns:repeat(3,1fr)}
+    .screenGrid{grid-template-columns:repeat(3,1fr)}
+    .metricGrid{grid-template-columns:repeat(4,1fr)}
+
+    .card,.screen,.chartWrap{background:rgba(255,255,255,.88);border:1px solid var(--line);box-shadow:var(--soft)}
+    .card{padding:22px}
+    .card p{color:var(--muted);font-size:.97rem;line-height:1.8;margin-top:10px}
+
+    .insightBox{
+      padding:20px;border-radius:24px;background:rgba(199,148,69,.08);border:1px dashed rgba(199,148,69,.28);color:#5a3b16
+    }
+    .insightBox strong{display:block;margin-bottom:6px}
+
+    .timeline{display:grid;gap:12px}
+    .step{display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:start;padding:16px;border-radius:20px;background:#fff;border:1px solid var(--line)}
+    .stepNum{
+      width:48px;height:48px;border-radius:16px;display:grid;place-items:center;font-weight:800;
+      background:rgba(199,148,69,.12);color:var(--copper)
+    }
+    .step p{color:var(--muted);margin-top:6px;line-height:1.75;font-size:.95rem}
+
+    .pills{display:flex;gap:10px;flex-wrap:wrap}
+    .pill{display:inline-flex;padding:7px 11px;border-radius:999px;background:rgba(184,106,61,.10);color:var(--copper);font-size:.74rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+    .pill--dark{background:rgba(255,255,255,.08);color:#f3d3a3}
+
+    .featureCard{
+      padding:22px;border-radius:24px;background:linear-gradient(180deg,#fff, #fcf7f1);
+      border:1px solid var(--line);box-shadow:var(--soft);min-height:100%
+    }
+    .featureCard p{color:var(--muted);margin-top:10px;line-height:1.78}
+    .featureList{display:grid;gap:9px;margin-top:16px;padding-left:18px;color:var(--muted)}
+
+    .metricBand{
+      padding:24px;background:linear-gradient(135deg,var(--deep),#2a1914);color:#fff;box-shadow:0 24px 60px rgba(20,13,10,.18)
+    }
+    .metric{padding:18px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+    .metric strong{display:block;font-size:1.6rem;font-weight:800;line-height:1}
+    .metric span{display:block;margin-top:8px;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+
+    .barList{display:grid;gap:16px;margin-top:18px}
+    .barRow{display:grid;grid-template-columns:180px 1fr 54px;gap:12px;align-items:center}
+    .barLabel{color:var(--muted);font-size:.92rem}
+    .track{height:12px;background:#f1e8de;border-radius:999px;overflow:hidden}
+    .fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--amber));border-radius:999px;transition:width 1.1s cubic-bezier(.22,1,.36,1)}
+    .fill.alt{background:linear-gradient(90deg,var(--copper),#d99b6f)}
+    .fill.dark{background:linear-gradient(90deg,var(--plum),#8a5a42)}
+    .val{font-weight:800;text-align:right}
+
+    .screen{overflow:hidden}
+    .screen__top{padding:10px 14px;border-bottom:1px solid var(--line);background:#fcf8f3;color:var(--muted);font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+    .screen__body{padding:20px}
+    .screenMock{
+      min-height:320px;border-radius:22px;background:linear-gradient(180deg,#241611,#0f0907);position:relative;overflow:hidden;
+      padding:18px;color:#fff;display:flex;flex-direction:column;justify-content:space-between
+    }
+    .screenMock::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 18%, rgba(241,182,97,.22), transparent 24%), radial-gradient(circle at 18% 80%, rgba(199,148,69,.16), transparent 32%)}
+    .screenMock > *{position:relative;z-index:1}
+    .mockTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .mockTitle{font-size:2rem;font-weight:800;line-height:1}
+    .mockMeta{max-width:18ch;color:rgba(255,255,255,.72);font-size:.82rem;line-height:1.6}
+    .mockBar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .mockChip{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.08);font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .mockGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:16px}
+    .mockTile{aspect-ratio:1;border-radius:16px;background:linear-gradient(135deg,#3a2419,#b57f31);display:flex;align-items:flex-end;padding:10px;font-size:.72rem;font-weight:800}
+    .mockFooter{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:16px}
+    .mockBtn{display:inline-flex;padding:9px 12px;border-radius:999px;background:linear-gradient(135deg,var(--gold),#daab5d);color:#fff;font-size:.76rem;font-weight:800}
+
+    .quote{
+      padding:24px;border-radius:28px;background:linear-gradient(135deg, rgba(199,148,69,.12), rgba(184,106,61,.08));
+      border:1px solid rgba(199,148,69,.18)
+    }
+    .quote p{font-size:clamp(1.5rem,2.8vw,2.2rem);font-weight:800;line-height:1.08;color:var(--ink)}
+    .quote span{display:block;margin-top:10px;color:var(--muted);font-size:.92rem}
+
+    .shotGrid{display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:start}
+    .shotGrid__lead{display:grid;gap:16px}
+    .shotStack{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .shotCard{overflow:hidden;border-radius:24px;background:#fff;border:1px solid var(--line);box-shadow:var(--soft);height:100%}
+    .shotCard--lead{min-height:100%}
+    .siteShot{display:flex;flex-direction:column;min-height:100%;background:linear-gradient(180deg,#fffaf2 0%, #fff 100%)}
+    .siteShot__chrome{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--line);background:#fcf7ef;color:var(--muted);font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+    .siteShot__dots{display:flex;gap:6px}
+    .siteShot__dots span{width:8px;height:8px;border-radius:50%;background:#d9ccbb;display:block}
+    .siteShot__url{margin-left:auto;color:var(--copper)}
+    .siteShot__body{padding:18px;display:grid;gap:12px;flex:1}
+    .siteShot__eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--copper)}
+    .siteShot__title{font-size:1.5rem;line-height:1.04;max-width:13ch}
+    .siteShot__lead{color:var(--muted);font-size:.94rem;line-height:1.7;max-width:42ch}
+    .siteShot__ctaRow{display:flex;gap:8px;flex-wrap:wrap}
+    .siteShot__ctaRow span{display:inline-flex;padding:7px 10px;border-radius:999px;background:rgba(199,148,69,.12);color:var(--ink);font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .siteShot__statGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .siteShot__stat{padding:10px;border-radius:16px;background:rgba(199,148,69,.08);border:1px solid rgba(199,148,69,.16)}
+    .siteShot__stat strong{display:block;font-size:1rem;line-height:1.1}
+    .siteShot__stat span{display:block;margin-top:4px;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+    .siteShot__panelGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .siteShot__panel{padding:12px;border-radius:16px;background:rgba(24,17,13,.04);border:1px solid var(--line)}
+    .siteShot__panel strong{display:block;font-size:.95rem}
+    .siteShot__panel p{margin-top:6px;color:var(--muted);font-size:.84rem;line-height:1.55}
+    .siteShot__footer{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:.78rem;color:var(--muted)}
+    .siteShot__footer strong{color:var(--ink)}
+    .siteShot--hero{background:linear-gradient(180deg,#fff8ec 0%, #fff 100%)}
+    .siteShot--hero .siteShot__title{max-width:12ch}
+    .siteShot--stats .siteShot__title{max-width:14ch}
+    .siteShot--gallery .siteShot__title{max-width:12ch}
+    .siteShot--contact .siteShot__title{max-width:12ch}
+    .shotCard__body{padding:0}
+
+    .callout{
+      padding:24px;background:linear-gradient(135deg,#1b120f,#352017);color:#fff;box-shadow:0 24px 60px rgba(20,13,10,.18)
+    }
+    .callout p{color:rgba(255,255,255,.72);margin-top:10px;line-height:1.8}
+
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease, transform .6s ease}
+    .reveal.is-in{opacity:1;transform:none}
+    .reveal--delay1{transition-delay:.08s}
+    .reveal--delay2{transition-delay:.16s}
+    .reveal--delay3{transition-delay:.24s}
+
+    .footer{
+      padding:24px 0 40px;color:var(--muted)
+    }
+    .footer__row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line);padding-top:18px}
+    .footer__links{display:flex;gap:16px;flex-wrap:wrap}
+    .footer__links a:hover{color:var(--ink)}
+
+    @media (max-width: 1080px){
+      .hero__grid,.grid-3,.grid-2,.featureGrid,.screenGrid,.metricGrid{grid-template-columns:1fr 1fr}
+      .shotGrid{grid-template-columns:1fr}
+      .hero__stats{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 760px){
+      h1{font-size:clamp(2.6rem,11vw,4rem)}
+      h2{font-size:clamp(1.8rem,9vw,2.7rem)}
+      .hero__grid,.grid-3,.grid-2,.featureGrid,.screenGrid,.metricGrid,.shotGrid,.shotStack{grid-template-columns:1fr}
+      .barRow{grid-template-columns:1fr}
+      .hero__stats{grid-template-columns:1fr}
+      .topbar__row{align-items:flex-start;flex-direction:column}
+      .topbar__actions{justify-content:flex-start}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .reveal{opacity:1;transform:none;transition:none}
+      *{scroll-behavior:auto !important}
+    }
+  
+    /* Global accessibility and responsive baseline */
+    .skip-link{
+      position:absolute;
+      left:12px;
+      top:-48px;
+      z-index:9999;
+      background:#111;
+      color:#fff;
+      padding:10px 12px;
+      border-radius:10px;
+      font-weight:700;
+      text-decoration:none;
+    }
+    .skip-link:focus{top:12px}
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    [tabindex]:focus-visible{
+      outline:3px solid #2563eb;
+      outline-offset:3px;
+      border-radius:6px;
+    }
+
+    img,video,canvas,svg{max-width:100%;height:auto}
+
+    @media (max-width: 900px){
+      .topbar__row{flex-wrap:wrap}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="topbar">
+    <div class="wrap topbar__row">
+      <a class="brand" href="index.html" aria-label="No Name Productions home">
+        <span class="brand__text">
+          <span class="brand__name">No Name Productions</span>
+          <span class="brand__sub">Creative Studio</span>
+        </span>
+      </a>
+      <div class="crumb">Case Study / <strong>AAM Palace</strong></div>
+      <div class="topbar__actions">
+        <a class="btn btn--ghost" href="index.html#work">Back to work</a>
+        <a class="btn btn--primary" href="index.html#contact">Start a project</a>
+      </div>
+    </div>
+    <div class="progressWrap" aria-hidden="true">
+      <div class="progressBar" data-progress></div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div class="hero__content reveal">
+          <div class="eyebrow">Premium Event Destination Website</div>
+          <h1 class="hero__title">AAM Palace</h1>
+          <p class="hero__lead">A large-scale convention center and luxury event venue website designed to translate a grand physical experience into a digital interface that feels equally premium, intuitive, and persuasive.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#overview">Explore the case study</a>
+            <a class="btn btn--ghost" href="#outcome">View outcome</a>
+            <a class="btn btn--light" href="https://www.aampalace.com/" target="_blank" rel="noopener noreferrer">Visit live website</a>
+          </div>
+          <div class="hero__stats">
+            <div class="stat"><span class="stat__num">All-in-one</span><span class="stat__label">venue positioning</span></div>
+            <div class="stat"><span class="stat__num">Mobile-first</span><span class="stat__label">responsive experience</span></div>
+            <div class="stat"><span class="stat__num">Inquiry-led</span><span class="stat__label">conversion path</span></div>
+
+            <div class="stat"><span class="stat__num">Luxury</span><span class="stat__label">visual language</span></div>
+          </div>
+        </div>
+
+        <aside class="panel reveal reveal--delay1">
+          <div class="panel__inner">
+            <span class="panel__tag">Project Snapshot</span>
+            <h2 style="font-size:clamp(2rem,4vw,3rem);line-height:.95">Sell the experience first. Explain the details second.</h2>
+            <p class="panel__lead">Users evaluating event venues are making an emotional decision before a logical one. The site had to help them imagine their celebration at AAM Palace, then quickly guide them to the services, spaces, and booking path.</p>
+            <div class="panelCards">
+              <div class="panelCard">
+                <strong>Positioning</strong>
+                <p>AAM Palace as a premium, all-in-one event destination for weddings, corporate events, catering, and resort-style stays.</p>
+              </div>
+              <div class="panelCard">
+                <strong>Navigation</strong>
+                <p>Clear service grouping so visitors can move from venue overview to spaces, facilities, and enquiry without friction.</p>
+              </div>
+              <div class="panelCard">
+                <strong>Conversion</strong>
+                <p>Consistent enquiry prompts, trust signals, and contact access throughout the browsing experience.</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="overview" class="section">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div class="eyebrow eyebrow--dark">Overview</div>
+          <h2>The problem was not a lack of services. It was a lack of clarity.</h2>
+          <p class="sectionLead">AAM Palace offers a broad venue experience, but the original digital presence did not communicate its scale, premium character, or booking intent clearly enough. Visitors were left to piece together the offer on their own.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card reveal">
+            <div class="eyebrow eyebrow--dark">Problem 01</div>
+            <h3>Brand positioning was unclear</h3>
+            <p>The site did not immediately frame AAM Palace as a premium, all-in-one destination. That weakened first impressions and reduced confidence.</p>
+          </article>
+          <article class="card reveal reveal--delay1">
+            <div class="eyebrow eyebrow--dark">Problem 02</div>
+            <h3>Services were scattered</h3>
+            <p>Venue, catering, facilities, and support offerings needed a stronger structure so users could understand the breadth of the experience quickly.</p>
+          </article>
+          <article class="card reveal reveal--delay2">
+            <div class="eyebrow eyebrow--dark">Problem 03</div>
+            <h3>There was no clear conversion path</h3>
+            <p>Inquiry prompts and booking actions were not prominent enough to support high-intent visitors who were ready to enquire.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap grid-2">
+        <div class="card reveal">
+          <div class="eyebrow eyebrow--dark">Goal</div>
+          <h2>Build a website that feels as premium as the venue itself.</h2>
+          <p class="sectionLead">The brief was to create a digital presence that positions AAM Palace as a luxury event destination, communicates its services without overwhelm, and guides users toward enquiry or booking in a natural way.</p>
+          <div class="insightBox" style="margin-top:16px"><strong>Design principle</strong> Less friction, more confidence. If users can imagine their event here, the site has done its job.</div>
+        </div>
+        <div class="card reveal reveal--delay1">
+          <div class="eyebrow eyebrow--dark">Insight</div>
+          <h2>Event decisions begin with imagination.</h2>
+          <p class="sectionLead">Users do not start by comparing feature lists. They start by asking whether they can picture their celebration in the space. The design therefore had to create atmosphere immediately, then support practical decision-making.</p>
+          <div class="quote" style="margin-top:16px">
+            <p>Can I imagine my event here?</p>
+            <span>That question shaped the hierarchy, imagery, and CTAs.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div class="eyebrow eyebrow--dark">Strategy</div>
+          <h2>A visual-first, structured, conversion-led approach</h2>
+          <p class="sectionLead">The experience was designed to balance emotional appeal and usability. The interface needed to feel spacious and refined, while still making the venue offer easy to scan.</p>
+        </div>
+
+        <div class="featureGrid">
+          <article class="featureCard reveal">
+            <div class="eyebrow eyebrow--dark">01</div>
+            <h3>Visual-first experience</h3>
+            <p>Large, immersive imagery and dark luxury blocks were used to create atmosphere and reflect the scale of the destination.</p>
+            <ul class="featureList">
+              <li>Grand hero composition</li>
+              <li>Warm, celebration-led palette</li>
+              <li>Editorial spacing and hierarchy</li>
+            </ul>
+          </article>
+          <article class="featureCard reveal reveal--delay1">
+            <div class="eyebrow eyebrow--dark">02</div>
+            <h3>Structured simplicity</h3>
+            <p>Content was grouped into clear clusters so multiple services could be understood quickly without feeling crowded.</p>
+            <ul class="featureList">
+              <li>Venue and spaces</li>
+              <li>Events and services</li>
+              <li>Facilities and amenities</li>
+            </ul>
+          </article>
+          <article class="featureCard reveal reveal--delay2">
+            <div class="eyebrow eyebrow--dark">03</div>
+            <h3>Conversion by design</h3>
+            <p>CTAs, contact points, and trust cues were placed consistently so high-intent users could move toward enquiry with confidence.</p>
+            <ul class="featureList">
+              <li>Enquiry prompts throughout</li>
+              <li>Testimonials and reassurance</li>
+              <li>Fast access to contact</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="wrap metricBand reveal">
+        <div class="grid-4 metricGrid">
+          <div class="metric"><strong>01</strong><span>Clarity</span></div>
+          <div class="metric"><strong>02</strong><span>Atmosphere</span></div>
+          <div class="metric"><strong>03</strong><span>Trust</span></div>
+          <div class="metric"><strong>04</strong><span>Action</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap grid-2">
+        <div class="chartWrap card reveal">
+          <div class="eyebrow eyebrow--dark">Challenges</div>
+          <h2>Balancing scale with clarity</h2>
+          <div class="timeline" style="margin-top:16px">
+            <div class="step"><div class="stepNum">01</div><div><h3>Multiple services</h3><p>AAM Palace needed to speak to weddings, corporate events, catering, and resort-style amenities without turning into a long feature dump.</p></div></div>
+            <div class="step"><div class="stepNum">02</div><div><h3>Performance pressure</h3><p>High-quality visuals had to feel rich without slowing the experience or making the page heavy on mobile devices.</p></div></div>
+            <div class="step"><div class="stepNum">03</div><div><h3>Hierarchy discipline</h3><p>Every section could not compete equally. Prioritisation was necessary to keep the message focused and persuasive.</p></div></div>
+          </div>
+        </div>
+
+        <div class="chartWrap card reveal reveal--delay1">
+          <div class="eyebrow eyebrow--dark">Solutions</div>
+          <h2>Modular sections and a clearer story</h2>
+          <div class="barList">
+            <div class="barRow"><div class="barLabel">Modular layout system</div><div class="track"><div class="fill" data-width="92"></div></div><div class="val">92%</div></div>
+            <div class="barRow"><div class="barLabel">Content hierarchy</div><div class="track"><div class="fill alt" data-width="88"></div></div><div class="val">88%</div></div>
+            <div class="barRow"><div class="barLabel">Media optimisation</div><div class="track"><div class="fill dark" data-width="84"></div></div><div class="val">84%</div></div>
+            <div class="barRow"><div class="barLabel">Section separation</div><div class="track"><div class="fill" data-width="90"></div></div><div class="val">90%</div></div>
+          </div>
+          <div class="insightBox" style="margin-top:16px"><strong>Execution note</strong> The page structure was designed so the most important message appears first, and the supporting detail follows only after the user is oriented.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div class="eyebrow eyebrow--dark">Key Features</div>
+          <h2>What the final experience needed to deliver</h2>
+          <p class="sectionLead">The site was built to feel elegant and spacious, while still doing the practical work of helping prospective clients assess the venue and contact the team.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card reveal">
+            <h3>Responsive across devices</h3>
+            <p>Mobile-first layouts ensured that imagery, spacing, and enquiry access stayed usable on smaller screens.</p>
+          </article>
+          <article class="card reveal reveal--delay1">
+            <h3>Service-oriented navigation</h3>
+            <p>Navigation was organised around venue spaces, events, and facilities so visitors could find what matters quickly.</p>
+          </article>
+          <article class="card reveal reveal--delay2">
+            <h3>Visual gallery storytelling</h3>
+            <p>High-impact visuals were used to show atmosphere, scale, and celebration rather than simply listing offerings.</p>
+          </article>
+          <article class="card reveal">
+            <h3>Testimonials and reassurance</h3>
+            <p>Trust-building elements were included to reduce hesitation and make the venue feel established and credible.</p>
+          </article>
+          <article class="card reveal reveal--delay1">
+            <h3>Streamlined enquiry flow</h3>
+            <p>Calls to action stayed visible so users could move from browsing to enquiry without having to search for contact details.</p>
+          </article>
+          <article class="card reveal reveal--delay2">
+            <h3>Warm premium language</h3>
+            <p>The visual language used gold, amber, and deep brown tones to evoke celebration, luxury, and scale.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div class="eyebrow eyebrow--dark">Live Site</div>
+          <h2>Screenshot showcase from the actual website</h2>
+          <p class="sectionLead">These snapshots show the website itself, not the building. The layout gives one primary page view room to breathe, with supporting website sections arranged beside it.</p>
+          <a class="sectionLink" href="https://www.aampalace.com/" target="_blank" rel="noopener noreferrer">Open the live website →</a>
+        </div>
+
+        <div class="shotGrid">
+            <article class="shotCard shotCard--lead siteShot siteShot--hero reveal">
+              <div class="siteShot__chrome"><span class="siteShot__dots"><span></span><span></span><span></span></span><span class="siteShot__url">aampalace.com</span></div>
+              <div class="siteShot__body">
+                <div>
+                  <div class="siteShot__eyebrow">Homepage screenshot</div>
+                  <h3 class="siteShot__title">A Grand Luxury Marriage Palace in Ponneri</h3>
+                  <p class="siteShot__lead">Premium fully AC facility for large celebrations, with quick access to call, WhatsApp, enquiry, and gallery.</p>
+                </div>
+                <div class="siteShot__ctaRow">
+                  <span>Call now</span>
+                  <span>WhatsApp</span>
+                  <span>View gallery</span>
+                </div>
+                <div class="siteShot__statGrid">
+                  <div class="siteShot__stat"><strong>1000</strong><span>seating</span></div>
+                  <div class="siteShot__stat"><strong>400</strong><span>dining</span></div>
+                  <div class="siteShot__stat"><strong>17</strong><span>rooms</span></div>
+                  <div class="siteShot__stat"><strong>150</strong><span>parking</span></div>
+                </div>
+              </div>
+          </article>
+
+          <div class="shotGrid__lead">
+            <div class="shotStack">
+                <article class="shotCard siteShot siteShot--stats reveal reveal--delay1">
+                  <div class="siteShot__chrome"><span class="siteShot__dots"><span></span><span></span><span></span></span><span class="siteShot__url">/the-palace</span></div>
+                  <div class="siteShot__body">
+                    <div>
+                      <div class="siteShot__eyebrow">Palace section</div>
+                      <h3 class="siteShot__title">Spaces, services, and guest flow</h3>
+                      <p class="siteShot__lead">A structured section that explains the Ground, First, and Second levels without overwhelming the visitor.</p>
+                    </div>
+                    <div class="siteShot__panelGrid">
+                      <div class="siteShot__panel"><strong>Ground</strong><p>Dining area</p></div>
+                      <div class="siteShot__panel"><strong>First</strong><p>Main hall</p></div>
+                      <div class="siteShot__panel"><strong>Second</strong><p>Rooms</p></div>
+                      <div class="siteShot__panel"><strong>Access</strong><p>Lifts + wheelchair</p></div>
+                    </div>
+                  </div>
+              </article>
+                <article class="shotCard siteShot siteShot--gallery reveal reveal--delay2">
+                  <div class="siteShot__chrome"><span class="siteShot__dots"><span></span><span></span><span></span></span><span class="siteShot__url">/gallery</span></div>
+                  <div class="siteShot__body">
+                    <div>
+                      <div class="siteShot__eyebrow">Gallery preview</div>
+                      <h3 class="siteShot__title">Full-screen images and quick previews</h3>
+                      <p class="siteShot__lead">A visual-first gallery section built to build trust and help users imagine the event experience.</p>
+                    </div>
+                    <div class="siteShot__panelGrid">
+                      <div class="siteShot__panel"><strong>Exterior</strong><p>Arrival and scale</p></div>
+                      <div class="siteShot__panel"><strong>Main hall</strong><p>Seating and capacity</p></div>
+                      <div class="siteShot__panel"><strong>Stage</strong><p>Wedding focal point</p></div>
+                      <div class="siteShot__panel"><strong>Dining</strong><p>Support spaces</p></div>
+                    </div>
+                  </div>
+              </article>
+            </div>
+
+              <article class="shotCard siteShot siteShot--contact reveal reveal--delay3">
+                <div class="siteShot__chrome"><span class="siteShot__dots"><span></span><span></span><span></span></span><span class="siteShot__url">/contact</span></div>
+                <div class="siteShot__body">
+                  <div>
+                    <div class="siteShot__eyebrow">Contact / enquiry</div>
+                    <h3 class="siteShot__title">Fast enquiry, call, and WhatsApp actions</h3>
+                    <p class="siteShot__lead">The conversion layer focuses on quick decision-making with clear contact actions and confidence-building copy.</p>
+                  </div>
+                  <div class="siteShot__ctaRow">
+                    <span>Call now</span>
+                    <span>WhatsApp</span>
+                    <span>Book a visit</span>
+                  </div>
+                  <div class="siteShot__footer">
+                    <span>Premium • Fully AC • Established 2025</span>
+                    <strong>aampalace.com</strong>
+                  </div>
+                </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div class="eyebrow eyebrow--dark">Screens</div>
+          <h2>A premium interface told through three core moments</h2>
+          <p class="sectionLead">The experience was designed to move from emotional appeal to practical detail: first the feeling, then the offer, then the action.</p>
+        </div>
+
+        <div class="screenGrid">
+          <article class="screen reveal">
+            <div class="screen__top">Home / Immersive First Impression</div>
+            <div class="screen__body">
+              <div class="screenMock">
+                <div class="mockTop">
+                  <div>
+                    <div class="mockTitle">Celebrate at AAM Palace</div>
+                    <div class="mockMeta" style="margin-top:8px">Luxury events, weddings, and hospitality in one refined destination.</div>
+                  </div>
+                  <div style="text-align:right;font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.72)">Marriage hall</div>
+                </div>
+                <div>
+                  <div class="mockBar">
+                    <span class="mockChip">Weddings</span>
+                    <span class="mockChip">Corporate</span>
+                    <span class="mockChip">Catering</span>
+                    <span class="mockChip">Amenities</span>
+                  </div>
+                  <div class="mockGrid">
+                    <div class="mockTile">Grand Hall</div>
+                    <div class="mockTile">Banquet Suite</div>
+                    <div class="mockTile">Stage Decor</div>
+                    <div class="mockTile">Dining Court</div>
+                  </div>
+                </div>
+                <div class="mockFooter">
+                  <div style="font-size:.78rem;color:rgba(255,255,255,.72)">Explore spaces and services with confidence</div>
+                  <span class="mockBtn">Enquire now</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="screen reveal reveal--delay1">
+            <div class="screen__top">Services / Structured Offerings</div>
+            <div class="screen__body">
+              <div class="screenMock" style="background:linear-gradient(180deg,#2a1914,#140d0a)">
+                <div class="mockTop">
+                  <div>
+                    <div class="mockTitle">Venue, services, facilities</div>
+                    <div class="mockMeta" style="margin-top:8px">Grouped into modules so visitors can scan the full offer without overload.</div>
+                  </div>
+                </div>
+                <div style="display:grid;gap:10px">
+                  <div class="panelCard" style="background:rgba(255,255,255,.05)"><strong>Venue & spaces</strong><p>Hall capacity, event zones, and space types.</p></div>
+                  <div class="panelCard" style="background:rgba(255,255,255,.05)"><strong>Events & services</strong><p>Wedding support, corporate bookings, catering.</p></div>
+                  <div class="panelCard" style="background:rgba(255,255,255,.05)"><strong>Facilities & amenities</strong><p>Guest comfort, support, and resort-style additions.</p></div>
+                </div>
+                <div class="mockFooter">
+                  <div style="font-size:.78rem;color:rgba(255,255,255,.72)">Clear structure reduces cognitive load</div>
+                  <span class="mockBtn">View services</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="screen reveal reveal--delay2">
+            <div class="screen__top">Enquiry / Conversion Path</div>
+            <div class="screen__body">
+              <div class="screenMock" style="background:linear-gradient(180deg,#1d110c,#321f17)">
+                <div class="mockTop">
+                  <div>
+                    <div class="mockTitle">Book with confidence</div>
+                    <div class="mockMeta" style="margin-top:8px">A simple inquiry path with visible contact points and trust cues.</div>
+                  </div>
+                </div>
+                <div style="display:grid;gap:10px;margin-top:10px">
+                  <div class="panelCard" style="background:rgba(255,255,255,.05)"><strong>Consistent CTA</strong><p>Enquiry prompts appear throughout the experience instead of being hidden at the bottom.</p></div>
+                  <div class="panelCard" style="background:rgba(255,255,255,.05)"><strong>Trust signals</strong><p>Testimonials and confirmation cues support the booking decision.</p></div>
+                  <div class="panelCard" style="background:rgba(255,255,255,.05)"><strong>Easy access</strong><p>Contact details stay within reach for users who are ready to take action.</p></div>
+                </div>
+                <div class="mockFooter">
+                  <div style="font-size:.78rem;color:rgba(255,255,255,.72)">From interest to enquiry in fewer steps</div>
+                  <span class="mockBtn">Start booking</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="outcome" class="section">
+      <div class="wrap grid-2">
+        <div class="metricBand reveal">
+          <div class="eyebrow">Outcome</div>
+          <h2>The final product feels premium, spacious, and intentional.</h2>
+          <p class="sectionLead sectionLead--light">The platform now aligns with the physical experience of the venue. It communicates value faster, reduces uncertainty, and gives high-intent users a clear route to enquiry and booking.</p>
+          <div class="grid-2" style="margin-top:18px">
+            <div class="metric"><strong>Premium</strong><span>Perceived value</span></div>
+            <div class="metric"><strong>Focused</strong><span>Message clarity</span></div>
+            <div class="metric"><strong>Intentional</strong><span>Navigation flow</span></div>
+            <div class="metric"><strong>Booked</strong><span>Inquiry readiness</span></div>
+          </div>
+        </div>
+
+        <div class="card reveal reveal--delay1">
+          <div class="eyebrow eyebrow--dark">Reflection</div>
+          <h2>Clarity drives conversion more than complexity ever will.</h2>
+          <p class="sectionLead">This project reinforced a simple principle: removing friction and focusing on what users need to feel and understand creates a simpler and more effective experience.</p>
+          <div class="callout" style="margin-top:18px">
+            <strong>Next steps</strong>
+            <p>Future improvements could include real-time booking integration, enhanced SEO structure, and analytics-driven UX refinements.</p>
+          </div>
+          <div class="timeline" style="margin-top:16px">
+            <div class="step"><div class="stepNum">01</div><div><h3>Real-time booking integration</h3><p>Reduce back-and-forth by allowing visitors to check availability and book faster.</p></div></div>
+            <div class="step"><div class="stepNum">02</div><div><h3>SEO structure</h3><p>Strengthen discoverability for venue and wedding-related search intent.</p></div></div>
+            <div class="step"><div class="stepNum">03</div><div><h3>Analytics-led refinement</h3><p>Use user behavior to improve section ordering, CTA placement, and enquiry performance.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__row">
+      <p>Credits: Design and development by Your Name</p>
+      <div class="footer__links">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="https://www.aampalace.com/" target="_blank" rel="noopener noreferrer">Live website</a>
+        <a href="#overview">Top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const progress = document.querySelector('[data-progress]');
+      const revealEls = document.querySelectorAll('.reveal');
+      const bars = document.querySelectorAll('[data-width]');
+
+      const updateProgress = () => {
+        const doc = document.documentElement;
+        const max = doc.scrollHeight - doc.clientHeight;
+        const value = max > 0 ? (doc.scrollTop / max) * 100 : 0;
+        if (progress) progress.style.width = `${Math.max(0, Math.min(100, value))}%`;
+      };
+
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+
+      if (!prefersReduced && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+        revealEls.forEach(el => io.observe(el));
+
+        const barObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const width = entry.target.getAttribute('data-width') || '0';
+            entry.target.style.width = `${width}%`;
+            barObserver.unobserve(entry.target);
+          });
+        }, { threshold: 0.3 });
+        bars.forEach(bar => barObserver.observe(bar));
+      } else {
+        revealEls.forEach(el => el.classList.add('is-in'));
+        bars.forEach(bar => {
+          const width = bar.getAttribute('data-width') || '0';
+          bar.style.width = `${width}%`;
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
+
+

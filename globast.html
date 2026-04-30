@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Globast — Premium UX Case Study</title>
+  <meta name="description" content="Premium UX case study for Globast, an accessibility-first streaming platform for visually and hearing-impaired users." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f7f8fd; --paper:#fff; --ink:#12131a; --muted:#60677a;
+      --line:rgba(18,19,26,.08); --line-strong:rgba(18,19,26,.14);
+      --violet:#7c3aed; --violet-2:#a78bfa; --cyan:#22d3ee; --red:#ef4444; --green:#10b981;
+      --dark:#0f1120; --dark-2:#17192c;
+      --shadow:0 24px 60px rgba(17,20,38,.12); --soft:0 10px 30px rgba(17,20,38,.06);
+      --wrap:1180px; --radius:24px; --pad:clamp(18px,2.4vw,30px);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{
+      margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);line-height:1.65;
+      background:
+        radial-gradient(900px 520px at 8% 0%, rgba(124,58,237,.10), transparent 60%),
+        radial-gradient(700px 420px at 90% 10%, rgba(34,211,238,.09), transparent 60%),
+        linear-gradient(180deg,var(--bg),#fff);
+    }
+    a{text-decoration:none;color:inherit}
+    .wrap{width:min(var(--wrap), calc(100% - var(--pad)*2)); margin-inline:auto}
+    .topbar{position:sticky;top:0;z-index:100;background:rgba(247,248,253,.78);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+    .topbar__row{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800}
+    .brand__mark{width:38px;height:38px;border-radius:14px;background:linear-gradient(135deg,var(--violet),var(--cyan));box-shadow:0 16px 30px rgba(124,58,237,.24);position:relative}
+    .brand__mark:after{content:"";position:absolute;inset:8px;border-radius:10px;border:1px solid rgba(255,255,255,.42)}
+    .crumb{font-size:.88rem;color:var(--muted)} .crumb strong{color:var(--ink)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:999px;font-weight:700;border:1px solid var(--line-strong);background:#fff;box-shadow:var(--soft);transition:.18s ease}
+    .btn:hover{transform:translateY(-2px)} .btn--primary{background:linear-gradient(135deg,var(--violet),#8b5cf6);color:#fff;border-color:transparent}
+    .hero,.section{padding:54px 0}
+    .hero{padding-top:86px}
+    .hero__grid,.grid-2,.grid-3,.chartGrid,.screenGrid,.impactGrid{display:grid;gap:18px}
+    .hero__grid{grid-template-columns:1.08fr .92fr;align-items:start}
+    .grid-2{grid-template-columns:1fr 1fr}.grid-3{grid-template-columns:repeat(3,1fr)}
+    .chartGrid{grid-template-columns:1.1fr .9fr}.screenGrid{grid-template-columns:1fr 1fr}.impactGrid{grid-template-columns:repeat(4,1fr)}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:18px;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--violet)}
+    .eyebrow::before{content:"";width:28px;height:2px;background:currentColor;border-radius:999px}
+    h1,h2,h3{font-family:Manrope,Inter,sans-serif;margin:0;letter-spacing:-.03em}
+    h1{font-size:clamp(2.8rem,6vw,5.2rem);line-height:.95} h2{font-size:clamp(1.8rem,3.5vw,3rem);line-height:1} h3{font-size:1.18rem}
+    .lead,.sectionLead,.card p{color:var(--muted)} .lead{font-size:1.05rem;max-width:64ch;margin-top:18px} .sectionLead{max-width:70ch;margin-top:10px}
+    .heroPanel,.card,.chartWrap,.screen,.impactBand{border-radius:28px}
+    .heroPanel{
+      padding:28px;background:linear-gradient(180deg,var(--dark),var(--dark-2));color:#fff;box-shadow:0 34px 80px rgba(15,17,32,.24);position:relative;overflow:hidden
+    }
+    .heroPanel::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 18px,rgba(255,255,255,.03) 18px,rgba(255,255,255,.03) 20px)}
+    .heroPanel>*{position:relative;z-index:1}
+    .heroStats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
+    .stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:16px}
+    .stat__num{display:block;font-size:1.35rem;font-weight:800}.stat__label{display:block;margin-top:6px;font-size:.74rem;color:rgba(255,255,255,.72);text-transform:uppercase;letter-spacing:.1em}
+    .card,.chartWrap,.screen{background:rgba(255,255,255,.88);border:1px solid var(--line);box-shadow:var(--soft)}
+    .card,.chartWrap{padding:22px}
+    .pill{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(124,58,237,.10);color:var(--violet);font-size:.74rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .timeline{display:grid;gap:12px}
+    .step{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:start;padding:16px;border-radius:20px;border:1px solid var(--line);background:#fff}
+    .stepNum{width:42px;height:42px;border-radius:14px;background:rgba(124,58,237,.12);display:grid;place-items:center;font-weight:800;color:var(--violet)}
+    .insight{padding:14px 16px;border-radius:18px;background:rgba(34,211,238,.08);border:1px dashed rgba(34,211,238,.28);color:#164055;font-size:.94rem}
+    .bars{display:grid;gap:16px;margin-top:18px}
+    .barRow{display:grid;grid-template-columns:170px 1fr 54px;gap:12px;align-items:center}
+    .barLabel{font-size:.9rem;color:var(--muted)} .track{height:12px;background:#ececf4;border-radius:999px;overflow:hidden}
+    .fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--violet),var(--cyan));transition:width 1.2s cubic-bezier(.22,1,.36,1)}
+    .fill.green{background:linear-gradient(90deg,var(--green),#34d399)} .fill.red{background:linear-gradient(90deg,var(--red),#fb7185)} .val{font-weight:800;text-align:right}
+    .ringArea{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+    .ringCard{border:1px solid var(--line);border-radius:22px;padding:18px;background:#fff}
+    .ring{width:122px;height:122px;margin:0 auto 12px;position:relative;border-radius:50%;background:conic-gradient(var(--clr) 0deg, var(--clr) calc(var(--pct)*3.6deg), #ececf4 calc(var(--pct)*3.6deg), #ececf4 360deg)}
+    .ring:after{content:"";position:absolute;inset:15px;background:#fff;border-radius:50%;box-shadow:inset 0 0 0 1px var(--line)}
+    .ring span{position:absolute;inset:0;display:grid;place-items:center;z-index:1;font-size:1.25rem;font-weight:800}
+    .screen{overflow:hidden}
+    .screen__top{padding:10px 14px;font-size:.72rem;font-weight:800;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;background:#fbfbff;border-bottom:1px solid var(--line)}
+    .frame{
+      margin:20px auto;width:100%;max-width:420px;min-height:420px;border-radius:24px;overflow:hidden;background:var(--dark);box-shadow:0 18px 40px rgba(15,17,32,.18)
+    }
+    .navRail{width:62px;background:rgba(0,0,0,.42);display:flex;flex-direction:column;align-items:center;padding:14px 0;gap:14px}
+    .dot{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;color:#fff;background:rgba(255,255,255,.06)}
+    .heroBanner{padding:16px;border-radius:20px;background:linear-gradient(135deg,#1c1842,#311a68,#0d1537);position:relative;overflow:hidden}
+    .heroBanner::after{content:"";position:absolute;right:-16px;top:-8px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.35),transparent 60%)}
+    .playBtn{display:inline-flex;padding:8px 12px;border-radius:999px;background:var(--violet);color:#fff;font-size:.76rem;font-weight:800}
+    .movieGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+    .poster{aspect-ratio:.72;border-radius:12px;background:linear-gradient(135deg,#251d53,#0f1227);padding:8px;display:flex;align-items:flex-end;color:#fff;font-size:.68rem;font-weight:700}
+    .featureList{display:grid;gap:8px;margin-top:12px}
+    .feature{padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.82);font-size:.78rem}
+    .impactBand{padding:24px;background:linear-gradient(135deg,#0f172a,#1e1b43);color:#fff;box-shadow:0 24px 60px rgba(15,23,42,.18)}
+    .impact{padding:18px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+    .impact strong{display:block;font-size:1.5rem}.impact span{font-size:.76rem;text-transform:uppercase;color:rgba(255,255,255,.72);letter-spacing:.1em}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease, transform .6s ease}
+    .reveal.in{opacity:1;transform:none}
+    @media (max-width:1020px){
+      .hero__grid,.grid-2,.grid-3,.chartGrid,.screenGrid{grid-template-columns:1fr}
+      .heroStats,.impactGrid,.ringArea{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:720px){
+      .heroStats,.impactGrid,.ringArea{grid-template-columns:1fr}
+      .barRow{grid-template-columns:1fr}
+    }
+  
+    /* Global accessibility and responsive baseline */
+    .skip-link{
+      position:absolute;
+      left:12px;
+      top:-48px;
+      z-index:9999;
+      background:#111;
+      color:#fff;
+      padding:10px 12px;
+      border-radius:10px;
+      font-weight:700;
+      text-decoration:none;
+    }
+    .skip-link:focus{top:12px}
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    [tabindex]:focus-visible{
+      outline:3px solid #2563eb;
+      outline-offset:3px;
+      border-radius:6px;
+    }
+
+    img,video,canvas,svg{max-width:100%;height:auto}
+
+    @media (max-width: 900px){
+      .topbar__row{flex-wrap:wrap}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="topbar">
+    <div class="wrap topbar__row">
+      <a class="brand" href="index.html"><span><span class="brand__nameMain">No Name</span><span class="brand__nameSub">Productions</span></span></a>
+      <div class="crumb">Case Study / <strong>Globast</strong></div>
+      <div style="display:flex;gap:10px"><a class="btn" href="index.html#work">← Work</a><a class="btn btn--primary" href="index.html#contact">Hire Us</a></div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div class="reveal">
+          <div class="eyebrow">Premium Accessibility Case Study</div>
+          <h1>Globast</h1>
+          <p class="lead">An accessibility-first streaming platform designed for visually and hearing-impaired users. Through iterative testing and inclusive interaction design, the final concept reduced task completion time by <strong>35%</strong> and significantly improved perceived independence while browsing content.</p>
+          <div class="heroStats">
+            <div class="stat"><span class="stat__num">20</span><span class="stat__label">Participants</span></div>
+            <div class="stat"><span class="stat__num">5</span><span class="stat__label">Core tasks</span></div>
+            <div class="stat"><span class="stat__num">2</span><span class="stat__label">Primary personas</span></div>
+            <div class="stat"><span class="stat__num">-35%</span><span class="stat__label">Task time</span></div>
+          </div>
+        </div>
+
+        <aside class="heroPanel reveal">
+          <span class="pill">Case Snapshot</span>
+          <h2 style="margin-top:14px;font-size:1.55rem">Accessibility was the product, not an add-on</h2>
+          <p style="color:rgba(255,255,255,.72); margin-top:10px">Instead of patching mainstream streaming patterns, Globast started from disability-specific needs: voice guidance for visual impairment, subtitle language depth for hearing impairment, and reduced navigation friction for both.</p>
+          <div class="featureList">
+            <div class="feature">🎙️ Audio descriptions designed as primary UX support</div>
+            <div class="feature">💬 Multilingual subtitles and clearer caption states</div>
+            <div class="feature">🔎 Simplified discovery, stronger browsing hierarchy</div>
+            <div class="feature">🧭 Navigation built around independence, not assistance</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap grid-3">
+        <div class="card reveal">
+          <div class="eyebrow">Challenge 1</div>
+          <h2>Mainstream streaming is visually biased</h2>
+          <p class="sectionLead">Visually impaired users struggle with discovery, navigation, and context. Audio description exists in some products, but often as a buried setting instead of a central access path.</p>
+        </div>
+        <div class="card reveal">
+          <div class="eyebrow">Challenge 2</div>
+          <h2>Subtitles are not the same as accessibility</h2>
+          <p class="sectionLead">Hearing-impaired users need more than generic captions. They need language control, clarity, readability, and reduced cognitive friction while switching content.</p>
+        </div>
+        <div class="card reveal">
+          <div class="eyebrow">Challenge 3</div>
+          <h2>Users wanted independence</h2>
+          <p class="sectionLead">The real product goal was not “inclusive features.” It was enabling users to browse, choose, and watch on their own — without needing sighted or hearing support from others.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="research">
+      <div class="wrap grid-2">
+        <div class="card reveal">
+          <div class="eyebrow">Research</div>
+          <h2>20 participants, mixed accessibility contexts</h2>
+          <p class="sectionLead">The research combined interviews, task-based usability testing, and prototype validation with users across visual and auditory accessibility needs. Two personas were synthesized to anchor decisions without losing nuance.</p>
+          <div class="timeline" style="margin-top:14px">
+            <div class="step"><div class="stepNum">01</div><div><h3>Discovery interviews</h3><p>Captured barriers around movie discovery, language access, and sensory friction.</p></div></div>
+            <div class="step"><div class="stepNum">02</div><div><h3>Task testing</h3><p>Measured search, filter, play, subtitle, and accessibility-setting workflows.</p></div></div>
+            <div class="step"><div class="stepNum">03</div><div><h3>Prototype refinement</h3><p>Adjusted hierarchy, controls, and content cards based on observed hesitation and errors.</p></div></div>
+          </div>
+        </div>
+        <div class="card reveal">
+          <div class="eyebrow">Personas</div>
+          <h2>Two different needs, one coherent system</h2>
+          <div class="grid-2" style="margin-top:14px">
+            <div style="padding:16px;border-radius:20px;background:rgba(124,58,237,.08);border:1px solid var(--line)">
+              <h3>Charles</h3>
+              <p>Visual impairment. Needed strong voice support, simplified navigation, and content confidence before playback.</p>
+            </div>
+            <div style="padding:16px;border-radius:20px;background:rgba(34,211,238,.08);border:1px solid var(--line)">
+              <h3>Ming Yue</h3>
+              <p>Hearing impairment. Needed reliable subtitle language access, clarity, and control without extra friction.</p>
+            </div>
+          </div>
+          <div class="insight" style="margin-top:14px"><strong>Design principle:</strong> Globast was shaped around “independent completion.” Every UX decision was evaluated against whether the user could complete the journey alone.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap chartGrid">
+        <div class="chartWrap reveal">
+          <div class="eyebrow">Animated Metrics</div>
+          <h2>Accessibility outcomes</h2>
+          <div class="bars">
+            <div class="barRow"><div class="barLabel">Task time reduction</div><div class="track"><div class="fill" data-width="35"></div></div><div class="val">35%</div></div>
+            <div class="barRow"><div class="barLabel">Search success</div><div class="track"><div class="fill green" data-width="88"></div></div><div class="val">88%</div></div>
+            <div class="barRow"><div class="barLabel">Accessibility satisfaction</div><div class="track"><div class="fill" data-width="91"></div></div><div class="val">91%</div></div>
+            <div class="barRow"><div class="barLabel">Navigation errors drop</div><div class="track"><div class="fill red" data-width="42"></div></div><div class="val">42%</div></div>
+          </div>
+        </div>
+        <div class="chartWrap reveal">
+          <div class="eyebrow">Signal</div>
+          <h2>What improved most</h2>
+          <div class="ringArea">
+            <div class="ringCard">
+              <div class="ring" style="--pct:91; --clr: var(--violet)"><span>91%</span></div>
+              <h3 style="text-align:center">Accessibility satisfaction</h3>
+              <p style="text-align:center;color:var(--muted)">Users strongly preferred the final browsing flow.</p>
+            </div>
+            <div class="ringCard">
+              <div class="ring" style="--pct:88; --clr: var(--green)"><span>88%</span></div>
+              <h3 style="text-align:center">Search completion</h3>
+              <p style="text-align:center;color:var(--muted)">More users successfully reached content on their own.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div class="eyebrow">Premium Layout</div>
+          <h2>Key screens and storytelling flow</h2>
+          <p class="sectionLead">The interface had to feel premium, cinematic, and accessible at the same time. I used dark immersion, strong hierarchy, and obvious control affordances to reduce sensory ambiguity.</p>
+        </div>
+        <div class="screenGrid">
+          <article class="screen reveal">
+            <div class="screen__top">Home / Guided Discovery</div>
+            <div class="frame">
+              <div style="display:flex;min-height:420px">
+                <aside class="navRail">
+                  <div class="dot">🏠</div>
+                  <div class="dot">🔎</div>
+                  <div class="dot">🎬</div>
+                  <div class="dot">⚙️</div>
+                </aside>
+                <div style="flex:1;padding:16px;background:var(--dark)">
+                  <div class="heroBanner">
+                    <div style="font-size:1.1rem;font-weight:800;color:#fff">Captain America</div>
+                    <div style="font-size:.8rem;color:rgba(255,255,255,.72);max-width:180px;margin-top:8px">Featured content with immediate access to play, audio settings, and content context.</div>
+                    <div style="margin-top:14px"><span class="playBtn">▶ Play now</span></div>
+                  </div>
+                  <div style="font-size:.72rem;color:rgba(255,255,255,.72);font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-top:14px">Recently watched</div>
+                  <div class="movieGrid">
+                    <div class="poster">Dark</div><div class="poster">Nope</div><div class="poster">Tenet</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="padding:0 20px 22px">
+              <h3>Discovery with lower friction</h3>
+              <p>Immediate entry points for watching and clearer visual grouping reduced browsing hesitation.</p>
+            </div>
+          </article>
+
+          <article class="screen reveal">
+            <div class="screen__top">Playback / Accessibility Controls</div>
+            <div class="frame">
+              <div style="padding:16px;background:linear-gradient(180deg,#090b16,#151834);min-height:420px">
+                <div style="height:180px;border-radius:20px;background:linear-gradient(135deg,#251d53,#0f1227);display:grid;place-items:center;color:rgba(255,255,255,.8);font-weight:800;font-size:1.1rem">Now playing</div>
+                <div style="margin-top:14px;padding:16px;border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)">
+                  <h3 style="color:#fff">Accessibility panel</h3>
+                  <div style="display:grid;gap:10px;margin-top:12px">
+                    <div style="padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.08);color:#fff;font-size:.82rem">Audio description / On</div>
+                    <div style="padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.08);color:#fff;font-size:.82rem">Subtitle language / Chinese</div>
+                    <div style="padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.08);color:#fff;font-size:.82rem">Voice navigation / Enabled</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="padding:0 20px 22px">
+              <h3>Controls that don’t hide</h3>
+              <p>Accessibility settings were promoted to first-class controls rather than buried secondary preferences.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="impact">
+      <div class="wrap impactBand reveal">
+        <div class="eyebrow" style="color:#c4b5fd">Impact</div>
+        <h2 style="color:#fff">Accessibility improved when the product was designed around independence</h2>
+        <p style="color:rgba(255,255,255,.72); max-width:72ch; margin-top:12px">The final Globast concept proved that accessibility support should not behave like an extra settings layer. When content discovery, playback, and adaptation controls are integrated into the core journey, confidence and completion both improve.</p>
+        <div class="impactGrid" style="margin-top:18px">
+          <div class="impact"><strong>-35%</strong><span>Task completion time</span></div>
+          <div class="impact"><strong>91%</strong><span>Accessibility satisfaction</span></div>
+          <div class="impact"><strong>88%</strong><span>Search success rate</span></div>
+          <div class="impact"><strong>-42%</strong><span>Navigation error rate</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          entry.target.querySelectorAll('.fill').forEach(bar=>bar.style.width = bar.dataset.width + '%');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.18});
+    document.querySelectorAll('.reveal, .chartWrap').forEach(el=>observer.observe(el));
+  </script>
+</body>
+</html>
+
+
+

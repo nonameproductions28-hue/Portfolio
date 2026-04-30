@@ -1,0 +1,2352 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shrigana — Brand Identity Case Study · No Name Productions</title>
+  <meta name="description" content="A complete brand identity for Shrigana, a holistic wellness company rooted in nature, optimism, and personal growth. Designed by No Name Productions." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    @font-face {
+      font-family: 'Molgon Regular';
+      src: local('Molgon Regular'), local('Molgan Regular'), local('Molgan');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Shrigana brand colours */
+      --forest:     #3A7D44;
+      --forest-dk:  #2B5E32;
+      --forest-lt:  #4E9E5A;
+      --moss:       #7ABD6E;
+      --moss-lt:    #A8D5A2;
+      --macaroni:   #F0B429;
+      --macaroni-lt:#F7D070;
+      --cream:      #F8F5EE;
+      --cream-dk:   #EDE8DC;
+      --white:      #FFFFFF;
+
+      /* No Name tokens */
+      --ink:        #1A1A1A;
+      --ink2:       #2E2E2E;
+      --muted:      #6E6E6E;
+      --border:     rgba(58, 125, 68, .15);
+
+      --wrap: 1160px;
+      --pad:  clamp(20px, 2.8vw, 36px);
+      --section-space: clamp(68px, 8vw, 118px);
+      --shrigana-display: 'Molgon Regular', 'Molgan Regular', 'Molgan', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Poppins', system-ui, sans-serif;
+      font-weight: 300;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* Organic noise texture */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .12;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(var(--wrap), calc(100% - (var(--pad) * 2)));
+      margin-inline: auto;
+    }
+
+    /* ── Buttons ──────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 11px 24px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(58,125,68,.25);
+      background: rgba(255,255,255,.8);
+      font: inherit;
+      font-size: .88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(58,125,68,.18); }
+    .btn--primary { background: var(--forest); color: #fff; border-color: var(--forest); }
+    .btn--primary:hover { background: var(--forest-dk); }
+
+    /* ── Topbar ───────────────────────────────────────── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(248, 245, 238, .92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 16px;
+    }
+
+    .brand { display: flex; gap: 12px; align-items: center; }
+
+    .brand__mark {
+      width: 34px;
+      height: 34px;
+      background: radial-gradient(12px 12px at 35% 35%, rgba(255,255,255,.95), rgba(255,255,255,0) 70%),
+                  linear-gradient(135deg, rgba(244,197,66,.95), rgba(255,123,123,.65));
+      border: 2px solid rgba(23,21,19,.18);
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(23,21,19,.08);
+      transform: rotate(2deg);
+      flex-shrink: 0;
+    }
+
+    .brand__name { display: flex; flex-direction: column; line-height: 1; }
+    .brand__nameMain { font-family: 'Patrick Hand', cursive; font-size: 1.15rem; }
+    .brand__nameSub  { font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+    .topbar__crumb { display: flex; align-items: center; gap: 8px; font-size: .85rem; color: var(--muted); }
+    .topbar__crumb strong { color: var(--ink2); font-weight: 600; }
+    .topbar__actions { display: flex; gap: 10px; }
+
+    /* Progress */
+    .progressWrap { height: 3px; background: rgba(58,125,68,.1); }
+    .progressBar  { height: 100%; width: 0%; background: linear-gradient(90deg, var(--forest), var(--macaroni), var(--moss)); transition: width .1s linear; }
+
+    /* ── Hero ─────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+
+    /* Left panel — deep forest */
+    .hero__left {
+      background: var(--forest-dk);
+      padding: clamp(60px, 8vw, 100px) clamp(28px, 4vw, 64px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Organic blob shapes in bg */
+    .hero__left::before {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(58,125,68,.4) 0%, transparent 70%);
+      top: -150px;
+      right: -200px;
+      pointer-events: none;
+    }
+
+    .hero__left::after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(240,180,41,.12) 0%, transparent 70%);
+      bottom: -80px;
+      left: -60px;
+      pointer-events: none;
+    }
+
+    /* Right panel — cream with brand applications */
+    .hero__right {
+      background: var(--cream-dk);
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    .hero__right-top {
+      background: var(--forest);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero__right-top::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 60% 40%, rgba(240,180,41,.15) 0%, transparent 50%),
+                        radial-gradient(circle at 20% 70%, rgba(122,189,110,.2) 0%, transparent 50%);
+    }
+
+    .hero__right-bot {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .hero__swatch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 28px;
+    }
+
+    .hero__swatch-dot {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      box-shadow: 0 8px 24px rgba(0,0,0,.12);
+    }
+
+    .hero__swatch-name { font-size: .72rem; font-weight: 600; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+
+    /* Hero logo SVG area */
+    .hero__logo-display {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero__logo-mark {
+      width: 120px;
+      height: auto;
+      display: block;
+    }
+
+    /* ── Left hero content ──────────────────────────── */
+    .hero__content { position: relative; z-index: 2; }
+
+    .hero__eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--macaroni);
+      margin-bottom: 22px;
+    }
+
+    .hero__eyebrow::before {
+      content: "";
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--macaroni);
+      border-radius: 999px;
+    }
+
+    .hero__title {
+      font-family: 'ArgentumSans', sans-serif;
+      font-size: clamp(3.5rem, 6vw, 7rem);
+      line-height: .92;
+      letter-spacing: -.02em;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .hero__title--accent { color: var(--macaroni); }
+    .hero__title--light  { color: var(--moss-lt); font-size: .55em; display: block; margin-top: 6px; letter-spacing: .02em; }
+
+    .hero__tagline {
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(.9rem, 1.1vw, 1.05rem);
+      color:rgba(255,255,255,.72);
+      margin-bottom: 32px;
+      margin-top: 16px;
+      max-width: 38ch;
+      line-height: 1.75;
+    }
+
+    .hero__meta-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .chip {
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .chip--leaf   { background: rgba(122,189,110,.2); color: var(--moss); border: 1px solid rgba(122,189,110,.3); }
+    .chip--sun    { background: rgba(240,180,41,.18); color: var(--macaroni); border: 1px solid rgba(240,180,41,.3); }
+    .chip--forest { background: rgba(255,255,255,.08); color:rgba(255,255,255,.72); border: 1px solid rgba(255,255,255,.12); }
+
+    .hero__stats {
+      display: flex;
+      gap: 32px;
+      padding-top: 36px;
+      border-top: 1px solid rgba(255,255,255,.1);
+      flex-wrap: wrap;
+    }
+
+    .stat__num {
+      font-family: 'Molgon Regular', sans-serif;
+      font-size: 2rem;
+      color: var(--macaroni);
+      line-height: 1;
+    }
+
+    .stat__label { font-size: .72rem; color:rgba(255,255,255,.72); letter-spacing: .08em; text-transform: uppercase; margin-top: 3px; }
+
+    /* ── Section Base ─────────────────────────────────── */
+    section:not(.hero) { padding-block: var(--section-space); }
+
+    .section-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--forest);
+      margin-bottom: 14px;
+    }
+
+    .section-eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 2px;
+      background: var(--forest);
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: 'Molgon Regular', sans-serif;
+      font-size: clamp(2rem, 3.8vw, 3.6rem);
+      line-height: .96;
+      letter-spacing: -.02em;
+      margin-bottom: 18px;
+      color: var(--ink);
+    }
+
+    .section-title--light { color: #fff; }
+    .section-title--accent { color: var(--forest); }
+
+    .section-lead {
+      font-size: clamp(.92rem, 1.1vw, 1.06rem);
+      color: var(--muted);
+      max-width: 58ch;
+      line-height: 1.82;
+      font-weight: 300;
+    }
+
+    /* ── Reveal ─────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal.is-in { opacity: 1; transform: none; }
+    .reveal--delay1 { transition-delay: .1s; }
+    .reveal--delay2 { transition-delay: .2s; }
+    .reveal--delay3 { transition-delay: .3s; }
+    .reveal--delay4 { transition-delay: .42s; }
+    .reveal--scale  { transform: scale(.95) translateY(16px); }
+    .reveal--scale.is-in { transform: none; }
+
+    /* ── Brand Story ────────────────────────────────── */
+    .story { background: var(--cream); }
+
+    .story__grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .brief-list { display: flex; flex-direction: column; }
+
+    .brief-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 14px;
+      align-items: baseline;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(58,125,68,.12);
+    }
+
+    .brief-item:first-child { border-top: 1px solid rgba(58,125,68,.12); }
+    .brief-item__label { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); font-weight: 600; }
+    .brief-item__val   { font-size: .95rem; font-weight: 500; color: var(--ink2); }
+
+    /* Pull quote block */
+    .pull-quote {
+      margin-top: 32px;
+      background: var(--forest);
+      border-radius: 20px;
+      padding: 28px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pull-quote::before {
+      content: "❝";
+      position: absolute;
+      top: -14px;
+      right: 18px;
+      font-size: 6rem;
+      color:rgba(255,255,255,.72);
+      font-family: serif;
+      line-height: 1;
+    }
+
+    .pull-quote p {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,.85);
+      line-height: 1.75;
+      font-style: italic;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pull-quote p strong { color: var(--macaroni); font-style: normal; font-weight: 600; }
+
+    /* ── Logo Formation ─────────────────────────────── */
+    .logo-section { background: var(--forest); overflow: hidden; }
+
+    .logo-construction {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 52px;
+      align-items: center;
+    }
+
+    .logo-equation {
+      background: rgba(255,255,255,.1);
+      border-radius: 20px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,.12);
+      overflow: hidden;
+    }
+
+    .logo-equation__img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+    }
+
+    .logo-eq-icon {
+      width: 70px;
+      height: 70px;
+      background: rgba(255,255,255,.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .logo-eq-label {
+      font-size: .72rem;
+      color:rgba(255,255,255,.72);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-weight: 500;
+    }
+
+    .logo-eq-op {
+      font-family: 'Molgon Regular', sans-serif;
+      font-size: 2rem;
+      color: var(--macaroni);
+      flex-shrink: 0;
+    }
+
+    .logo-eq-result {
+      width: 80px;
+      height: 80px;
+      background: var(--macaroni);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      box-shadow: 0 12px 32px rgba(240,180,41,.3);
+    }
+
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .logo-card {
+      border-radius: 16px;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(255,255,255,.1);
+      transition: transform .2s ease;
+    }
+
+    .logo-card:hover { transform: translateY(-4px); }
+    .logo-card--white  { background: #fff; }
+    .logo-card--green  { background: var(--forest-dk); }
+    .logo-card--yellow { background: var(--macaroni); }
+    .logo-card--black  { background: #111; }
+    .logo-card--moss   { background: var(--moss); }
+
+    .logo-card__mark {
+      width: 78px;
+      height: 78px;
+      display: grid;
+      place-items: center;
+    }
+
+    .logo-card__mark-img {
+      width: 62px;
+      height: auto;
+      display: block;
+    }
+
+    .logo-card__mark-img--light {
+      filter: brightness(0) invert(1);
+    }
+
+    .logo-card__wordmark {
+      font-family: var(--shrigana-display);
+      font-size: .95rem;
+      line-height: 1;
+      letter-spacing: .02em;
+    }
+
+    .logo-card--white  .logo-card__wordmark { color: var(--forest-dk); }
+    .logo-card--green  .logo-card__wordmark { color: #fff; }
+    .logo-card--yellow .logo-card__wordmark { color: var(--forest-dk); }
+    .logo-card--black  .logo-card__wordmark { color: #fff; }
+    .logo-card--moss   .logo-card__wordmark { color: var(--forest-dk); }
+
+    .logo-card__sub {
+      font-size: .55rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .logo-card--white  .logo-card__sub { color: var(--muted); }
+    .logo-card--green  .logo-card__sub { color:rgba(255,255,255,.72); }
+    .logo-card--yellow .logo-card__sub { color: rgba(43,94,50,.65); }
+    .logo-card--black  .logo-card__sub { color:rgba(255,255,255,.72); }
+    .logo-card--moss   .logo-card__sub { color: rgba(43,94,50,.65); }
+
+    .logo-card__bg-label {
+      position: relative;
+      width: 100%;
+      text-align: center;
+      font-size: .62rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,.12);
+    }
+
+    .logo-card--white .logo-card__bg-label { color: var(--muted); border-color: rgba(0,0,0,.08); }
+    .logo-card--yellow .logo-card__bg-label { color: rgba(43,94,50,.5); border-color: rgba(43,94,50,.15); }
+    .logo-card--moss .logo-card__bg-label { color: rgba(43,94,50,.55); border-color: rgba(43,94,50,.12); }
+
+    /* ── Colours ────────────────────────────────────── */
+    .colours-section { background: var(--cream); }
+
+    .colour-system {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 0;
+      margin-top: 52px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(58,125,68,.14);
+      border: 1px solid rgba(58,125,68,.12);
+    }
+
+    .colour-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 32px 28px;
+      min-height: 320px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .colour-block--forest { background: var(--forest); }
+    .colour-block--macaroni { background: var(--macaroni); }
+    .colour-block--moss { background: var(--moss); }
+
+    .colour-block::before {
+      content: "";
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.15);
+    }
+
+    .colour-block__name {
+      font-family: 'Molgon Regular', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: -.01em;
+      color: #fff;
+      margin-bottom: 4px;
+      line-height: 1.1;
+    }
+
+    .colour-block--macaroni .colour-block__name { color: var(--forest-dk); }
+    .colour-block--moss .colour-block__name { color: var(--forest-dk); }
+
+    .colour-block__sub {
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-weight: 600;
+      color:rgba(255,255,255,.72);
+      margin-bottom: 6px;
+    }
+
+    .colour-block--macaroni .colour-block__sub { color: rgba(43,94,50,.55); }
+    .colour-block--moss .colour-block__sub { color: rgba(43,94,50,.55); }
+
+    .colour-block__hex {
+      font-family: 'Courier New', monospace;
+      font-size: .75rem;
+      color:rgba(255,255,255,.72);
+    }
+
+    .colour-block--macaroni .colour-block__hex { color: rgba(43,94,50,.45); }
+    .colour-block--moss .colour-block__hex { color: rgba(43,94,50,.45); }
+
+    .colour-block__role {
+      font-size: .8rem;
+      color:rgba(255,255,255,.72);
+      line-height: 1.5;
+      margin-top: 10px;
+      font-weight: 300;
+    }
+
+    .colour-block--macaroni .colour-block__role { color: rgba(43,94,50,.65); }
+    .colour-block--moss .colour-block__role { color: rgba(43,94,50,.65); }
+
+    /* Colour rationale */
+    .colour-rationale {
+      margin-top: 40px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 32px 36px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 28px rgba(58,125,68,.07);
+    }
+
+    .colour-rationale p {
+      font-size: .98rem;
+      color: var(--muted);
+      line-height: 1.85;
+      font-weight: 300;
+    }
+
+    .colour-rationale p strong { color: var(--forest); font-weight: 600; }
+
+    /* clear spacing */
+    .clearspace-section {
+      background: var(--macaroni);
+      padding-block: var(--section-space);
+      color: white;
+    }
+
+    .clearspace-section p,
+    .clearspace-section ul li {
+      color: white;
+    }
+
+    .clearspace-section .section-title {
+      color: var(--forest);
+    }
+
+    .clearspace-section h3 {
+      color: var(--forest);
+    }
+
+    .clearspace-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 48px;
+      margin-top: 40px;
+      align-items: center;
+    }
+
+    .clearspace-card {
+      background: #fff;
+      padding: 32px;
+      border-radius: 20px;
+      border: 2px dashed rgba(0,0,0,.1);
+    }
+
+    .clearspace-card img {
+      width: 100%;
+    }
+
+    .clearspace-info h3 {
+      margin-bottom: 12px;
+    }
+
+    .clearspace-info ul {
+      margin-top: 12px;
+      padding-left: 18px;
+    }
+
+    /* ── Typography ─────────────────────────────────── */
+    .typography-section { background: var(--forest-dk); color: #fff; }
+
+    .type-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 52px;
+    }
+
+    .type-card {
+      border-radius: 20px;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .type-card--primary { background: rgba(255,255,255,.05); }
+    .type-card--body    { background: rgba(240,180,41,.08); border-color: rgba(240,180,41,.15); }
+
+    .type-specimen-large {
+      font-family: var(--shrigana-display);
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      line-height: .9;
+      letter-spacing: -.02em;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .type-card--primary .type-specimen-large {
+      font-family: var(--shrigana-display);
+      letter-spacing: -.01em;
+    }
+
+    .type-card--body .type-specimen-large {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      color: var(--macaroni);
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      letter-spacing: -.01em;
+    }
+
+    .type-description {
+      font-size: .9rem;
+      color:rgba(255,255,255,.72);
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 24px;
+    }
+
+    .type-attrs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .type-attr {
+      padding: 12px 14px;
+      background: rgba(255,255,255,.05);
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .type-attr__label { font-size: .65rem; text-transform: uppercase; letter-spacing: .12em; color:rgba(255,255,255,.72); margin-bottom: 4px; font-weight: 600; }
+    .type-attr__val   { font-size: .82rem; color: rgba(255,255,255,.8); font-weight: 500; }
+
+    /* ── Applications ───────────────────────────────── */
+    .applications { background: var(--cream-dk); }
+
+    .app-masonry {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 240px;
+      gap: 14px;
+      margin-top: 52px;
+    }
+
+    .app-card {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(58,125,68,.10);
+      border: 1px solid rgba(58,125,68,.10);
+      transition: transform .22s ease, box-shadow .22s ease;
+      position: relative;
+    }
+
+    .app-card:hover { transform: translateY(-6px) rotate(-.2deg); box-shadow: 0 24px 56px rgba(58,125,68,.18); }
+
+    .app-card--span2 { grid-column: span 2; }
+    .app-card--tall  { grid-row: span 2; }
+
+    .app-visual { width: 100%; height: 100%; position: relative; overflow: hidden; }
+
+    .app-card__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* Individual mockups */
+    .mock-tote {
+      background: var(--forest);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      height: 100%;
+      position: relative;
+    }
+
+    .mock-tote::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 200px 200px at 50% 30%, rgba(122,189,110,.25), transparent 70%);
+    }
+
+    .mock-tote__icon { font-size: 3.5rem; position: relative; z-index: 1; }
+
+    .mock-tote__name {
+      font-family: var(--shrigana-display);
+      font-size: 1.4rem;
+      color: #fff;
+      letter-spacing: -.01em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mock-tote__sub {
+      font-size: .65rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color:rgba(255,255,255,.72);
+      position: relative;
+      z-index: 1;
+    }
+
+    .mock-mug {
+      background: linear-gradient(145deg, #e8dfd0 0%, #d9cfc0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      height: 100%;
+      position: relative;
+    }
+
+    .mock-mug__cup {
+      width: 70px;
+      height: 80px;
+      background: var(--forest);
+      border-radius: 6px 6px 10px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      box-shadow: 0 12px 28px rgba(0,0,0,.2);
+      position: relative;
+    }
+
+    .mock-mug__cup::after {
+      content: "";
+      position: absolute;
+      right: -14px;
+      top: 20px;
+      width: 16px;
+      height: 28px;
+      border: 3px solid var(--forest);
+      border-left: none;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .mock-mug__icon { font-size: 1.8rem; }
+    .mock-mug__brand { font-family: var(--shrigana-display); font-size: .7rem; color: #fff; }
+
+    .mock-bottle {
+      background: linear-gradient(160deg, #f0ece3 0%, #e0dbd2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      height: 100%;
+    }
+
+    .mock-bottle__vessel {
+      width: 40px;
+      height: 120px;
+      background: #fff;
+      border-radius: 20px 20px 14px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      box-shadow: 0 12px 28px rgba(0,0,0,.12);
+      border: 1px solid rgba(58,125,68,.15);
+    }
+
+    .mock-bottle__icon { font-size: 1.4rem; }
+    .mock-bottle__brand { font-family: var(--shrigana-display); font-size: .5rem; color: var(--forest); writing-mode: vertical-rl; letter-spacing: .08em; }
+
+    .mock-candle {
+      background: linear-gradient(145deg, #f5ede0 0%, #ede3d4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      height: 100%;
+    }
+
+    .mock-candle__jar {
+      width: 68px;
+      height: 78px;
+      background: rgba(240,180,41,.15);
+      border-radius: 8px 8px 12px 12px;
+      border: 1.5px solid rgba(240,180,41,.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      position: relative;
+    }
+
+    .mock-candle__jar::before {
+      content: "🕯️";
+      position: absolute;
+      top: -22px;
+      font-size: 1.2rem;
+    }
+
+    .mock-candle__icon { font-size: 1.6rem; }
+    .mock-candle__brand { font-family: var(--shrigana-display); font-size: .65rem; color: var(--forest-dk); }
+
+    .mock-signage {
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      position: relative;
+    }
+
+    .mock-sign {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: #fff;
+      border: 3px solid var(--forest);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.14);
+    }
+
+    .mock-sign__icon { font-size: 2.2rem; }
+    .mock-sign__name { font-family: var(--shrigana-display); font-size: .82rem; color: var(--forest-dk); letter-spacing: -.01em; }
+    .mock-sign__sub  { font-size: .48rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+
+    .mock-biz {
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      gap: 10px;
+      height: 100%;
+      flex-wrap: wrap;
+    }
+
+    .mock-biz__card {
+      width: 130px;
+      padding: 16px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      box-shadow: 0 8px 22px rgba(0,0,0,.10);
+    }
+
+    .mock-biz__card--front {
+      background: #fff;
+      border-top: 3px solid var(--forest);
+    }
+
+    .mock-biz__card--back {
+      background: var(--forest);
+      aspect-ratio: 1.75;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mock-biz__icon { font-size: 1.6rem; }
+    .mock-biz__name { font-family: var(--shrigana-display); font-size: .8rem; color: var(--forest-dk); }
+    .mock-biz__role { font-size: .58rem; color: var(--muted); letter-spacing: .04em; }
+    .mock-biz__dot  { width: 8px; height: 8px; border-radius: 50%; background: var(--macaroni); }
+
+    .app-card__caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 14px 18px;
+      background: linear-gradient(transparent, rgba(0,0,0,.5));
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      pointer-events: none;
+    }
+
+    .app-card__caption--light { background: linear-gradient(transparent, rgba(248,245,238,.9)); }
+
+    .app-card__caption-title {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1rem;
+      color: #fff;
+      font-weight: 400;
+    }
+
+    .app-card__caption--light .app-card__caption-title { color: var(--ink2); }
+
+    .app-card__caption-meta {
+      font-size: .7rem;
+      color:rgba(255,255,255,.72);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    .app-card__caption--light .app-card__caption-meta { color: var(--muted); }
+
+    .gallery-card {
+      cursor: pointer;
+    }
+
+    .gallery-card:focus-visible {
+      outline: 3px solid rgba(240, 180, 41, 0.85);
+      outline-offset: 3px;
+    }
+
+    /* ── Lightbox Gallery ─────────────────────────────── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.is-active {
+      display: flex;
+      opacity: 1;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox__content {
+      position: relative;
+      width: 90%;
+      height: 85%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lightbox__image-wrapper {
+      flex: 1;
+      overflow: hidden;
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .lightbox__image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .lightbox__close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 24px;
+      transition: all 0.2s ease;
+      z-index: 9001;
+    }
+
+    .lightbox__close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color:rgba(255,255,255,.72);
+    }
+
+    .lightbox__arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 24px;
+      transition: all 0.2s ease;
+      z-index: 9001;
+    }
+
+    .lightbox__arrow:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color:rgba(255,255,255,.72);
+    }
+
+    .lightbox__arrow--prev {
+      left: 20px;
+    }
+
+    .lightbox__arrow--next {
+      right: 20px;
+    }
+
+    .lightbox__thumbnails {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 20px;
+      overflow-x: auto;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    .lightbox__thumbnail {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .lightbox__thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .lightbox__thumbnail:hover {
+      border-color:rgba(255,255,255,.72);
+      transform: scale(1.05);
+    }
+
+    .lightbox__thumbnail.is-active {
+      border-color: var(--macaroni);
+      box-shadow: 0 0 12px rgba(240, 180, 41, 0.4);
+    }
+
+    .gallery-image {
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .gallery-image:hover {
+      transform: scale(1.02);
+    }
+
+    /* ── Wellness Values ────────────────────────────── */
+    .values-section { background: var(--cream); }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 52px;
+    }
+
+    .value-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 22px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(58,125,68,.07);
+      transition: transform .2s ease, box-shadow .2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .value-card:nth-child(1)::before { background: var(--forest); }
+    .value-card:nth-child(2)::before { background: var(--macaroni); }
+    .value-card:nth-child(3)::before { background: var(--moss); }
+    .value-card:nth-child(4)::before { background: var(--forest-dk); }
+
+    .value-card:hover { transform: translateY(-5px) rotate(.3deg); box-shadow: 0 20px 44px rgba(58,125,68,.14); }
+
+    .value-card__icon { font-size: 2.4rem; margin-bottom: 12px; }
+
+    .value-card__title {
+      font-family: 'Molgon Regular', sans-serif;
+      font-size: 1rem;
+      color: var(--forest-dk);
+      margin-bottom: 8px;
+      letter-spacing: -.01em;
+    }
+
+    .value-card__desc {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── Quote ──────────────────────────────────────── */
+    .quote-section {
+      background: var(--macaroni);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 10% 50%, rgba(58,125,68,.18) 0%, transparent 45%),
+        radial-gradient(circle at 90% 30%, rgba(255,255,255,.15) 0%, transparent 40%);
+    }
+
+    .quote-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .quote-leaf { font-size: 3rem; margin-bottom: 20px; display: block; }
+
+    .quote-text {
+      font-family: 'Molgon Regular', sans-serif;
+      font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+      line-height: 1.3;
+      letter-spacing: -.01em;
+      color: var(--forest-dk);
+      margin-bottom: 28px;
+    }
+
+    .quote-body {
+      font-size: 1rem;
+      color: rgba(43,94,50,.72);
+      line-height: 1.8;
+      font-weight: 300;
+      max-width: 56ch;
+      margin: 0 auto 28px;
+    }
+
+    .quote-author { display: flex; align-items: center; justify-content: center; gap: 12px; }
+
+    .quote-avatar {
+      width: 44px;
+      height: 44px;
+      background: var(--forest);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .quote-author__name { font-weight: 600; color: var(--forest-dk); font-size: .9rem; }
+    .quote-author__role { font-size: .76rem; color: rgba(43,94,50,.6); margin-top: 2px; }
+
+    /* ── Outcomes ───────────────────────────────────── */
+    .outcomes { background: var(--forest-dk); color: #fff; }
+
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 52px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .outcome-card {
+      padding: 34px 26px;
+      border-right: 1px solid rgba(255,255,255,.1);
+      transition: background .18s ease;
+    }
+
+    .outcome-card:last-child { border-right: none; }
+    .outcome-card:hover { background: rgba(255,255,255,.04); }
+
+    .outcome-card__num {
+      font-family: 'Molgon Regular', sans-serif;
+      font-size: 2.6rem;
+      color: var(--macaroni);
+      line-height: 1;
+      margin-bottom: 8px;
+      letter-spacing: -.01em;
+    }
+
+    .outcome-card__label {
+      font-size: .78rem;
+      color:rgba(255,255,255,.72);
+      line-height: 1.5;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    /* ── CTA ────────────────────────────────────────── */
+    .cta-section { background: var(--cream); }
+
+    .cta-inner {
+      text-align: center;
+      padding: 0;
+      border-top: 1px dashed rgba(58,125,68,.22);
+    }
+
+    .cta-inner .section-title { margin-bottom: 12px; }
+    .cta-inner p { color: var(--muted); max-width: 48ch; margin: 0 auto 32px; font-size: 1rem; }
+
+    .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── Footer ─────────────────────────────────────── */
+    .footer { background: var(--forest-dk); color:rgba(255,255,255,.72); padding: 36px 0; }
+
+    .footer__row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
+    .footer__brand { font-family: 'Patrick Hand', cursive; font-size: 1.1rem; color: rgba(255,255,255,.75); }
+    .footer__links { display: flex; gap: 18px; font-size: .82rem; }
+    .footer__links a:hover { color: var(--macaroni); }
+
+    /* ── Dividers ───────────────────────────────────── */
+    .divider-nature {
+      height: 4px;
+      background: linear-gradient(90deg, var(--forest), var(--moss), var(--macaroni), var(--moss), var(--forest));
+    }
+
+    /* ── Responsive ─────────────────────────────────── */
+    @media (max-width: 1020px) {
+      .hero           { grid-template-columns: 1fr; min-height: auto; }
+      .hero__right    { display: none; }
+      .hero__left     { padding: clamp(60px, 8vw, 80px) clamp(28px, 4vw, 48px); }
+      .story__grid    { grid-template-columns: 1fr; gap: 48px; }
+      .logo-construction { grid-template-columns: 1fr; gap: 32px; }
+      .clearspace-grid { grid-template-columns: 1fr; gap: 32px; }
+      .colour-system  { grid-template-columns: 1fr; }
+      .colour-block   { min-height: 180px; }
+      .type-grid      { grid-template-columns: 1fr; }
+      .app-masonry    { grid-template-columns: 1fr 1fr; }
+      .app-card--span2 { grid-column: span 2; }
+      .app-card--tall  { grid-row: span 1; }
+      .values-grid    { grid-template-columns: 1fr 1fr; }
+      .outcomes-grid  { grid-template-columns: 1fr 1fr; }
+      .logo-grid      { grid-template-columns: repeat(3, 1fr); }
+      .brief-item     { grid-template-columns: 110px 1fr; gap: 12px; }
+    }
+
+    @media (max-width: 768px) {
+      .topbar__actions { flex-wrap: wrap; gap: 8px; }
+      .logo-grid      { grid-template-columns: 1fr 1fr; }
+      .app-masonry    { grid-template-columns: 1fr 1fr; grid-auto-rows: 200px; gap: 12px; }
+      .app-card--tall { grid-row: span 2; }
+      .values-grid    { grid-template-columns: 1fr 1fr; }
+      .outcomes-grid  { grid-template-columns: 1fr 1fr; }
+
+      .lightbox__arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+      }
+
+      .lightbox__arrow--prev { left: 10px; }
+      .lightbox__arrow--next { right: 10px; }
+
+      .lightbox__close {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        top: 15px;
+        right: 15px;
+      }
+
+      .lightbox__thumbnails {
+        padding: 15px;
+        gap: 8px;
+      }
+
+      .lightbox__thumbnail {
+        width: 60px;
+        height: 60px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root { --pad: clamp(16px, 2.4vw, 24px); }
+      :root { --section-space: clamp(52px, 10vw, 72px); }
+
+      .topbar__row    { flex-wrap: wrap; gap: 12px; padding: 12px 0; }
+      .topbar__crumb  { display: none; }
+      .topbar__actions { width: 100%; gap: 8px; }
+      .btn            { font-size: .82rem; padding: 10px 18px; }
+
+      .hero__title    { font-size: clamp(2.5rem, 5vw, 4rem); }
+      .hero__tagline  { font-size: clamp(.85rem, 2vw, 1rem); max-width: 35ch; }
+      .hero__stats    { gap: 24px; flex-direction: column; }
+      .stat__num      { font-size: 1.6rem; }
+
+      .section-title  { font-size: clamp(1.6rem, 3vw, 2.4rem); }
+      .section-lead   { font-size: clamp(.88rem, 2vw, 1rem); }
+
+      .clearspace-grid { gap: 24px; }
+      .clearspace-card { padding: 20px; }
+
+      .app-masonry    { grid-template-columns: 1fr; grid-auto-rows: 200px; }
+      .app-card--span2 { grid-column: span 1; }
+      .app-card--tall { grid-row: span 1; }
+      .values-grid    { grid-template-columns: 1fr; }
+      .value-card     { padding: 20px 16px; }
+      .value-card__icon { font-size: 2rem; margin-bottom: 8px; }
+
+      .outcomes-grid  { grid-template-columns: 1fr; }
+      .outcome-card   { padding: 24px 20px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.1); }
+      .outcome-card:last-child { border-bottom: none; }
+
+      .logo-grid      { grid-template-columns: 1fr; }
+      .logo-equation  { flex-wrap: wrap; gap: 12px; padding: 24px; }
+      .logo-eq-icon   { width: 60px; height: 60px; font-size: 1.8rem; }
+      .logo-eq-op     { font-size: 1.6rem; }
+      .logo-eq-result { width: 70px; height: 70px; font-size: 2rem; }
+
+      .type-attrs     { grid-template-columns: 1fr; }
+      .brief-item     { grid-template-columns: 100px 1fr; gap: 10px; padding: 12px 0; }
+      .brief-item__label { font-size: .65rem; }
+      .brief-item__val { font-size: .9rem; }
+
+      .footer__row    { flex-direction: column; text-align: center; gap: 12px; }
+      .footer__links  { justify-content: center; gap: 12px; font-size: .75rem; }
+
+      .cta-inner      { padding: 0; }
+      .cta-buttons    { flex-direction: column; gap: 12px; }
+      .cta-buttons .btn { width: 100%; justify-content: center; }
+
+      .hero__meta-chips { gap: 6px; flex-wrap: wrap; }
+      .chip           { font-size: .65rem; padding: 4px 12px; }
+
+      .type-card      { padding: 28px 20px; }
+      .type-specimen-large { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 14px; }
+      .type-description { font-size: .85rem; margin-bottom: 16px; }
+
+      .colour-block   { padding: 24px 20px; min-height: 160px; }
+      .colour-block__name { font-size: 1.1rem; }
+      .colour-block__role { font-size: .75rem; margin-top: 8px; }
+
+      .pull-quote     { padding: 20px 24px; margin-top: 24px; }
+      .pull-quote::before { font-size: 4rem; top: -8px; right: 12px; }
+      .pull-quote p   { font-size: .95rem; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --wrap: calc(100% - 32px); }
+
+      .brand__nameMain { font-size: .95rem; }
+      .brand__mark    { width: 28px; height: 28px; }
+
+      .section-eyebrow { font-size: .7rem; gap: 8px; }
+      .section-eyebrow::before { width: 18px; }
+
+      .hero__title    { font-size: clamp(2rem, 6vw, 3rem); }
+      .hero__eyebrow  { font-size: .72rem; }
+
+      .app-masonry    { gap: 10px; grid-auto-rows: 160px; }
+      .mock-tote__name { font-size: 1.1rem; }
+
+      .value-card     { padding: 16px 12px; }
+      .value-card__title { font-size: .95rem; }
+      .value-card__desc { font-size: .78rem; line-height: 1.5; }
+
+      .quote-text     { font-size: clamp(1.3rem, 4vw, 1.8rem); }
+      .quote-body     { font-size: .9rem; margin: 0 auto 20px; }
+      .quote-leaf     { font-size: 2.4rem; margin-bottom: 14px; }
+
+      .type-card      { padding: 20px 16px; }
+      .type-specimen-large { font-size: clamp(1.6rem, 3.5vw, 2.2rem); }
+
+      .colour-rationale { padding: 20px 16px; margin-top: 28px; }
+      .colour-rationale p { font-size: .92rem; }
+
+      .outcome-card__num { font-size: 2rem; margin-bottom: 6px; }
+      .outcome-card__label { font-size: .72rem; }
+
+      .btn            { font-size: .8rem; padding: 9px 16px; gap: 5px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { transition: none; opacity: 1; transform: none; }
+    }
+  
+    /* Global accessibility and responsive baseline */
+    .skip-link{
+      position:absolute;
+      left:12px;
+      top:-48px;
+      z-index:9999;
+      background:#111;
+      color:#fff;
+      padding:10px 12px;
+      border-radius:10px;
+      font-weight:700;
+      text-decoration:none;
+    }
+    .skip-link:focus{top:12px}
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    [tabindex]:focus-visible{
+      outline:3px solid #2563eb;
+      outline-offset:3px;
+      border-radius:6px;
+    }
+
+    img,video,canvas,svg{max-width:100%;height:auto}
+
+    @media (max-width: 900px){
+      .topbar__row{flex-wrap:wrap}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ── Topbar ─────────────────────────────────────────── -->
+  <header class="topbar">
+    <div class="wrap topbar__row">
+      <a class="brand" href="index.html">
+
+        <div class="brand__name">
+          <span class="brand__nameMain">No Name</span>
+          <span class="brand__nameSub">Productions</span>
+        </div>
+      </a>
+
+      <nav class="topbar__crumb" aria-label="Breadcrumb">
+        <a href="index.html#work" style="color:var(--muted)">Work</a>
+        <span>›</span>
+        <strong>Shrigana</strong>
+      </nav>
+
+      <div class="topbar__actions">
+        <a class="btn" href="index.html#work">← Back to Work</a>
+        <a class="btn btn--primary" href="index.html#contact">Hire Us</a>
+      </div>
+    </div>
+    <div class="progressWrap" aria-hidden="true">
+      <div class="progressBar" id="progressBar"></div>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+  <!-- ── Hero ───────────────────────────────────────────── -->
+  <section class="hero" aria-label="Shrigana Case Study">
+
+    <!-- Left — brand story -->
+    <div class="hero__left">
+      <div class="hero__content">
+        <p class="hero__eyebrow reveal">Case Study · Brand Identity</p>
+
+        <h1 class="hero__title reveal reveal--delay1">
+          Shri<span class="hero__title--accent">gana</span>
+          <span class="hero__title--light">Studio of Wellness</span>
+        </h1>
+
+        <p class="hero__tagline reveal reveal--delay2">
+          A passion for optimism and holistic wellness gave rise to Shrigana — 
+          where nature's palette meets the human form in perfect balance.
+        </p>
+
+        <div class="hero__meta-chips reveal reveal--delay2">
+          <span class="chip chip--leaf">Wellness</span>
+          <span class="chip chip--sun">Holistic</span>
+          <span class="chip chip--forest">Brand Identity</span>
+          <span class="chip chip--forest">2024</span>
+        </div>
+
+        <div class="hero__stats reveal reveal--delay3">
+          <div>
+            <div class="stat__num">3</div>
+            <div class="stat__label">Brand Colours</div>
+          </div>
+          <div>
+            <div class="stat__num">2</div>
+            <div class="stat__label">Typefaces</div>
+          </div>
+          <div>
+            <div class="stat__num">8+</div>
+            <div class="stat__label">Touchpoints</div>
+          </div>
+          <div>
+            <div class="stat__num">∞</div>
+            <div class="stat__label">Good Vibes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right — colour preview split -->
+    <div class="hero__right" aria-hidden="true">
+      <div class="hero__right-top">
+        <div class="hero__logo-display">
+          <img class="hero__logo-mark" src="assests/img/shrigana/logo-01.png" alt="Shrigana logo mark" loading="lazy" />
+          <svg viewBox="0 0 140 28" width="140" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="22" style="font-family: var(--shrigana-display);" font-size="22" fill="white" letter-spacing="1">Shrigana</text>
+          </svg>
+          <span style="font-size:.62rem; letter-spacing:.18em; color:rgba(255,255,255,.72); text-transform:uppercase; font-weight:600;">Studio of Wellness</span>
+        </div>
+      </div>
+
+      <div class="hero__right-bot">
+        <div class="hero__swatch" style="background:var(--cream-dk);">
+          <div class="hero__swatch-dot" style="background:var(--forest);"></div>
+          <span class="hero__swatch-name">Forest Green</span>
+        </div>
+        <div class="hero__swatch" style="background:var(--cream);">
+          <div class="hero__swatch-dot" style="background:var(--macaroni);"></div>
+          <span class="hero__swatch-name">Macaroni</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="divider-nature"></div>
+
+  <!-- ── Brand Story ────────────────────────────────────── -->
+  <section class="story">
+    <div class="wrap">
+      <div class="story__grid">
+        <div>
+          <p class="section-eyebrow reveal">Brand Story</p>
+          <h2 class="section-title reveal reveal--delay1">
+            Where nature<br>
+            <span style="color:var(--forest);">meets wellbeing.</span>
+          </h2>
+          <p class="section-lead reveal reveal--delay2">
+            A passion for optimism and holistic wellness gave rise to Shrigana. The company wants 
+            to make it possible for everyone to experience natural healing and personal development.
+          </p>
+          <p class="section-lead reveal reveal--delay3" style="margin-top:16px;">
+            Shrigana promotes attentive living and honours the path to health and balance via its 
+            hospitable visual identity — a brand that feels as calming as the practices it stands for.
+          </p>
+
+          <div class="pull-quote reveal" style="margin-top:36px;">
+            <p>
+              "The restorative power of nature and the optimism that comes with wellbeing are reflected in 
+              Shrigana's colour scheme — centred on <strong>calming greens with a hint of golden yellow</strong>. 
+              Brand materials always feel welcoming, organic, and fresh."
+            </p>
+          </div>
+        </div>
+
+        <div class="brief-list reveal reveal--delay1">
+          <div class="brief-item">
+            <span class="brief-item__label">Client</span>
+            <span class="brief-item__val">Shrigana Wellness</span>
+          </div>
+          <div class="brief-item">
+            <span class="brief-item__label">Year</span>
+            <span class="brief-item__val">2024</span>
+          </div>
+          <div class="brief-item">
+            <span class="brief-item__label">Industry</span>
+            <span class="brief-item__val">Holistic Health & Wellness</span>
+          </div>
+          <div class="brief-item">
+            <span class="brief-item__label">Audience</span>
+            <span class="brief-item__val">Health-Conscious Adults</span>
+          </div>
+          <div class="brief-item">
+            <span class="brief-item__label">Location</span>
+            <span class="brief-item__val">UK / Remote</span>
+          </div>
+          <div class="brief-item">
+            <span class="brief-item__label">Values</span>
+            <span class="brief-item__val">Optimism · Growth · Balance · Harmony</span>
+          </div>
+          <div class="brief-item">
+            <span class="brief-item__label">Deliverables</span>
+            <span class="brief-item__val">Logo · Molgon Wordmark System · Typography · Packaging · Merchandise · Stationery · Signage</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-nature"></div>
+
+  <!-- ── Logo Formation ────────────────────────────────── -->
+  <section class="logo-section">
+    <div class="wrap">
+      <p class="section-eyebrow reveal" style="color:rgba(255,255,255,.72);">Logo Formation</p>
+      <h2 class="section-title section-title--light reveal reveal--delay1">
+        Leaf + Sun<br>
+        <span style="color:var(--macaroni);">= Life.</span>
+      </h2>
+      <p class="section-lead reveal reveal--delay2" style="color:rgba(255,255,255,.72);">
+        The dazzling sun element and organic leaf shapes stand for optimism, growth, and well-being. 
+        Paired with the Molgon Regular wordmark, the symbol feels grounded yet uplifting, while the 
+        symmetrical, flowing forms represent harmony, positive energy, and renewal.
+      </p>
+
+      <div class="logo-construction">
+        <!-- Equation -->
+        <div class="logo-equation reveal reveal--delay1">
+          <img class="logo-equation__img" src="assests/img/shrigana/logo formation-02.png" alt="Shrigana logo formation: leaf plus sun equals final mark" loading="lazy" />
+        </div>
+
+        <!-- Logo variations grid -->
+        <div class="logo-grid">
+          <div class="logo-card logo-card--white reveal reveal--delay1">
+            <span class="logo-card__mark"><img class="logo-card__mark-img" src="assests/img/shrigana/logo.svg" alt="Shrigana logo mark" loading="lazy"></span>
+            <span class="logo-card__wordmark">Shrigana</span>
+            <span class="logo-card__sub">Studio of Wellness</span>
+            <span class="logo-card__bg-label">On White</span>
+          </div>
+          <div class="logo-card logo-card--green reveal reveal--delay2">
+            <span class="logo-card__mark"><img class="logo-card__mark-img logo-card__mark-img--light" src="assests/img/shrigana/logo.svg" alt="Shrigana logo mark" loading="lazy"></span>
+            <span class="logo-card__wordmark">Shrigana</span>
+            <span class="logo-card__sub" style="color:rgba(255,255,255,.72);">Studio of Wellness</span>
+            <span class="logo-card__bg-label">On Forest</span>
+          </div>
+          <div class="logo-card logo-card--yellow reveal reveal--delay3">
+            <span class="logo-card__mark"><img class="logo-card__mark-img logo-card__mark-img--light" src="assests/img/shrigana/logo.svg" alt="Shrigana logo mark" loading="lazy"></span>
+            <span class="logo-card__wordmark">Shrigana</span>
+            <span class="logo-card__sub">Studio of Wellness</span>
+            <span class="logo-card__bg-label">On Yellow</span>
+          </div>
+          <div class="logo-card logo-card--black reveal reveal--delay1">
+            <span class="logo-card__mark"><img class="logo-card__mark-img logo-card__mark-img--light" src="assests/img/shrigana/logo.svg" alt="Shrigana logo mark" loading="lazy"></span>
+            <span class="logo-card__wordmark">Shrigana</span>
+            <span class="logo-card__sub" style="color:rgba(255,255,255,.72);">Studio of Wellness</span>
+            <span class="logo-card__bg-label" style="color:rgba(255,255,255,.72);">On Black</span>
+          </div>
+          <div class="logo-card logo-card--moss reveal reveal--delay2" style="grid-column:span 2;">
+            <span class="logo-card__mark"><img class="logo-card__mark-img" src="assests/img/shrigana/logo.svg" alt="Shrigana logo mark" loading="lazy"></span>
+            <span class="logo-card__wordmark" style="font-size:1.1rem;">Shrigana</span>
+            <span class="logo-card__sub">Studio of Wellness</span>
+            <span class="logo-card__bg-label">On Moss — Clear Space = Sun Element Height</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Colours ───────────────────────────────────────── -->
+  <section class="colours-section">
+    <div class="wrap">
+      <p class="section-eyebrow reveal">Colour System</p>
+      <h2 class="section-title reveal reveal--delay1">
+        Green, Gold,<br>
+        <span style="color:var(--forest);">and Growing.</span>
+      </h2>
+      <p class="section-lead reveal reveal--delay2">
+        Building trust with a health audience requires harmony, growth, and a connection to organic living — 
+        all of which are evoked by these three colours.
+      </p>
+
+      <div class="colour-system reveal reveal--delay1">
+        <div class="colour-block colour-block--forest">
+          <div class="colour-block__name">Medium<br>Forest Green</div>
+          <div class="colour-block__sub">Primary Colour</div>
+          <div class="colour-block__hex">#3A7D44</div>
+          <p class="colour-block__role">The foundation of the brand — natural authority, trust, and growth. Used on all primary surfaces and the logo.</p>
+        </div>
+        <div class="colour-block colour-block--macaroni">
+          <div class="colour-block__name">Macaroni &amp; Cheese</div>
+          <div class="colour-block__sub">Accent · Sun</div>
+          <div class="colour-block__hex">#F0B429</div>
+          <p class="colour-block__role">The warmth of the sun. Adds optimism and radiance to the brand — used in the logo sun element and highlights.</p>
+        </div>
+        <div class="colour-block colour-block--moss">
+          <div class="colour-block__name">Light<br>Moss Green</div>
+          <div class="colour-block__sub">Secondary</div>
+          <div class="colour-block__hex">#7ABD6E</div>
+          <p class="colour-block__role">A lighter, accessible green — used for backgrounds, supporting elements, and to add tonal variation to the system.</p>
+        </div>
+      </div>
+
+      <div class="colour-rationale reveal reveal--delay2">
+        <p>
+          The restorative power of nature and the optimism that comes with wellbeing are reflected in Shrigana's colour scheme, 
+          which is centred on <strong>calming greens with a hint of golden yellow</strong>. Building trust with a health audience 
+          requires harmony, growth, and a connection to organic living. In keeping with the brand's promise of radiant health and 
+          holistic treatment, the <strong>yellow sun aspect adds warmth and optimism</strong>. Brand materials always feel 
+          welcoming, organic, and fresh thanks to this soothing yet energising colour scheme.
+        </p>
+      </div>
+    </div>
+  </section>
+
+    <section class="clearspace-section">
+  <div class="wrap">
+    <p class="section-eyebrow">Logo Guidelines</p>
+    <h2 class="section-title">Clear Space</h2>
+    <p class="section-lead">
+      To maintain visibility and impact, the logo must always be surrounded by sufficient clear space.
+    </p>
+
+    <div class="clearspace-grid">
+      <div class="clearspace-card">
+        <img src="assests/img/shrigana/Clear Spacing-02.png" alt="Clear space diagram">
+      </div>
+
+      <div class="clearspace-info">
+        <h3>Spacing Rule</h3>
+        <p>
+          The minimum clear space is defined by the height of the @ icon.
+          No text, images, or elements should enter this area.
+        </p>
+
+        <ul>
+          <li>Maintain equal spacing on all sides</li>
+          <li>Do not crowd the logo</li>
+          <li>Always preserve proportions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- ── Typography ────────────────────────────────────── -->
+  <section class="typography-section">
+    <div class="wrap">
+      <p class="section-eyebrow reveal" style="color:rgba(255,255,255,.72);">Typography</p>
+      <h2 class="section-title section-title--light reveal reveal--delay1">
+        Friendly.<br>
+        <span style="color:var(--macaroni);">Professional.</span><br>
+        <span style="color:rgba(255,255,255,.72); font-size:.55em;">Accessible to all.</span>
+      </h2>
+
+      <div class="type-grid">
+        <div class="type-card type-card--primary reveal reveal--delay1">
+          <div class="type-specimen-large">Molgon<br>Regular</div>
+          <p class="type-description">
+            Molgon Regular is the Shrigana wordmark and primary display typeface. 
+            Its sculpted curves and confident rhythm give the identity a distinctive wellness feel while keeping the brand warm, polished, and easy to recognise.
+          </p>
+          <div class="type-attrs">
+            <div class="type-attr">
+              <div class="type-attr__label">Role</div>
+              <div class="type-attr__val">Wordmark · Display</div>
+            </div>
+            <div class="type-attr">
+              <div class="type-attr__label">Weight</div>
+              <div class="type-attr__val">Regular (400)</div>
+            </div>
+            <div class="type-attr">
+              <div class="type-attr__label">Character</div>
+              <div class="type-attr__val">Organic · Sculpted · Distinctive</div>
+            </div>
+            <div class="type-attr">
+              <div class="type-attr__label">Usage</div>
+              <div class="type-attr__val">Logo · Packaging · Key Touchpoints</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="type-card type-card--body reveal reveal--delay2">
+          <div class="type-specimen-large">Poppins</div>
+          <p class="type-description">
+            A simple, contemporary sans-serif with soft curves and distinct spacing — conveying professionalism 
+            and approachability. Every message is readable and friendly to customers of all ages across print and digital.
+          </p>
+          <div class="type-attrs">
+            <div class="type-attr" style="background:rgba(240,180,41,.08); border-color:rgba(240,180,41,.12);">
+              <div class="type-attr__label">Role</div>
+              <div class="type-attr__val">Body · UI · Support Type</div>
+            </div>
+            <div class="type-attr" style="background:rgba(240,180,41,.08); border-color:rgba(240,180,41,.12);">
+              <div class="type-attr__label">Weights</div>
+              <div class="type-attr__val">300 · 400 · 500 · 600</div>
+            </div>
+            <div class="type-attr" style="background:rgba(240,180,41,.08); border-color:rgba(240,180,41,.12);">
+              <div class="type-attr__label">Character</div>
+              <div class="type-attr__val">Clean · Modern · Gentle</div>
+            </div>
+            <div class="type-attr" style="background:rgba(240,180,41,.08); border-color:rgba(240,180,41,.12);">
+              <div class="type-attr__label">Usage</div>
+              <div class="type-attr__val">Body · Labels · Forms</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Applications ───────────────────────────────────── -->
+  <section class="applications">
+    <div class="wrap">
+      <p class="section-eyebrow reveal">Brand Applications</p>
+      <h2 class="section-title reveal reveal--delay1">
+        On everything<br>
+        <span style="color:var(--forest);">you touch.</span>
+      </h2>
+      <p class="section-lead reveal reveal--delay2">
+        The Shrigana identity was applied across every product and environment — from wellness merchandise 
+        to storefront signage, each touchpoint radiates calm, nature, and intention.
+      </p>
+
+      <div class="app-masonry">
+
+        <!-- Tote bag — tall -->
+        <div class="app-card app-card--tall reveal reveal--delay1">
+          <div class="app-visual">
+            <img src="assests/img/shrigana/Yoga Bag.png" alt="Shrigana Tote Bag" class="app-card__image gallery-image" data-gallery-src="assests/img/shrigana/Yoga Bag.png" data-gallery-index="0" />
+          </div>
+          <div class="app-card__caption">
+            <span class="app-card__caption-title">Tote Bag</span>
+            <span class="app-card__caption-meta">Merchandise</span>
+          </div>
+        </div>
+
+        <!-- Mug -->
+        <div class="app-card reveal reveal--delay2">
+          <div class="app-visual">
+            <img src="assests/img/shrigana/Yoga Cup.png" alt="Shrigana Branded Mug" class="app-card__image gallery-image" data-gallery-src="assests/img/shrigana/Yoga Cup.png" data-gallery-index="1" />
+          </div>
+          <div class="app-card__caption app-card__caption--light">
+            <span class="app-card__caption-title">Branded Mug</span>
+            <span class="app-card__caption-meta">Merchandise</span>
+          </div>
+        </div>
+
+        <!-- Candle -->
+        <div class="app-card reveal reveal--delay3">
+          <div class="app-visual">
+            <img src="assests/img/shrigana/Yoga Candle.png" alt="Shrigana Wellness Candle" class="app-card__image gallery-image" data-gallery-src="assests/img/shrigana/Yoga Candle.png" data-gallery-index="2" />
+          </div>
+          <div class="app-card__caption app-card__caption--light">
+            <span class="app-card__caption-title">Wellness Candle</span>
+            <span class="app-card__caption-meta">Packaging</span>
+          </div>
+        </div>
+
+        <!-- Water bottle — span 2 -->
+        <div class="app-card app-card--span2 reveal reveal--delay1">
+          <div class="app-visual">
+            <img src="assests/img/shrigana/Yoga Bottle.png" alt="Shrigana Water Bottle" class="app-card__image gallery-image" data-gallery-src="assests/img/shrigana/Yoga Bottle.png" data-gallery-index="3" />
+          </div>
+          <div class="app-card__caption app-card__caption--light">
+            <span class="app-card__caption-title">Water Bottle</span>
+            <span class="app-card__caption-meta">Merchandise · Lifestyle</span>
+          </div>
+        </div>
+
+        <!-- Store signage -->
+        <div class="app-card reveal reveal--delay2">
+          <div class="app-visual">
+            <img src="assests/img/shrigana/Name Board Design.png" alt="Shrigana Store Signage" class="app-card__image gallery-image" data-gallery-src="assests/img/shrigana/Name Board Design.png" data-gallery-index="4" />
+          </div>
+          <div class="app-card__caption app-card__caption--light">
+            <span class="app-card__caption-title">Store Signage</span>
+            <span class="app-card__caption-meta">Environmental</span>
+          </div>
+        </div>
+
+        <!-- Business cards — span 2 -->
+        <div class="app-card app-card--span2 reveal reveal--delay3">
+          <div class="app-visual">
+            <img src="assests/img/shrigana/Business Card Mock-Up.png" alt="Shrigana Business Cards" class="app-card__image gallery-image" data-gallery-src="assests/img/shrigana/Business Card Mock-Up.png" data-gallery-index="5" />
+          </div>
+          <div class="app-card__caption app-card__caption--light">
+            <span class="app-card__caption-title">Business Cards</span>
+            <span class="app-card__caption-meta">Stationery · Print</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Wellness Values ───────────────────────────────── -->
+  <section class="values-section">
+    <div class="wrap">
+      <p class="section-eyebrow reveal">Brand Values</p>
+      <h2 class="section-title reveal reveal--delay1">
+        Built around<br>
+        <span style="color:var(--forest);">four pillars.</span>
+      </h2>
+
+      <div class="values-grid">
+        <div class="value-card reveal reveal--delay1">
+          <div class="value-card__icon">🌿</div>
+          <div class="value-card__title">Natural Healing</div>
+          <p class="value-card__desc">Rooted in the restorative power of nature and holistic wellness practices for the whole self.</p>
+        </div>
+        <div class="value-card reveal reveal--delay2">
+          <div class="value-card__icon">☀️</div>
+          <div class="value-card__title">Optimism</div>
+          <p class="value-card__desc">The golden sun element embodies the brand's promise of radiant health and a positive outlook.</p>
+        </div>
+        <div class="value-card reveal reveal--delay3">
+          <div class="value-card__icon">⚖️</div>
+          <div class="value-card__title">Balance</div>
+          <p class="value-card__desc">Symmetrical, flowing forms in the logo represent harmony between the mind, body, and spirit.</p>
+        </div>
+        <div class="value-card reveal reveal--delay4">
+          <div class="value-card__icon">🌱</div>
+          <div class="value-card__title">Growth</div>
+          <p class="value-card__desc">Every element points upward — leaf, sun, and figure — a visual language of continuous personal development.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Quote ─────────────────────────────────────────── -->
+  <section class="quote-section">
+    <div class="wrap">
+      <div class="quote-inner">
+        <span class="quote-leaf reveal">🌿</span>
+        <p class="quote-text reveal reveal--delay1">
+          "A brand that honours the path to health and balance via its hospitable visual identity."
+        </p>
+        <p class="quote-body reveal reveal--delay2">
+          Every colour, every curve, and every spacing decision in the Shrigana identity was made 
+          in service of one feeling: stepping outside on a quiet morning and breathing in fresh air. 
+          That's the brand promise — and the design delivers it at every touchpoint.
+        </p>
+        <div class="quote-author reveal reveal--delay3">
+          <div class="quote-avatar">🌱</div>
+          <div>
+            <div class="quote-author__name">No Name Productions</div>
+            <div class="quote-author__role">Lead Designer · Brand Identity · 2024</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Outcomes ──────────────────────────────────────── -->
+  <section class="outcomes">
+    <div class="wrap">
+      <p class="section-eyebrow reveal" style="color:rgba(255,255,255,.72);">The Outcome</p>
+      <h2 class="section-title section-title--light reveal reveal--delay1">
+        A brand as alive<br>as the values it holds.
+      </h2>
+
+      <div class="outcomes-grid">
+        <div class="outcome-card reveal reveal--delay1">
+          <div class="outcome-card__num">3</div>
+          <div class="outcome-card__label">Brand colours — natural, intentional, distinct</div>
+        </div>
+        <div class="outcome-card reveal reveal--delay2">
+          <div class="outcome-card__num">8+</div>
+          <div class="outcome-card__label">Physical & digital touchpoints applied</div>
+        </div>
+        <div class="outcome-card reveal reveal--delay3">
+          <div class="outcome-card__num">1</div>
+          <div class="outcome-card__label">Unified logo system across all backgrounds</div>
+        </div>
+        <div class="outcome-card reveal reveal--delay4">
+          <div class="outcome-card__num">∞</div>
+          <div class="outcome-card__label">Scalable from candle jar to storefront sign</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ───────────────────────────────────────────── -->
+  <section class="cta-section">
+    <div class="wrap">
+      <div class="cta-inner">
+        <p class="section-eyebrow reveal" style="justify-content:center;">Start Something New</p>
+        <h2 class="section-title reveal reveal--delay1" style="text-align:center;">
+          Ready to build a brand<br>
+          <span style="color:var(--forest);">rooted in purpose?</span>
+        </h2>
+        <p class="reveal reveal--delay2">
+          We'd love to hear about your project — whether it's your first brand or a 
+          complete overhaul. Tell us what you're building.
+        </p>
+        <div class="cta-buttons reveal reveal--delay3">
+          <a class="btn btn--primary" href="index.html#contact">Start a Project</a>
+          <a class="btn" href="index.html#work">View More Work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="wrap footer__row">
+      <span class="footer__brand">No Name Productions</span>
+      <p style="font-size:.8rem;">© <span id="footerYear"></span> No Name Productions · doodles included</p>
+      <nav class="footer__links">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#work">Work</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Lightbox Gallery -->
+  <div class="lightbox" id="gallery-lightbox">
+    <div class="lightbox__content">
+      <button class="lightbox__close" id="lightbox-close" aria-label="Close gallery">×</button>
+      <div class="lightbox__image-wrapper">
+        <img src="" alt="Gallery image" id="lightbox-image" class="lightbox__image" />
+        <button class="lightbox__arrow lightbox__arrow--prev" id="prev-arrow" aria-label="Previous image">❮</button>
+        <button class="lightbox__arrow lightbox__arrow--next" id="next-arrow" aria-label="Next image">❯</button>
+      </div>
+      <div class="lightbox__thumbnails" id="lightbox-thumbnails"></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+    // Progress bar
+    const bar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      bar.style.width = `${Math.max(0, Math.min(1, d.scrollTop / (d.scrollHeight - d.clientHeight))) * 100}%`;
+    }, { passive: true });
+
+    // Reveal on scroll
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduced && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-in'));
+    }
+
+    // Gallery Lightbox
+    const galleryImages = document.querySelectorAll('.gallery-image');
+    const galleryCards = document.querySelectorAll('.applications .app-card');
+    const lightbox = document.getElementById('gallery-lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const prevArrow = document.getElementById('prev-arrow');
+    const nextArrow = document.getElementById('next-arrow');
+    const thumbnailsContainer = document.getElementById('lightbox-thumbnails');
+
+    let currentIndex = 0;
+    const images = Array.from(galleryImages).map(img => ({
+      src: img.dataset.gallerySrc || img.src,
+      alt: img.alt,
+      index: parseInt(img.dataset.galleryIndex, 10)
+    })).sort((a, b) => a.index - b.index);
+
+    function initThumbnails() {
+      thumbnailsContainer.innerHTML = '';
+      images.forEach((img, idx) => {
+        const thumb = document.createElement('div');
+        thumb.className = 'lightbox__thumbnail';
+        thumb.innerHTML = `<img src="${img.src}" alt="${img.alt}" />`;
+        thumb.addEventListener('click', () => {
+          currentIndex = idx;
+          updateLightbox();
+        });
+        thumbnailsContainer.appendChild(thumb);
+      });
+    }
+
+    function updateLightbox() {
+      if (images.length === 0) return;
+      const img = images[currentIndex];
+      lightboxImage.src = img.src;
+      lightboxImage.alt = img.alt;
+
+      document.querySelectorAll('.lightbox__thumbnail').forEach((thumb, idx) => {
+        thumb.classList.toggle('is-active', idx === currentIndex);
+      });
+
+      const activeThumbnail = document.querySelectorAll('.lightbox__thumbnail')[currentIndex];
+      if (activeThumbnail) {
+        activeThumbnail.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-active');
+      document.body.style.overflow = '';
+    }
+
+    function openLightboxAt(idx) {
+      currentIndex = idx;
+      lightbox.classList.add('is-active');
+      document.body.style.overflow = 'hidden';
+      updateLightbox();
+    }
+
+    if (images.length > 0) {
+      initThumbnails();
+
+      galleryCards.forEach((card) => {
+        const image = card.querySelector('.gallery-image');
+        if (!image) return;
+
+        const imageOrder = parseInt(image.dataset.galleryIndex, 10);
+        const sortedIndex = images.findIndex((item) => item.index === imageOrder);
+        if (sortedIndex < 0) return;
+
+        card.classList.add('gallery-card');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `Open ${image.alt} in fullscreen gallery`);
+
+        card.addEventListener('click', () => {
+          openLightboxAt(sortedIndex);
+        });
+
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openLightboxAt(sortedIndex);
+          }
+        });
+      });
+
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      prevArrow.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateLightbox();
+      });
+
+      nextArrow.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateLightbox();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('is-active')) return;
+        if (e.key === 'ArrowLeft') prevArrow.click();
+        if (e.key === 'ArrowRight') nextArrow.click();
+        if (e.key === 'Escape') closeLightbox();
+      });
+    }
+  </script>
+</body>
+</html>
+
+
+

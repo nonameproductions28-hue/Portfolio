@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>No Name Productions — Creative Studio Portfolio</title>
+  <meta name="description" content="No Name Productions is a creative studio offering graphic design, UX/UI, website creation, and video editing. Explore brand, product, research, and digital case studies in one polished portfolio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="topbar">
+    <div class="wrap topbar__row">
+      <a class="brand" href="#home" data-jump="#home" aria-label="No Name Productions Home">
+
+        <span class="brand__text">
+          <span class="brand__name">No Name Productions</span>
+          <span class="brand__sub">Creative Studio</span>
+        </span>
+      </a>
+
+      <button class="menuBtn" type="button" data-menu-btn aria-controls="siteNav" aria-expanded="false">
+        <span class="menuBtn__line"></span>
+        <span class="menuBtn__line"></span>
+        <span class="menuBtn__line"></span>
+        <span class="srOnly">Open menu</span>
+      </button>
+
+      <nav class="nav" id="siteNav" data-nav>
+        <a class="nav__link is-active" href="#home" data-jump="#home">Home</a>
+        <a class="nav__link" href="#services" data-jump="#services">Services</a>
+        <a class="nav__link" href="#work" data-jump="#work">Work</a>
+        <a class="nav__link" href="#process" data-jump="#process">Process</a>
+        <a class="nav__link" href="#about" data-jump="#about">About</a>
+        <a class="nav__link" href="#contact" data-jump="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="progressWrap" aria-hidden="true">
+      <div class="progressBar" data-progress></div>
+    </div>
+  </header>
+
+  <aside class="rail" aria-label="Quick jump navigation">
+    <button class="rail__dot is-active" data-jump="#home" aria-label="Go to Home"></button>
+    <button class="rail__dot" data-jump="#services" aria-label="Go to Services"></button>
+    <button class="rail__dot" data-jump="#work" aria-label="Go to Work"></button>
+    <button class="rail__dot" data-jump="#process" aria-label="Go to Process"></button>
+    <button class="rail__dot" data-jump="#about" aria-label="Go to About"></button>
+    <button class="rail__dot" data-jump="#contact" aria-label="Go to Contact"></button>
+    <span class="rail__label" data-rail-label>Home</span>
+  </aside>
+
+  <button class="backToTop" type="button" data-top aria-label="Back to top">↑</button>
+
+  <main id="main-content">
+    <section id="home" class="section hero" data-section data-label="Home">
+      <div class="hero__glow hero__glow--one" aria-hidden="true"></div>
+      <div class="hero__glow hero__glow--two" aria-hidden="true"></div>
+      <div class="wrap hero__grid">
+        <div class="hero__content reveal">
+          <p class="eyebrow">Graphic design • UX/UI • websites • video editing</p>
+          <h1 class="hero__title">Creative work that gives brands a sharper presence online.</h1>
+          <p class="hero__lead">
+            No Name Productions is a creative studio for businesses that need clarity, character, and execution.
+            We shape identities, design interfaces, build websites, and edit content that looks strong and works hard.
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#work" data-jump="#work">View selected work</a>
+            <a class="btn btn--ghost" href="#contact" data-jump="#contact">Start a project</a>
+          </div>
+
+          <div class="hero__stats">
+            <div class="stat">
+              <span class="stat__num">8</span>
+              <span class="stat__label">case studies</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num">4</span>
+              <span class="stat__label">core services</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num">Brand → Build</span>
+              <span class="stat__label">full creative pipeline</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="heroPanel reveal reveal--delay1">
+          <div class="heroPanel__top">
+            <span class="heroPanel__tag">Selected focus</span>
+            <h2>One studio. Multiple disciplines.</h2>
+            <p>Built from the uploaded brand identity, UX research, and product design case studies — reorganised into a cleaner studio portfolio.</p>
+          </div>
+          <div class="heroPanel__list">
+            <article class="heroMiniCard">
+              <span class="heroMiniCard__meta">Brand systems</span>
+              <strong>Pāw Prints, Shrigana, VON</strong>
+              <p>Identity design, colour systems, packaging, signage, and rollout assets.</p>
+            </article>
+            <article class="heroMiniCard">
+              <span class="heroMiniCard__meta">UX / UI</span>
+              <strong>Globast, Verdura</strong>
+              <p>Inclusive streaming, immersive learning, product thinking, and usability-led flows.</p>
+            </article>
+            <article class="heroMiniCard">
+              <span class="heroMiniCard__meta">Research depth</span>
+              <strong>Designing for Understanding</strong>
+              <p>Mixed-methods research, prototype testing, insight synthesis, and design validation.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight valueStrip">
+      <div class="wrap valueStrip__row reveal">
+        <div class="valueStrip__item"><span>01</span> Strategy-first creative direction</div>
+        <div class="valueStrip__item"><span>02</span> Visual systems with consistency</div>
+        <div class="valueStrip__item"><span>03</span> Interfaces built for clarity</div>
+        <div class="valueStrip__item"><span>04</span> Content edited for attention</div>
+      </div>
+    </section>
+
+    <section id="services" class="section" data-section data-label="Services">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <p class="eyebrow eyebrow--dark">Services</p>
+          <h2>What the studio delivers</h2>
+          <!-- <p class="sectionLead">The homepage now reflects a real creative studio offer instead of a placeholder demo gallery: graphic design, UX/UI, website creation, and video editing — each with a defined output and purpose.</p> -->
+        </div>
+
+        <div class="serviceGrid">
+          <article class="serviceCard reveal">
+            <span class="serviceCard__icon">✦</span>
+            <h3>Graphic design</h3>
+            <p>Identity systems, campaign graphics, marketing collateral, packaging, and presentation-ready visual language.</p>
+            <ul>
+              <li>Logo and identity systems</li>
+              <li>Brand guidelines and asset kits</li>
+              <li>Campaign visuals and social graphics</li>
+            </ul>
+            <a class="projectCard__ctaLink" href="social-media-posters.html">Open Digital Canvas →</a>
+          </article>
+
+          <article class="serviceCard reveal reveal--delay1">
+            <span class="serviceCard__icon">◎</span>
+            <h3>UX / UI design</h3>
+            <p>Research-backed interfaces for products, dashboards, and digital journeys that need clarity, structure, and usability.</p>
+            <ul>
+              <li>User flows and wireframes</li>
+              <li>High-fidelity UI systems</li>
+              <li>Prototype testing and refinement</li>
+            </ul>
+          </article>
+
+          <article class="serviceCard reveal reveal--delay2">
+            <span class="serviceCard__icon">▣</span>
+            <h3>Website creation</h3>
+            <p>Modern, responsive websites built to communicate value clearly, support growth, and convert the right audience.</p>
+            <ul>
+              <li>Landing pages and portfolio sites</li>
+              <li>Marketing websites and web UI</li>
+              <li>Responsive front-end build</li>
+            </ul>
+          </article>
+
+          <article class="serviceCard reveal reveal--delay3">
+            <span class="serviceCard__icon">▶</span>
+            <h3>Video editing</h3>
+            <p>Short-form edits, promo content, motion-led visuals, and platform-ready video formats for digital campaigns.</p>
+            <ul>
+              <li>Social edits and launch reels</li>
+              <li>Motion design and transitions</li>
+              <li>Creative packaging for content</li>
+            </ul>
+            <a class="projectCard__ctaLink" href="video-editing-gallery.html">Open video gallery →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="section workSection" data-section data-label="Work">
+      <div class="wrap">
+        <div class="sectionHead sectionHead--split reveal">
+          <div>
+            <p class="eyebrow eyebrow--dark">Selected work</p>
+            <h2>Real case studies, not filler tiles</h2>
+            <!-- <p class="sectionLead">The fake gallery has been replaced with direct links to the uploaded case-study pages, grouped so the portfolio reads like a real studio site.</p> -->
+          </div>
+
+          <div class="filterBar" role="tablist" aria-label="Work filters">
+            <button class="filterChip is-active" type="button" data-filter="all" role="tab" aria-selected="true">All</button>
+            <button class="filterChip" type="button" data-filter="graphic-design" role="tab" aria-selected="false">Graphic Design</button>
+            <button class="filterChip" type="button" data-filter="ux-ui" role="tab" aria-selected="false">UX/UI</button>
+            <button class="filterChip" type="button" data-filter="websites" role="tab" aria-selected="false">Websites</button>
+            <button class="filterChip" type="button" data-filter="video-editing" role="tab" aria-selected="false">Video Editing</button>
+          </div>
+        </div>
+
+        <div class="projectGrid" data-gallery>
+          <a class="projectCard reveal" data-tags="graphic-design" href="paw-prints.html">
+            <div class="projectCard__visual projectCard__visual--paw">
+              <span class="projectCard__badge">Brand Identity</span>
+              <div class="projectCard__mark">PP</div>
+            </div>
+            <div class="projectCard__body">
+              <p class="projectCard__meta">Graphic design • Pet care</p>
+              <h3>Paw Prints</h3>
+              <p>A warm, premium identity system with logo, palette, applications, and rollout across touchpoints.</p>
+              <span class="projectCard__cta">View case study →</span>
+            </div>
+          </a>
+
+          <a class="projectCard reveal reveal--delay1" data-tags="graphic-design" href="shrigana.html">
+            <div class="projectCard__visual projectCard__visual--shrigana">
+              <span class="projectCard__badge">Brand Identity</span>
+              <div class="projectCard__mark">SG</div>
+            </div>
+            <div class="projectCard__body">
+              <p class="projectCard__meta">Graphic design • Wellness</p>
+              <h3>Shrigana</h3>
+              <p>A holistic wellness identity built around growth, trust, natural colour, and clean packaging-ready design.</p>
+              <span class="projectCard__cta">View case study →</span>
+            </div>
+          </a>
+
+          <a class="projectCard reveal reveal--delay2" data-tags="graphic-design" href="von.html">
+            <div class="projectCard__visual projectCard__visual--von">
+              <span class="projectCard__badge">Rebrand</span>
+              <div class="projectCard__mark">VON</div>
+            </div>
+            <div class="projectCard__body">
+              <p class="projectCard__meta">Graphic design • Sports</p>
+              <h3>VON</h3>
+              <p>A sharper sports brand rebrand using bold typography, high contrast, and stronger rollout logic.</p>
+              <span class="projectCard__cta">View case study →</span>
+            </div>
+          </a>
+
+          <a class="projectCard reveal" data-tags="graphic-design" href="social-media-posters.html">
+            <div class="projectCard__visual projectCard__visual--posters">
+              <span class="projectCard__badge">Poster Gallery</span>
+              <div class="projectCard__mark">SM</div>
+            </div>
+            <div class="projectCard__body">
+              <p class="projectCard__meta">Graphic design • Social media</p>
+              <h3>Digital Canvas</h3>
+              <p>A curated set of social media posters and isometric visuals arranged as two topic sections.</p>
+              <span class="projectCard__cta">View gallery →</span>
+            </div>
+          </a>
+
+          <a class="projectCard reveal" data-tags="ux-ui" href="globast.html">
+            <div class="projectCard__visual projectCard__visual--globast">
+              <span class="projectCard__badge">UX/UI Case Study</span>
+              <div class="projectCard__mark">GL</div>
+            </div>
+            <div class="projectCard__body">
+              <p class="projectCard__meta">UX/UI • Inclusive streaming</p>
+              <h3>Globast</h3>
+              <p>An inclusive streaming platform shaped around accessibility, subtitles, audio description, and guided testing.</p>
+              <span class="projectCard__cta">View case study →</span>
+            </div>
+          </a>
+
+          <a class="projectCard reveal reveal--delay1" data-tags="ux-ui websites" href="ott-platform.html">
+            <div class="projectCard__visual projectCard__visual--ott">
+              <span class="projectCard__badge">Interactive Prototype</span>
+              <div class="projectCard__mark">OTT</div>
+            </div>
+            <div class="projectCard__body">
+              <p class="projectCard__meta">UX/UI • OTT platform</p>
+              <h3>CINEMA accessible OTT</h3>
+              <p>An interactive OTT prototype with profile flows, search, library screens, and accessibility preference controls.</p>
+              <span class="projectCard__cta">View case study →</span>
+            </div>
+          </a>
+
+          <a class="projectCard reveal reveal--delay1" data-tags="ux-ui" href="designing-for-understanding.html">
+            <div class="projectCard__visual projectCard__visual--understanding">
+              <span class="projectCard__badge">UX Research</span>
+              <div class="projectCard__mark">DFU</div>
+            </div>
+            <div class="projectCard__body">
+              <p class="projectCard__meta">UX/UI • Research</p>
+              <h3>Designing for Understanding</h3>
+              <p>Mixed-methods UX research focused on improving elderly understanding of digital terms and conditions.</p>
+              <span class="projectCard__cta">View case study →</span>
+            </div>
+          </a>
+
+          <a class="projectCard reveal reveal--delay2" data-tags="ux-ui" href="verdura.html">
+            <div class="projectCard__visual projectCard__visual--verdura">
+              <span class="projectCard__badge">UX/UI Case Study</span>
+              <div class="projectCard__mark">VR</div>
+            </div>
+            <div class="projectCard__body">
+              <p class="projectCard__meta">UX/UI • EdTech</p>
+              <h3>Verdura</h3>
+              <p>A VR botany learning app using immersion, user testing, and three design iterations to tackle plant blindness.</p>
+              <span class="projectCard__cta">View case study →</span>
+            </div>
+          </a>
+
+          <a class="projectCard reveal" data-tags="websites" href="aam-palace.html">
+            <div class="projectCard__visual projectCard__visual--ahpalace">
+              <span class="projectCard__badge">Website Case Study</span>
+              <div class="projectCard__mark">AH</div>
+            </div>
+            <div class="projectCard__body">
+              <p class="projectCard__meta">Website • Event venue</p>
+              <h3>AAM Palace</h3>
+              <p>A premium digital experience for a marriage hall, designed to communicate scale, trust, and inquiry flow clearly.</p>
+              <span class="projectCard__cta">View case study →</span>
+            </div>
+          </a>
+
+          <a class="projectCard reveal reveal--delay1" data-tags="websites" href="tt-group.html">
+            <div class="projectCard__visual projectCard__visual--ttgroup">
+              <span class="projectCard__badge">Website Case Study</span>
+              <div class="projectCard__mark">TT</div>
+            </div>
+            <div class="projectCard__body">
+              <p class="projectCard__meta">Website • Multi-service business</p>
+              <h3>TT Group of Companies</h3>
+              <p>A structured corporate website that simplifies multiple service verticals into a clear, credible, and easy-to-navigate experience.</p>
+              <span class="projectCard__cta">View case study →</span>
+            </div>
+          </a>
+
+          <article class="projectCard reveal" data-tags="websites">
+            <div class="projectCard__visual projectCard__visual--web">
+              <span class="projectCard__badge">Service Spotlight</span>
+              <div class="projectCard__mark">WEB</div>
+            </div>
+            <div class="projectCard__body">
+              <p class="projectCard__meta">Website creation</p>
+              <h3>Studio website systems</h3>
+              <p>Conversion-focused portfolio, marketing, and landing-page builds designed with structure first and styled to match the brand.</p>
+              <a class="projectCard__ctaLink" href="#contact" data-jump="#contact">Enquire about website work →</a>
+            </div>
+          </article>
+
+          <a class="projectCard reveal reveal--delay1" data-tags="video-editing" href="video-editing-gallery.html">
+            <div class="projectCard__visual projectCard__visual--video">
+              <span class="projectCard__badge">Service Spotlight</span>
+              <div class="projectCard__mark">VID</div>
+            </div>
+            <div class="projectCard__body">
+              <p class="projectCard__meta">Video editing</p>
+              <h3>Launch edits and social cuts</h3>
+              <p>Promo edits, campaign reels, and motion-backed social formats designed to hold attention and package the message cleanly.</p>
+              <span class="projectCard__cta">Open video gallery →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="section section--alt" data-section data-label="Process">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <p class="eyebrow eyebrow--dark">Process</p>
+          <h2>A cleaner studio flow</h2>
+          <!-- <p class="sectionLead">The process section has been kept, tightened, and reframed to feel like a real creative engagement — not just placeholder copy.</p> -->
+        </div>
+
+        <ol class="processList">
+          <li class="processCard reveal">
+            <span class="processCard__num">01</span>
+            <div>
+              <h3>Discovery</h3>
+              <p>We map the business, audience, offer, and current friction before pushing visuals.</p>
+            </div>
+          </li>
+          <li class="processCard reveal reveal--delay1">
+            <span class="processCard__num">02</span>
+            <div>
+              <h3>Direction</h3>
+              <p>We define the visual, structural, and messaging direction so the work has a spine.</p>
+            </div>
+          </li>
+          <li class="processCard reveal reveal--delay2">
+            <span class="processCard__num">03</span>
+            <div>
+              <h3>Design</h3>
+              <p>We design the brand system, UI, website layout, or edit framework around that direction.</p>
+            </div>
+          </li>
+          <li class="processCard reveal reveal--delay3">
+            <span class="processCard__num">04</span>
+            <div>
+              <h3>Build / Edit</h3>
+              <p>We turn approved design into responsive pages, production assets, or final-cut content.</p>
+            </div>
+          </li>
+          <li class="processCard reveal">
+            <span class="processCard__num">05</span>
+            <div>
+              <h3>Launch / Handover</h3>
+              <p>You get organised files, working output, and a system that is easier to maintain and extend.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="about" class="section" data-section data-label="About">
+      <div class="wrap aboutGridWrap">
+        <div class="sectionHead reveal">
+          <p class="eyebrow eyebrow--dark">About</p>
+          <h2>Creative on the surface. Structured underneath.</h2>
+           <!-- <p class="sectionLead">This combined version keeps the original studio personality, but makes it more commercially useful. It now reads like a studio that can actually win work.</p> -->
+        </div>
+
+        <div class="aboutGrid">
+          <article class="aboutCard reveal">
+            <h3>What changed</h3>
+            <p>The homepage was rebuilt to stop feeling like a demo. Services are clearer, the work is real, and the flow now supports enquiry.</p>
+          </article>
+          <article class="aboutCard reveal reveal--delay1">
+            <h3>What stays strong</h3>
+            <p>The strongest part of the original files was the depth of the case studies. Those are now the proof behind the studio positioning.</p>
+          </article>
+          <article class="aboutCard reveal reveal--delay2">
+            <h3>Where it fits</h3>
+            <p>This version is suitable for a creative studio selling brand work, UX/UI, website projects, and edited content under one roof.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section section--contact" data-section data-label="Contact">
+      <div class="wrap contactWrap">
+        <div class="contactIntro reveal">
+          <p class="eyebrow">Contact</p>
+          <h2>Bring the next brief.</h2>
+          <p class="sectionLead sectionLead--light">Tell us what you need — brand identity, UX/UI, website creation, or edited content — and we’ll shape the right scope.</p>
+
+          <div class="contactInfo">
+            <div>
+              <span class="contactInfo__label">Email</span>
+              <strong>hello@nonameproductions.com</strong>
+            </div>
+            <div>
+              <span class="contactInfo__label">Based</span>
+              <strong>UK / Remote</strong>
+            </div>
+            <div>
+              <span class="contactInfo__label">Booking</span>
+              <strong>Available for freelance and studio projects</strong>
+            </div>
+          </div>
+
+          <div class="contactActions">
+            <button class="btn btn--light" type="button" data-copy-email>Copy email</button>
+            <button class="btn btn--ghost-light" type="button" data-open-demo>Open draft email</button>
+          </div>
+        </div>
+
+        <form class="contactForm reveal reveal--delay1" id="contactForm" novalidate>
+          <label class="field">
+            <span>Name</span>
+            <input type="text" name="name" autocomplete="name" required>
+          </label>
+          <label class="field">
+            <span>Email</span>
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+          <label class="field">
+            <span>Service</span>
+            <select name="need" required>
+              <option value="" selected disabled>Select one</option>
+              <option>Graphic Design</option>
+              <option>UX / UI Design</option>
+              <option>Website Creation</option>
+              <option>Video Editing</option>
+              <option>Mixed Scope</option>
+            </select>
+          </label>
+          <label class="field field--full">
+            <span>Project details</span>
+            <textarea name="message" rows="6" placeholder="Goals, timeline, deliverables, references…" required></textarea>
+          </label>
+          <button class="btn btn--primary btn--block" type="submit">Send enquiry</button>
+          <p class="formMsg" id="formMsg" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__row">
+      <p>© <span data-year></span> No Name Productions</p>
+      <div class="footer__links">
+        <a href="#home" data-jump="#home">Top</a>
+        <a href="#work" data-jump="#work">Work</a>
+        <a href="#contact" data-jump="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+
+

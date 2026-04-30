@@ -1,0 +1,2102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>VON — Rebranding Case Study · No Name Productions</title>
+  <meta name="description" content="A complete brand identity overhaul for VON, a sports merchandise and media brand. Designed by No Name Productions." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper:   #F5F2ED;
+      --ink:     #0A0A0A;
+      --ink2:    #1C1C1C;
+      --muted:   #6B6B6B;
+      --border:  rgba(10,10,10,.10);
+
+      /* VON brand colours */
+      --carmine:    #B12C3B;
+      --carmine-dk: #8A1E2B;
+      --carmine-lt: #D4364A;
+      --silver:     #AAAAAA;
+      --silver-lt:  #D5D5D5;
+      --silver-dk:  #787878;
+      --black:      #000000;
+      --offwhite:   #F0EDE8;
+
+      /* No Name tokens */
+      --accent:  #F4C542;
+      --accent2: #86D7C6;
+
+      --r: 4px;
+      --wrap: 1180px;
+      --pad: clamp(20px, 2.8vw, 36px);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Subtle grain */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .14;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E");
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .wrap {
+      width: min(var(--wrap), calc(100% - (var(--pad) * 2)));
+      margin-inline: auto;
+    }
+
+    /* ── Typography helpers ─────────────────────────── */
+    .oswald { font-family: 'Oswald', sans-serif; }
+
+    /* ── Pill buttons ───────────────────────────────── */
+    .pillBtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 22px;
+      border: 1.5px solid rgba(10,10,10,.22);
+      background: rgba(255,255,255,.75);
+      font: inherit;
+      font-size: .88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform .14s ease, box-shadow .14s ease;
+      text-decoration: none;
+      color: var(--ink);
+      letter-spacing: .02em;
+    }
+
+    .pillBtn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+
+    .pillBtn--primary {
+      background: var(--carmine);
+      color: #fff;
+      border-color: var(--carmine);
+    }
+
+    .pillBtn--primary:hover { background: var(--carmine-dk); }
+
+    /* ── Topbar ─────────────────────────────────────── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(245,242,237,.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .brand__mark {
+      width: 34px;
+      height: 34px;
+      background: radial-gradient(12px 12px at 35% 35%, rgba(255,255,255,.95), rgba(255,255,255,0) 70%),
+                  linear-gradient(135deg, rgba(244,197,66,.95), rgba(255,123,123,.65));
+      border: 2px solid rgba(23,21,19,.18);
+      box-shadow: 0 8px 20px rgba(23,21,19,.10);
+      transform: rotate(2deg);
+      flex-shrink: 0;
+    }
+
+    .brand__name { display: flex; flex-direction: column; line-height: 1; }
+    .brand__nameMain { font-family: 'Patrick Hand', cursive; font-size: 1.15rem; }
+    .brand__nameSub  { font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+    .topbar__crumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .topbar__crumb strong { color: var(--ink2); font-weight: 600; }
+
+    .topbar__actions { display: flex; gap: 10px; }
+
+    /* Progress */
+    .progressWrap { height: 3px; background: rgba(0,0,0,.06); }
+    .progressBar  { height: 100%; width: 0%; background: var(--carmine); transition: width .1s linear; }
+
+    /* ── Hero ───────────────────────────────────────── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+      color: #fff;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Diagonal stripe texture — signature VON pattern */
+    .hero__stripes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .hero__stripes::before {
+      content: "";
+      position: absolute;
+      inset: -50%;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 24px,
+        rgba(177, 44, 59, .06) 24px,
+        rgba(177, 44, 59, .06) 26px
+      );
+    }
+
+    /* Large VON wordmark as bg element */
+    .hero__bg-text {
+      position: absolute;
+      right: -2%;
+      bottom: -8%;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: clamp(16rem, 28vw, 32rem);
+      color: rgba(177, 44, 59, .05);
+      line-height: 1;
+      letter-spacing: -.04em;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Red accent block */
+    .hero__accent {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: var(--carmine);
+    }
+
+    .hero__inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 100px 0 100px;
+    }
+
+    .hero__meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 12px;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .tag--sport   { background: var(--carmine); color: #fff; }
+    .tag--year    { background: rgba(255,255,255,.08); color:rgba(255,255,255,.72); border: 1px solid rgba(255,255,255,.12); }
+    .tag--rebrand { background: rgba(255,255,255,.06); color:rgba(255,255,255,.72); border: 1px solid rgba(255,255,255,.10); }
+
+    .hero__eyebrow {
+      font-family: 'Oswald', sans-serif;
+      font-size: .95rem;
+      font-weight: 400;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--carmine);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .hero__eyebrow::before {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: var(--carmine);
+    }
+
+    .hero__title {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: clamp(5rem, 12vw, 14rem);
+      line-height: .88;
+      letter-spacing: -.03em;
+      margin-bottom: 8px;
+    }
+
+    .hero__title em {
+      font-style: normal;
+      -webkit-text-stroke: 2px rgba(255,255,255,.22);
+      color: transparent;
+    }
+
+    .hero__subtitle {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.4rem, 2.5vw, 2.4rem);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color:rgba(255,255,255,.72);
+      margin-bottom: 40px;
+    }
+
+    .hero__desc {
+      max-width: 52ch;
+      font-size: clamp(.95rem, 1.1vw, 1.08rem);
+      color:rgba(255,255,255,.72);
+      line-height: 1.75;
+      margin-bottom: 52px;
+      font-weight: 300;
+    }
+
+    .hero__stats {
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 40px;
+    }
+
+    .stat {
+      padding: 0 40px 0 0;
+      border-right: 1px solid rgba(255,255,255,.1);
+      margin-right: 40px;
+    }
+
+    .stat:last-child { border-right: none; }
+
+    .stat__num {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 2.6rem;
+      color: var(--carmine);
+      line-height: 1;
+      letter-spacing: -.01em;
+    }
+
+    .stat__label {
+      font-size: .75rem;
+      color:rgba(255,255,255,.72);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* Von logo SVG recreation */
+    .hero__logo-display {
+      position: absolute;
+      right: var(--pad);
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .von-logo {
+      width: 200px;
+      height: 120px;
+    }
+
+    .hero__logo-caption {
+      font-family: 'Oswald', sans-serif;
+      font-size: .75rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color:rgba(255,255,255,.72);
+    }
+
+    /* ── Section Base ───────────────────────────────── */
+    section { padding: clamp(64px, 8vw, 120px) 0; }
+
+    .section-eyebrow {
+      font-family: 'Oswald', sans-serif;
+      font-size: .82rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--carmine);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 400;
+    }
+
+    .section-eyebrow::before {
+      content: "";
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--carmine);
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      letter-spacing: -.02em;
+      line-height: .95;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .section-lead {
+      font-size: clamp(.95rem, 1.1vw, 1.08rem);
+      color: var(--muted);
+      max-width: 58ch;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* ── Reveal ─────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal.is-in { opacity: 1; transform: none; }
+    .reveal--delay1 { transition-delay: .08s; }
+    .reveal--delay2 { transition-delay: .16s; }
+    .reveal--delay3 { transition-delay: .26s; }
+    .reveal--delay4 { transition-delay: .36s; }
+    .reveal--left {
+      transform: translateX(-20px);
+    }
+    .reveal--left.is-in { transform: none; }
+
+    /* ── Brief / Overview ───────────────────────────── */
+    .overview { background: var(--paper); }
+
+    .overview__grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .overview__right { display: flex; flex-direction: column; gap: 0; }
+
+    .brief-row {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+    }
+
+    .brief-row:first-child { border-top: 1px solid var(--border); }
+
+    .brief-row__label {
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .brief-row__value {
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--ink2);
+    }
+
+    /* Old vs New comparison */
+    .before-after {
+      margin-top: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .ba-panel {
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 280px;
+      justify-content: flex-end;
+    }
+
+    .ba-panel--old {
+      background: var(--silver-lt);
+      filter: grayscale(1);
+      position: relative;
+    }
+
+    .ba-panel--old::after {
+      content: "BEFORE";
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      font-family: 'Oswald', sans-serif;
+      font-size: .7rem;
+      letter-spacing: .18em;
+      color: rgba(0,0,0,.4);
+      font-weight: 600;
+    }
+
+    .ba-panel--new {
+      background: var(--black);
+      position: relative;
+    }
+
+    .ba-panel--new::after {
+      content: "AFTER";
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-family: 'Oswald', sans-serif;
+      font-size: .7rem;
+      letter-spacing: .18em;
+      color: var(--carmine);
+      font-weight: 600;
+    }
+
+    .ba-logo-old {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 2.5rem;
+      color: rgba(0,0,0,.35);
+      letter-spacing: .08em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ba-logo-old .old-mark {
+      width: 44px;
+      height: 44px;
+      border: 3px solid rgba(0,0,0,.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .ba-label {
+      font-size: .8rem;
+      font-weight: 500;
+      color: rgba(0,0,0,.4);
+    }
+
+    /* ── Colour Section ─────────────────────────────── */
+    .colours { background: var(--ink2); color: #fff; }
+
+    .colour-intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-top: 48px;
+    }
+
+    .colour-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .colour-card {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 20px;
+      align-items: center;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,.08);
+      transition: border-color .18s ease;
+    }
+
+    .colour-card:hover { border-color: var(--carmine); }
+
+    .colour-card__swatch {
+      aspect-ratio: 1;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .colour-card__name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .colour-card__hex {
+      font-size: .8rem;
+      font-family: 'Courier New', monospace;
+      color:rgba(255,255,255,.72);
+      margin-bottom: 6px;
+    }
+
+    .colour-card__role {
+      font-size: .78rem;
+      color:rgba(255,255,255,.72);
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .colour-rationale {
+      padding: 32px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.03);
+    }
+
+    .colour-rationale__quote {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,.75);
+      font-weight: 300;
+      margin-bottom: 24px;
+    }
+
+    .colour-rationale__quote strong { color: var(--carmine); font-weight: 600; }
+
+    .colour-spectrum {
+      display: flex;
+      height: 8px;
+      margin-top: 28px;
+      overflow: hidden;
+    }
+
+    .colour-spectrum div { flex: 1; }
+
+    /* ── Typography ─────────────────────────────────── */
+    .typography-section { background: var(--black); color: #fff; overflow: hidden; }
+
+    .type-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 52px;
+      background: rgba(255,255,255,.05);
+    }
+
+    .type-panel {
+      padding: 48px;
+      background: var(--black);
+      position: relative;
+    }
+
+    .type-panel--stripe {
+      background: repeating-linear-gradient(
+        -45deg,
+        #0d0d0d,
+        #0d0d0d 8px,
+        #111 8px,
+        #111 16px
+      );
+    }
+
+    .type-specimen {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: clamp(3rem, 5vw, 5rem);
+      letter-spacing: -.02em;
+      text-transform: uppercase;
+      line-height: .9;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+
+    .type-specimen em {
+      font-style: normal;
+      display: block;
+      color: var(--carmine);
+    }
+
+    .type-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .type-meta-item {
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .type-meta-item__label {
+      font-size: .68rem;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color:rgba(255,255,255,.72);
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .type-meta-item__val {
+      font-size: .88rem;
+      color: rgba(255,255,255,.8);
+      font-weight: 500;
+    }
+
+    .type-scale {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      justify-content: center;
+      padding: 48px;
+    }
+
+    .type-scale__row {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      padding-bottom: 14px;
+    }
+
+    .type-scale__size {
+      font-size: .68rem;
+      color:rgba(255,255,255,.72);
+      letter-spacing: .12em;
+      width: 52px;
+      flex-shrink: 0;
+    }
+
+    .type-scale__sample {
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.9);
+      line-height: 1;
+    }
+
+    /* ── Old vs New designs ─────────────────────────── */
+    .comparison { background: var(--offwhite); }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 48px;
+    }
+
+    .comp-panel {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .comp-panel__label {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 2;
+      font-family: 'Oswald', sans-serif;
+      font-size: .7rem;
+      letter-spacing: .18em;
+      font-weight: 600;
+      padding: 4px 10px;
+    }
+
+    .comp-panel__label--old  { background: var(--silver-dk); color: #fff; }
+    .comp-panel__label--new  { background: var(--carmine);   color: #fff; }
+
+    .comp-visual {
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* OLD design mockup */
+    .old-design {
+      background: #f0f0f0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: grayscale(.8) contrast(.8);
+    }
+
+    .old-design__inner {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .old-banner {
+      background: #444;
+      color: #fff;
+      padding: 12px 28px;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 500;
+      font-size: 1.3rem;
+      letter-spacing: .08em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .old-badge {
+      width: 34px; height: 34px;
+      border: 2px solid rgba(255,255,255,.5);
+      display: grid;
+      place-items: center;
+      font-size: .7rem;
+    }
+
+    .old-sale {
+      background: #c00;
+      padding: 5px 14px;
+      font-family: 'Oswald', sans-serif;
+      font-size: .85rem;
+      color: #fff;
+      letter-spacing: .06em;
+    }
+
+    .old-off {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #c00;
+    }
+
+    /* NEW design mockup */
+    .new-design {
+      background: var(--black);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .new-design::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 12px,
+        rgba(177,44,59,.06) 12px,
+        rgba(177,44,59,.06) 14px
+      );
+    }
+
+    .new-design__tag {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 3.5rem;
+      letter-spacing: -.02em;
+      text-transform: uppercase;
+      line-height: .9;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+    }
+
+    .new-design__tag em {
+      font-style: normal;
+      color: var(--carmine);
+    }
+
+    .new-design__sub {
+      font-family: 'Oswald', sans-serif;
+      font-size: .75rem;
+      letter-spacing: .2em;
+      color:rgba(255,255,255,.72);
+      position: relative;
+      z-index: 1;
+      margin-top: 8px;
+    }
+
+    .new-design__bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--carmine);
+    }
+
+    .comp-panel__body {
+      padding: 20px 22px;
+      background: #fff;
+      border-top: 1px solid var(--border);
+    }
+
+    .comp-panel__title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--ink2);
+      margin-bottom: 5px;
+    }
+
+    .comp-panel__desc {
+      font-size: .82rem;
+      color: var(--muted);
+    }
+
+    /* ── Brand Applications ───────────────────────────── */
+    .applications { background: var(--paper); }
+
+    .app-masonry {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 240px;
+      gap: 18px;
+      margin-top: 48px;
+    }
+
+    .app-card {
+      border-radius: 22px;
+      overflow: hidden;
+      border: 2px solid rgba(10,10,10,.10);
+      box-shadow: 0 12px 36px rgba(10,10,10,.10);
+      transition: transform .2s ease, box-shadow .2s ease;
+      background: #fff;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .app-card:hover { transform: translateY(-6px) rotate(-.2deg); box-shadow: 0 28px 60px rgba(10,10,10,.14); }
+
+    .app-card--span2 { grid-column: span 2; }
+    .app-card--tall { grid-row: span 2; }
+
+    .app-visual {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-card__caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 16px;
+      background: linear-gradient(transparent, rgba(0,0,0,.4));
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .app-card__caption-title {
+      font-family: 'Patrick Hand', cursive;
+      font-size: .95rem;
+      color: #fff;
+      font-weight: 400;
+    }
+
+    .app-card__caption-meta {
+      font-size: .7rem;
+      color:rgba(255,255,255,.72);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .app-card__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .app-card__image:hover {
+      transform: scale(1.02);
+    }
+
+    /* ── Clear Space Section ──────────────────────────── */
+    .clearspace-section {
+      background: #3d3d3d;
+      padding: clamp(60px, 8vw, 120px) 0;
+      color: white;
+    }
+
+    .clearspace-section p,
+    .clearspace-section ul li,
+    .clearspace-section h3 {
+      color: white;
+    }
+
+    .clearspace-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 48px;
+      margin-top: 40px;
+      align-items: center;
+    }
+
+    .clearspace-card {
+      background: #fff;
+      padding: 32px;
+      border-radius: 20px;
+      border: 2px dashed rgba(0,0,0,.1);
+    }
+
+    .clearspace-card img {
+      width: 100%;
+    }
+
+    .clearspace-info h3 {
+      margin-bottom: 12px;
+      color: white;
+    }
+
+    .clearspace-info ul {
+      margin-top: 12px;
+      padding-left: 18px;
+    }
+
+    /* ── Lightbox Gallery ──────────────────────────────── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.is-active {
+      display: flex;
+      opacity: 1;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox__content {
+      position: relative;
+      width: 90%;
+      height: 85%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lightbox__image-wrapper {
+      flex: 1;
+      overflow: hidden;
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .lightbox__image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .lightbox__close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 24px;
+      transition: all 0.2s ease;
+      z-index: 9001;
+    }
+
+    .lightbox__close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color:rgba(255,255,255,.72);
+    }
+
+    .lightbox__arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 24px;
+      transition: all 0.2s ease;
+      z-index: 9001;
+    }
+
+    .lightbox__arrow:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color:rgba(255,255,255,.72);
+    }
+
+    .lightbox__arrow--prev {
+      left: 20px;
+    }
+
+    .lightbox__arrow--next {
+      right: 20px;
+    }
+
+    .lightbox__thumbnails {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 20px;
+      overflow-x: auto;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    .lightbox__thumbnail {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .lightbox__thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .lightbox__thumbnail:hover {
+      border-color:rgba(255,255,255,.72);
+      transform: scale(1.05);
+    }
+
+    .lightbox__thumbnail.is-active {
+      border-color: var(--carmine);
+      box-shadow: 0 0 12px rgba(177, 44, 59, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .lightbox__arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+      }
+
+      .lightbox__arrow--prev {
+        left: 10px;
+      }
+
+      .lightbox__arrow--next {
+        right: 10px;
+      }
+
+      .lightbox__close {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        top: 15px;
+        right: 15px;
+      }
+
+      .lightbox__thumbnails {
+        padding: 15px;
+        gap: 8px;
+      }
+
+      .lightbox__thumbnail {
+        width: 60px;
+        height: 60px;
+      }
+    }
+
+    /* ── Impact / Results ───────────────────────────── */
+    .results { background: var(--carmine); color: #fff; }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 52px;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+
+    .result-card {
+      padding: 36px 28px;
+      border-right: 1px solid rgba(255,255,255,.15);
+      transition: background .18s ease;
+    }
+
+    .result-card:last-child { border-right: none; }
+    .result-card:hover { background: rgba(0,0,0,.15); }
+
+    .result-card__num {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 3rem;
+      line-height: 1;
+      color: #fff;
+      margin-bottom: 8px;
+      letter-spacing: -.02em;
+    }
+
+    .result-card__num span { color:rgba(255,255,255,.72); }
+
+    .result-card__label {
+      font-size: .8rem;
+      color:rgba(255,255,255,.72);
+      line-height: 1.45;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    /* ── Quote ──────────────────────────────────────── */
+    .quote-section { background: var(--paper); }
+
+    .quote-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .quote-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+      font-weight: 600;
+      line-height: 1.25;
+      text-transform: uppercase;
+      letter-spacing: -.01em;
+      color: var(--ink);
+    }
+
+    .quote-text span { color: var(--carmine); }
+
+    .quote-right { display: flex; flex-direction: column; gap: 28px; }
+
+    .quote-body {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.8;
+      font-weight: 300;
+      border-left: 3px solid var(--carmine);
+      padding-left: 22px;
+    }
+
+    .quote-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .quote-avatar {
+      width: 46px;
+      height: 46px;
+      background: var(--carmine);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .quote-author__name {
+      font-weight: 600;
+      color: var(--ink2);
+      font-size: .92rem;
+    }
+
+    .quote-author__role {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── CTA ────────────────────────────────────────── */
+    .cta-section { background: var(--black); color: #fff; }
+
+    .cta-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      padding: 80px 0;
+      border-top: 1px solid rgba(255,255,255,.08);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .cta-title {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      text-transform: uppercase;
+      letter-spacing: -.02em;
+      line-height: .9;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .cta-title em { font-style: normal; color: var(--carmine); }
+
+    .cta-sub {
+      font-size: .88rem;
+      color:rgba(255,255,255,.72);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    .cta-buttons { display: flex; gap: 12px; }
+
+    /* ── Footer ─────────────────────────────────────── */
+    .footer {
+      background: var(--black);
+      color:rgba(255,255,255,.72);
+      padding: 32px 0;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+
+    .footer__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .footer__brand {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1.1rem;
+      color:rgba(255,255,255,.72);
+    }
+
+    .footer__links { display: flex; gap: 20px; font-size: .82rem; }
+    .footer__links a:hover { color: var(--carmine); }
+
+    /* ── Divider ────────────────────────────────────── */
+    .divider-red { height: 3px; background: var(--carmine); }
+
+    /* ── Responsive ─────────────────────────────────── */
+    @media (max-width: 1020px) {
+      .overview__grid    { grid-template-columns: 1fr; gap: 48px; }
+      .colour-intro-grid { grid-template-columns: 1fr; gap: 36px; }
+      .type-showcase     { grid-template-columns: 1fr; }
+      .comparison-grid   { grid-template-columns: 1fr; }
+      .app-grid          { grid-template-columns: 1fr 1fr; }
+      .app-card--span2, .app-card--span3 { grid-column: span 2; }
+      .results-grid      { grid-template-columns: 1fr 1fr; }
+      .quote-inner       { grid-template-columns: 1fr; gap: 40px; }
+      .hero__logo-display { display: none; }
+    }
+
+    @media (max-width: 660px) {
+      .app-grid          { grid-template-columns: 1fr; }
+      .app-card--span2, .app-card--span3, .app-card--tall { grid-column: span 1; grid-row: span 1; }
+      .results-grid      { grid-template-columns: 1fr 1fr; }
+      .cta-inner         { flex-direction: column; align-items: flex-start; }
+      .hero__stats       { gap: 24px; }
+      .stat { padding: 0 24px 0 0; margin-right: 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { transition: none; opacity: 1; transform: none; }
+    }
+  
+    /* Global accessibility and responsive baseline */
+    .skip-link{
+      position:absolute;
+      left:12px;
+      top:-48px;
+      z-index:9999;
+      background:#111;
+      color:#fff;
+      padding:10px 12px;
+      border-radius:10px;
+      font-weight:700;
+      text-decoration:none;
+    }
+    .skip-link:focus{top:12px}
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    [tabindex]:focus-visible{
+      outline:3px solid #2563eb;
+      outline-offset:3px;
+      border-radius:6px;
+    }
+
+    img,video,canvas,svg{max-width:100%;height:auto}
+
+    @media (max-width: 900px){
+      .topbar__row{flex-wrap:wrap}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ── Topbar ───────────────────────────────────────── -->
+  <header class="topbar">
+    <div class="wrap topbar__row">
+      <a class="brand" href="index.html">
+        <div class="brand__name">
+          <span class="brand__nameMain">No Name</span>
+          <span class="brand__nameSub">Productions</span>
+        </div>
+      </a>
+
+      <nav class="topbar__crumb" aria-label="Breadcrumb">
+        <a href="index.html#work" style="color:var(--muted)">Work</a>
+        <span style="color:var(--muted)">›</span>
+        <strong>VON Rebranding</strong>
+      </nav>
+
+      <div class="topbar__actions">
+        <a class="pillBtn" href="index.html#work">← Back to Work</a>
+        <a class="pillBtn pillBtn--primary" href="index.html#contact">Hire Us</a>
+      </div>
+    </div>
+    <div class="progressWrap" aria-hidden="true">
+      <div class="progressBar" id="progressBar"></div>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+  <!-- ── Hero ─────────────────────────────────────────── -->
+  <section class="hero" aria-label="VON Case Study Hero">
+    <div class="hero__stripes" aria-hidden="true"></div>
+    <div class="hero__bg-text" aria-hidden="true">VON</div>
+    <div class="hero__accent" aria-hidden="true"></div>
+
+    <div class="hero__inner">
+      <div class="wrap">
+        <p class="hero__eyebrow reveal">Case Study</p>
+
+        <div class="hero__meta reveal reveal--delay1">
+          <span class="tag tag--sport">Rebranding</span>
+          <span class="tag tag--year">2024</span>
+          <span class="tag tag--rebrand">Sports · Merchandise · Media</span>
+        </div>
+
+        <h1 class="hero__title reveal reveal--delay1">
+          VON<br>
+          <em>REBRANDS.</em>
+        </h1>
+
+        <p class="hero__subtitle reveal reveal--delay2">A Sports Brand, Rebuilt From Zero</p>
+
+        <p class="hero__desc reveal reveal--delay2">
+          VON needed a visual identity as bold as the athletes it serves. 
+          The brief: simplify, sharpen, and make the brand travel — from a phone screen to the side of a stadium.
+          "Less is more" became the guiding philosophy, and Deep Carmine became the signal.
+        </p>
+
+        <div class="hero__stats reveal reveal--delay3">
+          <div class="stat">
+            <div class="stat__num">3</div>
+            <div class="stat__label">Brand Colours</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num">1</div>
+            <div class="stat__label">Typeface System</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num">10+</div>
+            <div class="stat__label">Applications</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num">100%</div>
+            <div class="stat__label">Custom Identity</div>
+          </div>
+        </div>
+      </div>
+    </div>ííí
+
+    <!-- Reconstructed VON logo -->
+    <div class="hero__logo-display" aria-hidden="true">
+      <img class="von-logo" src="assests/img/von/new logo w.png" alt="VON new logo">
+      <span class="hero__logo-caption">New Mark · 2024</span>
+    </div>
+  </section>
+
+  <div class="divider-red"></div>
+
+  <!-- ── Overview ─────────────────────────────────────── -->
+  <section class="overview">
+    <div class="wrap">
+      <div class="overview__grid">
+        <div>
+          <p class="section-eyebrow reveal">The Brief</p>
+          <h2 class="section-title reveal reveal--delay1">
+            Simpler.<br>Stronger.<br>Further.
+          </h2>
+          <p class="section-lead reveal reveal--delay2">
+            The rebranding aims to simplify VON's visual identity, create a more flexible logo, 
+            strengthen the target audience connection, and transcend traditional sports merchandise.
+          </p>
+          <p class="section-lead reveal reveal--delay3" style="margin-top:18px;">
+            The design philosophy is a <strong>'less is more'</strong> approach — capturing the brand's 
+            heritage and core values while building something that resonates with athletes and fans 
+            across generations. A cleaner, more adaptable visual identity that connects and inspires.
+          </p>
+
+          <!-- Before / After logos -->
+          <div class="before-after reveal" style="margin-top:48px;">
+            <div class="ba-panel ba-panel--old">
+              <img src="assests/img/von/Old Logo.png" alt="Von Old Logo" style="width: 100%; max-width: 400px; height: auto; margin: auto; object-fit: contain;">
+              <div class="ba-label">Cluttered · Inconsistent · Dated</div>
+            </div>
+            <div class="ba-panel ba-panel--new">
+              <img src="assests/img/von/new logo w.png" alt="Von New Logo" style="width: 100%; max-width: 400px; height: auto; margin: auto; object-fit: contain;">
+              <div class="ba-label" style="color:rgba(255,255,255,.72);">Bold · Flexible · Timeless</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="overview__right reveal reveal--delay1">
+          <div class="brief-row">
+            <span class="brief-row__label">Client</span>
+            <span class="brief-row__value">VON Sports Brand</span>
+          </div>
+          <div class="brief-row">
+            <span class="brief-row__label">Year</span>
+            <span class="brief-row__value">2024</span>
+          </div>
+          <div class="brief-row">
+            <span class="brief-row__label">Industry</span>
+            <span class="brief-row__value">Sports Merchandise & Media</span>
+          </div>
+          <div class="brief-row">
+            <span class="brief-row__label">Audience</span>
+            <span class="brief-row__value">Athletes & Fans, All Ages</span>
+          </div>
+          <div class="brief-row">
+            <span class="brief-row__label">Location</span>
+            <span class="brief-row__value">UK / International</span>
+          </div>
+          <div class="brief-row">
+            <span class="brief-row__label">Philosophy</span>
+            <span class="brief-row__value">"Less is More"</span>
+          </div>
+          <div class="brief-row">
+            <span class="brief-row__label">Deliverables</span>
+            <span class="brief-row__value">Logo System · Colour · Typography · Billboards · Print · Stationery · Digital · Signage</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-red"></div>
+
+  <!-- ── Colour Section ───────────────────────────────── -->
+  <section class="colours">
+    <div class="wrap">
+      <p class="section-eyebrow reveal" style="color:rgba(255,255,255,.72);">Colour System</p>
+      <h2 class="section-title reveal reveal--delay1" style="color:#fff;">
+        Red Means<br>Business.
+      </h2>
+
+      <div class="colour-intro-grid">
+        <div class="colour-cards">
+          <div class="colour-card reveal reveal--delay1">
+            <div class="colour-card__swatch" style="background:#B12C3B;"></div>
+            <div>
+              <div class="colour-card__name">Deep Carmine</div>
+              <div class="colour-card__hex">#B12C3B · RGB(177, 44, 59)</div>
+              <div class="colour-card__role">Primary · Passion · Energy · Strength. The dominant signal of the VON brand — used on all primary touchpoints.</div>
+            </div>
+          </div>
+          <div class="colour-card reveal reveal--delay2">
+            <div class="colour-card__swatch" style="background:#AAAAAA;"></div>
+            <div>
+              <div class="colour-card__name">Silver Chalice</div>
+              <div class="colour-card__hex">#AAAAAA · RGB(170, 170, 170)</div>
+              <div class="colour-card__role">Secondary · Neutral · Professional. Supports the red without competing — used for backgrounds, text variants, and supporting graphics.</div>
+            </div>
+          </div>
+          <div class="colour-card reveal reveal--delay3">
+            <div class="colour-card__swatch" style="background:#000000; border:1px solid rgba(255,255,255,.08);"></div>
+            <div>
+              <div class="colour-card__name">Black</div>
+              <div class="colour-card__hex">#000000 · RGB(0, 0, 0)</div>
+              <div class="colour-card__role">Base · Authority · Discipline. The canvas for everything. Makes the red sing. Grounds the brand in athletic seriousness.</div>
+            </div>
+          </div>
+
+          <div class="colour-spectrum reveal reveal--delay4">
+            <div style="flex:3; background:#B12C3B;"></div>
+            <div style="flex:2; background:#000;"></div>
+            <div style="flex:1; background:#AAAAAA;"></div>
+          </div>
+        </div>
+
+        <div class="colour-rationale reveal reveal--delay2">
+          <p class="colour-rationale__quote">
+            Using colour in graphic design is an excellent way to subtly influence how a viewer feels. 
+            <strong>Deep Carmine embodies the essence of sport</strong> — energy, strength, passion, and community. 
+            This choice aligns with the mission to inspire hope and drive within every athlete, making it an 
+            instantly recognisable and emotionally powerful symbol of the VON brand.
+          </p>
+          <p class="colour-rationale__quote" style="font-size:.9rem;">
+            The triad of <strong>Black, Carmine, and Silver</strong> creates maximum contrast at every scale — 
+            readable on a business card, unmissable on a motorway billboard.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Typography ───────────────────────────────────── -->
+  <section class="typography-section">
+    <div class="wrap">
+      <p class="section-eyebrow reveal" style="color:rgba(255,255,255,.72);">Typography</p>
+      <h2 class="section-title reveal reveal--delay1" style="color:#fff;">
+        Oswald.<br>
+        <span style="color:var(--carmine);">One Voice.</span><br>
+        <span style="color:rgba(255,255,255,.72); font-size:.55em;">Zero Compromise.</span>
+      </h2>
+    </div>
+
+    <div style="margin-top:48px; background: rgba(255,255,255,.03); border-top:1px solid rgba(255,255,255,.06); border-bottom:1px solid rgba(255,255,255,.06);">
+      <div class="wrap">
+        <div class="type-showcase">
+          <div class="type-panel reveal reveal--delay1">
+            <div class="type-specimen">
+              OSWALD<br>
+              <em>MEDIUM</em>
+            </div>
+            <p style="color:rgba(255,255,255,.72); font-size:.92rem; font-weight:300; line-height:1.75; max-width:44ch; margin-bottom:24px;">
+              Oswald is used because of its boldness, neat discipline, and straight-forward attitude. 
+              Sports needs lots of discipline and focus — which is exactly what this typeface communicates.
+            </p>
+            <div class="type-meta-grid">
+              <div class="type-meta-item">
+                <div class="type-meta-item__label">Classification</div>
+                <div class="type-meta-item__val">Condensed Sans-Serif</div>
+              </div>
+              <div class="type-meta-item">
+                <div class="type-meta-item__label">Weights Used</div>
+                <div class="type-meta-item__val">300 · 400 · 500 · 700</div>
+              </div>
+              <div class="type-meta-item">
+                <div class="type-meta-item__label">Character</div>
+                <div class="type-meta-item__val">Bold · Disciplined · Direct</div>
+              </div>
+              <div class="type-meta-item">
+                <div class="type-meta-item__label">Role</div>
+                <div class="type-meta-item__val">All UI, Print & Display</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="type-scale reveal reveal--delay2">
+            <div class="type-scale__row">
+              <span class="type-scale__size">96px</span>
+              <span class="type-scale__sample" style="font-size:3.2rem; font-weight:700; color:var(--carmine);">GAME</span>
+            </div>
+            <div class="type-scale__row">
+              <span class="type-scale__size">64px</span>
+              <span class="type-scale__sample" style="font-size:2.2rem; font-weight:700;">THE JERSEY</span>
+            </div>
+            <div class="type-scale__row">
+              <span class="type-scale__size">40px</span>
+              <span class="type-scale__sample" style="font-size:1.5rem; font-weight:500;">Never Sleeps</span>
+            </div>
+            <div class="type-scale__row">
+              <span class="type-scale__size">24px</span>
+              <span class="type-scale__sample" style="font-size:.95rem; font-weight:400;">Season Sale · 25% Off</span>
+            </div>
+            <div class="type-scale__row">
+              <span class="type-scale__size">14px</span>
+              <span class="type-scale__sample" style="font-size:.72rem; font-weight:300; letter-spacing:.14em; color:rgba(255,255,255,.72);">FOR ALL SPORTS EQUIPMENT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Old vs New Comparison ────────────────────────── -->
+  <section class="comparison">
+    <div class="wrap">
+      <p class="section-eyebrow reveal">Before & After</p>
+      <h2 class="section-title reveal reveal--delay1">
+        What Changed.<br>
+        <span style="color:var(--carmine);">Everything.</span>
+      </h2>
+      <p class="section-lead reveal reveal--delay2">
+        The old designs were cluttered, inconsistent, and difficult to adapt. 
+        The new system is modular, bold, and instantly ownable at every size.
+      </p>
+
+      <div class="comparison-grid">
+        <div class="comp-panel reveal reveal--delay1">
+          <span class="comp-panel__label comp-panel__label--old">Before</span>
+          <div class="comp-visual">
+            <div class="old-design">
+              <div class="old-design__inner">
+                <div class="old-banner">
+                  <div class="old-badge">VH</div>
+                  MLB SEASON SALE
+                </div>
+                <div style="display:flex; gap:8px; align-items:center;">
+                  <div class="old-sale">Sale</div>
+                  <div class="old-off">25%</div>
+                </div>
+                <div style="font-size:.7rem; color:#666; letter-spacing:.06em;">For all baseball equipments</div>
+              </div>
+            </div>
+          </div>
+          <div class="comp-panel__body">
+            <div class="comp-panel__title">Old Design Language</div>
+            <div class="comp-panel__desc">Mixed hierarchy, inconsistent mark usage, unclear brand signals, competing visual elements.</div>
+          </div>
+        </div>
+
+        <div class="comp-panel reveal reveal--delay2">
+          <span class="comp-panel__label comp-panel__label--new">After</span>
+          <div class="comp-visual">
+            <div class="new-design">
+              <div class="new-design__bar"></div>
+              <div class="new-design__tag">
+                GAME<br>
+                <em>PLAN</em>
+              </div>
+              <div class="new-design__sub">↗ VON · SPORTS MEDIA</div>
+            </div>
+          </div>
+          <div class="comp-panel__body">
+            <div class="comp-panel__title">New Design Language</div>
+            <div class="comp-panel__desc">Clear hierarchy, dominant carmine, bold Oswald typography, consistent diagonal brand texture.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Brand Applications ────────────────────────────── -->
+  <section class="applications">
+    <div class="wrap">
+      <p class="section-eyebrow reveal">Brand Applications</p>
+      <h2 class="section-title reveal reveal--delay1">From vision to application.</h2>
+      <p class="section-lead reveal reveal--delay2">
+        The brand system was applied across every touchpoint — from digital to print, tested for impact at every scale.
+      </p>
+
+      <div class="app-masonry">
+        <!-- Billboard - Large horizontal -->
+        <div class="app-card app-card--span2 reveal reveal--delay1">
+          <div class="app-visual">
+            <img src="assests/img/von/Billboard.jpg" alt="VON Billboard" class="app-card__image gallery-image" data-gallery-index="0" />
+          </div>
+          <div class="app-card__caption">
+            <span class="app-card__caption-title">Billboard</span>
+            <span class="app-card__caption-meta">Brand Application</span>
+          </div>
+        </div>
+
+        <!-- Poster - Portrait -->
+        <div class="app-card app-card--tall reveal reveal--delay2">
+          <div class="app-visual">
+            <img src="assests/img/von/poster.jpg" alt="VON Poster" class="app-card__image gallery-image" data-gallery-index="1" />
+          </div>
+          <div class="app-card__caption">
+            <span class="app-card__caption-title">Poster</span>
+            <span class="app-card__caption-meta">Brand Application</span>
+          </div>
+        </div>
+
+        <!-- Magazine - Regular -->
+        <div class="app-card reveal reveal--delay3">
+          <div class="app-visual">
+            <img src="assests/img/von/magazine.jpg" alt="VON Magazine" class="app-card__image gallery-image" data-gallery-index="2" />
+          </div>
+          <div class="app-card__caption">
+            <span class="app-card__caption-title">Magazine</span>
+            <span class="app-card__caption-meta">Brand Application</span>
+          </div>
+        </div>
+
+        <!-- Standee - Portrait -->
+        <div class="app-card app-card--tall reveal reveal--delay1">
+          <div class="app-visual">
+            <img src="assests/img/von/standee.jpg" alt="VON Standee" class="app-card__image gallery-image" data-gallery-index="3" />
+          </div>
+          <div class="app-card__caption">
+            <span class="app-card__caption-title">Standee</span>
+            <span class="app-card__caption-meta">Brand Application</span>
+          </div>
+        </div>
+
+        <!-- Hoarding - Wide horizontal -->
+        <div class="app-card app-card--span2 reveal reveal--delay2">
+          <div class="app-visual">
+            <img src="assests/img/von/Hoarding.jpg" alt="VON Hoarding" class="app-card__image gallery-image" data-gallery-index="4" />
+          </div>
+          <div class="app-card__caption">
+            <span class="app-card__caption-title">Hoarding</span>
+            <span class="app-card__caption-meta">Brand Application</span>
+          </div>
+        </div>
+
+        <!-- Brochure - Regular -->
+        <div class="app-card reveal reveal--delay3">
+          <div class="app-visual">
+            <img src="assests/img/von/brochure.jpg" alt="VON Brochure" class="app-card__image gallery-image" data-gallery-index="5" />
+          </div>
+          <div class="app-card__caption">
+            <span class="app-card__caption-title">Brochure</span>
+            <span class="app-card__caption-meta">Brand Application</span>
+          </div>
+        </div>
+
+        <!-- Social Media Poster - Portrait -->
+        <div class="app-card app-card--tall reveal reveal--delay1">
+          <div class="app-visual">
+            <img src="assests/img/von/social media poster.jpg" alt="VON Social Media" class="app-card__image gallery-image" data-gallery-index="6" />
+          </div>
+          <div class="app-card__caption">
+            <span class="app-card__caption-title">Social Media</span>
+            <span class="app-card__caption-meta">Brand Application</span>
+          </div>
+        </div>
+
+        <!-- Stationary Items - Wide -->
+        <div class="app-card app-card--span2 reveal reveal--delay2">
+          <div class="app-visual">
+            <img src="assests/img/von/stationary items.jpg" alt="VON Stationary" class="app-card__image gallery-image" data-gallery-index="7" />
+          </div>
+          <div class="app-card__caption">
+            <span class="app-card__caption-title">Stationary Items</span>
+            <span class="app-card__caption-meta">Brand Application</span>
+          </div>
+        </div>
+
+        <!-- Flyer - Portrait -->
+        <div class="app-card app-card--tall reveal reveal--delay3">
+          <div class="app-visual">
+            <img src="assests/img/von/Flyer.jpg" alt="VON Flyer" class="app-card__image gallery-image" data-gallery-index="8" />
+          </div>
+          <div class="app-card__caption">
+            <span class="app-card__caption-title">Flyer</span>
+            <span class="app-card__caption-meta">Brand Application</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Results ───────────────────────────────────────── -->
+  <section class="results">
+    <div class="wrap">
+      <p class="section-eyebrow reveal" style="color:rgba(255,255,255,.72);">The Outcome</p>
+      <h2 class="section-title reveal reveal--delay1" style="color:#fff; font-size:clamp(1.8rem,3.5vw,3.2rem);">
+        A brand that performs<br>as hard as the athletes it represents.
+      </h2>
+
+      <div class="results-grid">
+        <div class="result-card reveal reveal--delay1">
+          <div class="result-card__num">3<span>×</span></div>
+          <div class="result-card__label">Colour Reduction<br>from old system</div>
+        </div>
+        <div class="result-card reveal reveal--delay2">
+          <div class="result-card__num">10<span>+</span></div>
+          <div class="result-card__label">Brand touchpoints<br>consistently applied</div>
+        </div>
+        <div class="result-card reveal reveal--delay3">
+          <div class="result-card__num">1<span>st</span></div>
+          <div class="result-card__label">Full brand guidelines<br>delivered</div>
+        </div>
+        <div class="result-card reveal reveal--delay4">
+          <div class="result-card__num">∞</div>
+          <div class="result-card__label">Scalability across<br>all print & digital</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Quote ─────────────────────────────────────────── -->
+  <section class="quote-section">
+    <div class="wrap">
+      <div class="quote-inner">
+        <div class="reveal reveal--left">
+          <p class="quote-text">
+            "Design is not just<br>
+            what it looks like —<br>
+            <span>it's how it works."</span>
+          </p>
+        </div>
+        <div class="quote-right reveal reveal--delay2">
+          <p class="quote-body">
+            The VON rebranding started with one question: does this work on a billboard at 80mph? 
+            Every decision — the type weight, the carmine, the diagonal textures — was tested against 
+            that bar. The result is a brand system that is as disciplined as the sport it represents.
+          </p>
+          <div class="quote-author">
+            <div class="quote-avatar">NP</div>
+            <div>
+              <div class="quote-author__name">No Name Productions</div>
+              <div class="quote-author__role">Lead Designer · Brand Identity · 2024</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ───────────────────────────────────────────── -->
+  <section class="cta-section">
+    <div class="wrap">
+      <div class="cta-inner">
+        <div class="cta-left reveal">
+          <p class="cta-sub">Ready to Rebrand?</p>
+          <h2 class="cta-title">LET'S<br><em>WORK.</em></h2>
+        </div>
+        <div class="cta-buttons reveal reveal--delay2">
+          <a class="pillBtn pillBtn--primary" href="index.html#contact">Start a Project</a>
+          <a class="pillBtn" href="index.html#work" style="background:transparent;color:rgba(255,255,255,.72);border-color:rgba(255,255,255,.72);">View More Work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="wrap footer__row">
+      <span class="footer__brand">No Name Productions</span>
+      <p style="font-size:.8rem;">
+        © <span id="footerYear"></span> No Name Productions · doodles included
+      </p>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#work">Work</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Lightbox Gallery -->
+  <div class="lightbox" id="gallery-lightbox">
+    <div class="lightbox__content">
+      <button class="lightbox__close" id="lightbox-close" aria-label="Close gallery">×</button>
+      <div class="lightbox__image-wrapper">
+        <img src="" alt="Gallery image" id="lightbox-image" class="lightbox__image" />
+        <button class="lightbox__arrow lightbox__arrow--prev" id="prev-arrow" aria-label="Previous image">❮</button>
+        <button class="lightbox__arrow lightbox__arrow--next" id="next-arrow" aria-label="Next image">❯</button>
+      </div>
+      <div class="lightbox__thumbnails" id="lightbox-thumbnails"></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+    // Progress
+    const bar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const doc = document.documentElement;
+      const p = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+      bar.style.width = `${Math.max(0, Math.min(1, p)) * 100}%`;
+    }, { passive: true });
+
+    // Reveal
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduced && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-in'));
+    }
+
+    // Gallery Lightbox
+    const galleryImages = document.querySelectorAll('.gallery-image');
+    const lightbox = document.getElementById('gallery-lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const prevArrow = document.getElementById('prev-arrow');
+    const nextArrow = document.getElementById('next-arrow');
+    const thumbnailsContainer = document.getElementById('lightbox-thumbnails');
+    
+    let currentIndex = 0;
+    const images = Array.from(galleryImages).map(img => ({
+      src: img.dataset.galleryPreset || img.src,
+      alt: img.alt,
+      index: parseInt(img.dataset.galleryIndex)
+    })).sort((a, b) => a.index - b.index);
+
+    // Create thumbnails
+    function initThumbnails() {
+      thumbnailsContainer.innerHTML = '';
+      images.forEach((img, idx) => {
+        const thumb = document.createElement('div');
+        thumb.className = 'lightbox__thumbnail';
+        thumb.innerHTML = `<img src="${img.src}" alt="${img.alt}" />`;
+        thumb.addEventListener('click', () => {
+          currentIndex = idx;
+          updateLightbox();
+        });
+        thumbnailsContainer.appendChild(thumb);
+      });
+    }
+
+    // Update lightbox display
+    function updateLightbox() {
+      if (images.length === 0) return;
+      const img = images[currentIndex];
+      lightboxImage.src = img.src;
+      lightboxImage.alt = img.alt;
+
+      // Update thumbnail active state
+      document.querySelectorAll('.lightbox__thumbnail').forEach((thumb, idx) => {
+        if (idx === currentIndex) {
+          thumb.classList.add('is-active');
+        } else {
+          thumb.classList.remove('is-active');
+        }
+      });
+
+      // Scroll thumbnail into view
+      const activeThumbnail = document.querySelectorAll('.lightbox__thumbnail')[currentIndex];
+      if (activeThumbnail) {
+        activeThumbnail.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+
+    // Open lightbox
+    galleryImages.forEach((img, idx) => {
+      img.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentIndex = idx;
+        lightbox.classList.add('is-active');
+        document.body.style.overflow = 'hidden';
+        updateLightbox();
+      });
+    });
+
+    // Close lightbox
+    function closeLightbox() {
+      lightbox.classList.remove('is-active');
+      document.body.style.overflow = '';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // Navigation
+    prevArrow.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateLightbox();
+    });
+
+    nextArrow.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateLightbox();
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('is-active')) return;
+      if (e.key === 'ArrowLeft') prevArrow.click();
+      if (e.key === 'ArrowRight') nextArrow.click();
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Initialize thumbnails
+    initThumbnails();
+  </script>
+</body>
+</html>
+
+
+

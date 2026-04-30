@@ -1,0 +1,550 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Designing for Understanding — Premium UX Case Study</title>
+  <meta name="description" content="FAANG-level UX case study on redesigning digital Terms & Conditions for elderly users through mixed-methods research and measurable outcomes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f7f8fc;
+      --paper:#ffffff;
+      --ink:#12131a;
+      --muted:#5f6677;
+      --line:rgba(18,19,26,.08);
+      --line-strong:rgba(18,19,26,.14);
+      --brand:#4f46e5;
+      --brand-2:#06b6d4;
+      --brand-3:#f59e0b;
+      --green:#16a34a;
+      --shadow:0 24px 60px rgba(26,31,54,.10);
+      --soft:0 10px 30px rgba(26,31,54,.06);
+      --wrap:1180px;
+      --radius:24px;
+      --pad:clamp(18px,2.4vw,30px);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(800px 500px at 10% 0%, rgba(79,70,229,.10), transparent 60%),
+        radial-gradient(700px 420px at 90% 10%, rgba(6,182,212,.09), transparent 60%),
+        linear-gradient(180deg, var(--bg), #fcfcfe);
+      line-height:1.65;
+    }
+    a{text-decoration:none;color:inherit}
+    .wrap{width:min(var(--wrap), calc(100% - var(--pad)*2)); margin-inline:auto}
+    .topbar{
+      position:sticky; top:0; z-index:100;
+      backdrop-filter:blur(16px);
+      background:rgba(247,248,252,.78);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar__row{
+      min-height:72px; display:flex; align-items:center; justify-content:space-between; gap:16px;
+    }
+    .brand{display:flex; align-items:center; gap:12px; font-weight:800}
+    .brand__mark{
+      width:38px; height:38px; border-radius:14px;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      box-shadow:0 16px 30px rgba(79,70,229,.24);
+      position:relative;
+    }
+    .brand__mark::after{
+      content:""; position:absolute; inset:8px; border-radius:10px;
+      border:1px solid rgba(255,255,255,.45);
+    }
+    .crumb{font-size:.88rem; color:var(--muted)}
+    .crumb strong{color:var(--ink)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:12px 16px; border-radius:999px; font-weight:700;
+      border:1px solid var(--line-strong); background:#fff;
+      transition:.18s ease; box-shadow:var(--soft)
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn--primary{background:linear-gradient(135deg,var(--brand),#6d5ef5); color:#fff; border-color:transparent}
+    .hero{padding:86px 0 56px; position:relative; overflow:hidden}
+    .hero__grid{display:grid; grid-template-columns:1.1fr .9fr; gap:26px; align-items:start}
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:10px; margin-bottom:18px;
+      font-size:.78rem; letter-spacing:.16em; text-transform:uppercase; font-weight:800; color:var(--brand)
+    }
+    .eyebrow::before{content:""; width:28px; height:2px; background:currentColor; border-radius:999px}
+    h1,h2,h3{font-family:Manrope,Inter,sans-serif; margin:0; letter-spacing:-.03em}
+    h1{font-size:clamp(2.7rem,6vw,5.4rem); line-height:.95}
+    h2{font-size:clamp(1.8rem,3.5vw,3rem); line-height:1}
+    h3{font-size:1.18rem}
+    .lead{font-size:1.06rem; color:var(--muted); max-width:63ch; margin-top:18px}
+    .heroCard{
+      background:linear-gradient(180deg, rgba(16,18,30,.98), rgba(27,31,53,.96));
+      color:#fff; border-radius:32px; padding:28px; box-shadow:0 34px 80px rgba(21,24,42,.22);
+      position:relative; overflow:hidden;
+    }
+    .heroCard::before{
+      content:""; position:absolute; inset:0;
+      background:repeating-linear-gradient(-45deg, transparent, transparent 18px, rgba(255,255,255,.03) 18px, rgba(255,255,255,.03) 20px);
+    }
+    .heroCard > *{position:relative; z-index:1}
+    .heroStats{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:28px}
+    .stat{
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08);
+      border-radius:20px; padding:16px
+    }
+    .stat__num{display:block; font-size:1.4rem; font-weight:800}
+    .stat__label{display:block; margin-top:6px; font-size:.74rem; color:rgba(255,255,255,.72); text-transform:uppercase; letter-spacing:.1em}
+    .section{padding:54px 0}
+    .sectionHead{margin-bottom:22px}
+    .sectionLead{color:var(--muted); max-width:68ch; margin-top:10px}
+    .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+    .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+    .card{
+      background:rgba(255,255,255,.86); border:1px solid var(--line);
+      border-radius:var(--radius); padding:22px; box-shadow:var(--soft)
+    }
+    .card p{color:var(--muted)}
+    .problemCard{border-top:4px solid var(--brand)}
+    .pill{
+      display:inline-flex; padding:6px 10px; border-radius:999px;
+      background:rgba(79,70,229,.10); color:var(--brand); font-size:.74rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase
+    }
+    .timeline{display:grid; gap:12px}
+    .step{
+      display:grid; grid-template-columns:42px 1fr; gap:14px; align-items:start;
+      padding:16px; border-radius:20px; border:1px solid var(--line); background:#fff
+    }
+    .stepNum{
+      width:42px; height:42px; border-radius:14px; background:rgba(79,70,229,.12);
+      display:grid; place-items:center; font-weight:800; color:var(--brand)
+    }
+    .insight{
+      padding:14px 16px; border-radius:18px; background:rgba(79,70,229,.07);
+      border:1px dashed rgba(79,70,229,.24); color:#2d3255; font-size:.94rem
+    }
+    .chartGrid{display:grid; grid-template-columns:1.1fr .9fr; gap:18px}
+    .chartWrap{
+      background:#fff; border:1px solid var(--line); border-radius:26px; padding:22px; box-shadow:var(--soft)
+    }
+    .bars{display:grid; gap:16px; margin-top:18px}
+    .barRow{display:grid; grid-template-columns:150px 1fr 54px; gap:12px; align-items:center}
+    .barLabel{font-size:.9rem; color:var(--muted)}
+    .track{height:12px; background:#eceff6; border-radius:999px; overflow:hidden}
+    .fill{
+      height:100%; width:0; border-radius:999px;
+      background:linear-gradient(90deg,var(--brand),var(--brand-2));
+      transition:width 1.2s cubic-bezier(.22,1,.36,1)
+    }
+    .val{font-weight:800; color:var(--ink); text-align:right}
+    .ringArea{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px}
+    .ringCard{
+      border:1px solid var(--line); border-radius:22px; padding:18px; background:#fff
+    }
+    .ring{
+      width:122px; height:122px; margin:0 auto 12px; position:relative;
+      background:conic-gradient(var(--brand) 0deg,var(--brand) calc(var(--pct)*3.6deg), #ecedf4 calc(var(--pct)*3.6deg), #ecedf4 360deg);
+      border-radius:50%;
+    }
+    .ring::after{
+      content:""; position:absolute; inset:15px; background:#fff; border-radius:50%;
+      box-shadow:inset 0 0 0 1px var(--line)
+    }
+    .ring span{
+      position:absolute; inset:0; display:grid; place-items:center; z-index:1;
+      font-size:1.3rem; font-weight:800
+    }
+    .screenGrid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+    .screen{
+      background:#fff; border:1px solid var(--line); border-radius:26px; box-shadow:var(--soft); overflow:hidden
+    }
+    .screen__top{padding:10px 14px; font-size:.72rem; font-weight:800; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; background:#fafbff; border-bottom:1px solid var(--line)}
+    .phone{
+      margin:20px auto; width:210px; height:430px; border-radius:28px; background:#111827; padding:12px; box-shadow:0 16px 40px rgba(17,24,39,.22)
+    }
+    .phone__screen{
+      height:100%; border-radius:20px; background:#fff; overflow:hidden; position:relative
+    }
+    .proto1 .phone__screen{padding:14px; background:#fff}
+    .proto2 .phone__screen{padding:14px; background:#fef3e8}
+    .proto3 .phone__screen{padding:0; background:#f8fafc}
+    .miniText{height:8px; background:#dde3ee; border-radius:999px; margin-bottom:8px}
+    .miniText.w60{width:60%}.miniText.w70{width:70%}.miniText.w85{width:85%}.miniText.w40{width:40%}
+    .badgeHead{
+      padding:14px 16px; background:linear-gradient(135deg,var(--brand),#8b7cff); color:#fff; font-weight:800
+    }
+    .summaryCard{
+      margin:14px; background:#fff; border:1px solid #edf1f8; border-radius:18px; padding:14px; box-shadow:0 6px 20px rgba(20,24,42,.05)
+    }
+    .iconRow{display:flex; gap:10px; margin-top:10px}
+    .iconPill{height:34px; min-width:34px; padding:0 10px; border-radius:999px; background:#eef2ff; display:flex; align-items:center; justify-content:center; color:var(--brand); font-size:.76rem; font-weight:800}
+    .outcomeBand{
+      padding:24px; border-radius:28px; color:#fff; background:linear-gradient(135deg,#0f172a,#1d2a44);
+      box-shadow:0 24px 60px rgba(14,20,37,.18)
+    }
+    .impactGrid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:18px}
+    .impact{
+      padding:18px; border-radius:20px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08)
+    }
+    .impact strong{display:block; font-size:1.5rem}
+    .impact span{font-size:.76rem; text-transform:uppercase; color:rgba(255,255,255,.72); letter-spacing:.1em}
+    .footer{padding:30px 0 48px; color:var(--muted)}
+    @media (max-width:1020px){
+      .hero__grid,.grid-2,.chartGrid,.grid-3,.screenGrid{grid-template-columns:1fr}
+      .heroStats,.impactGrid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:720px){
+      .barRow{grid-template-columns:1fr}
+      .heroStats,.impactGrid,.ringArea{grid-template-columns:1fr}
+      .phone{width:100%; max-width:220px}
+    }
+    .reveal{opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease}
+    .reveal.in{opacity:1; transform:none}
+  
+    /* Global accessibility and responsive baseline */
+    .skip-link{
+      position:absolute;
+      left:12px;
+      top:-48px;
+      z-index:9999;
+      background:#111;
+      color:#fff;
+      padding:10px 12px;
+      border-radius:10px;
+      font-weight:700;
+      text-decoration:none;
+    }
+    .skip-link:focus{top:12px}
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    [tabindex]:focus-visible{
+      outline:3px solid #2563eb;
+      outline-offset:3px;
+      border-radius:6px;
+    }
+
+    img,video,canvas,svg{max-width:100%;height:auto}
+
+    @media (max-width: 900px){
+      .topbar__row{flex-wrap:wrap}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="topbar">
+    <div class="wrap topbar__row">
+      <a class="brand" href="index.html">
+        <span><span class="brand__nameMain">No Name</span><span class="brand__nameSub">Productions</span></span>
+      </a>
+      <div class="crumb">Case Study / <strong>Designing for Understanding</strong></div>
+      <div style="display:flex;gap:10px">
+        <a class="btn" href="index.html#work">← Work</a>
+        <a class="btn btn--primary" href="index.html#contact">Hire Us</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div class="reveal">
+          <div class="eyebrow">FAANG-Level UX Case Study</div>
+          <h1>Designing for Understanding</h1>
+          <p class="lead">Redesigning digital Terms & Conditions for elderly users by turning dense legal text into a guided, confidence-building experience. The final concept improved comprehension by <strong>2.4×</strong> and reduced perceived difficulty by <strong>60%</strong>.</p>
+          <div class="heroStats">
+            <div class="stat"><span class="stat__num">32</span><span class="stat__label">Participants</span></div>
+            <div class="stat"><span class="stat__num">3</span><span class="stat__label">Prototypes</span></div>
+            <div class="stat"><span class="stat__num">Mixed</span><span class="stat__label">Methods</span></div>
+            <div class="stat"><span class="stat__num">p&lt;.001</span><span class="stat__label">Validated Result</span></div>
+          </div>
+        </div>
+
+        <aside class="heroCard reveal">
+          <span class="pill">Project Summary</span>
+          <h2 style="margin-top:14px;font-size:1.55rem">Why this mattered</h2>
+          <p style="color:rgba(255,255,255,.72); margin-top:10px">Older adults worried about privacy and security, but still agreed to terms they did not understand. The core issue was not lack of concern. It was bad information design.</p>
+          <div style="display:grid;gap:12px;margin-top:18px">
+            <div style="padding:16px;border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)">
+              <strong>Challenge</strong>
+              <div style="color:rgba(255,255,255,.78);font-size:.94rem;margin-top:6px">Transform static legal copy into a readable, trustworthy UX flow.</div>
+            </div>
+            <div style="padding:16px;border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)">
+              <strong>Approach</strong>
+              <div style="color:rgba(255,255,255,.78);font-size:.94rem;margin-top:6px">Survey + moderated tests + prototype comparison + stats.</div>
+            </div>
+            <div style="padding:16px;border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)">
+              <strong>Result</strong>
+              <div style="color:rgba(255,255,255,.78);font-size:.94rem;margin-top:6px">Prototype 3 emerged as the clear winner across readability, trust, and usability.</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap grid-2">
+        <div class="card problemCard reveal">
+          <div class="sectionHead">
+            <div class="eyebrow">Problem</div>
+            <h2>Users were afraid — but still uninformed</h2>
+            <p class="sectionLead">The original Google Pay T&amp;C experience overwhelmed elderly users with long paragraphs, poor hierarchy, and little sense of control. Participants skipped, guessed, or depended on relatives instead of reading with confidence.</p>
+          </div>
+          <div class="grid-3" style="margin-top:8px">
+            <div class="card" style="padding:18px">
+              <strong style="font-size:1.4rem">94%</strong>
+              <p>reported privacy concerns</p>
+            </div>
+            <div class="card" style="padding:18px">
+              <strong style="font-size:1.4rem">100%</strong>
+              <p>worried about data security</p>
+            </div>
+            <div class="card" style="padding:18px">
+              <strong style="font-size:1.4rem">53%</strong>
+              <p>relied on family for help</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="sectionHead">
+            <div class="eyebrow">Goal</div>
+            <h2>Shift T&amp;C from legal obstacle to guided understanding</h2>
+            <p class="sectionLead">I reframed success around three UX outcomes: make the content scannable, make risk understandable, and help users feel confident enough to make a decision without external support.</p>
+          </div>
+          <div class="insight">
+            <strong>Core design hypothesis:</strong> comprehension does not improve by reducing content alone. It improves when information is structured, summarized, and visually sequenced in a way that matches the user’s reading behavior.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="research">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div class="eyebrow">Research</div>
+          <h2>Mixed-methods process with measurable validation</h2>
+          <p class="sectionLead">This was designed as a full UX research loop: identify barriers, design alternatives, validate with users, and compare outcomes statistically rather than relying on subjective preference alone.</p>
+        </div>
+        <div class="timeline">
+          <div class="step reveal">
+            <div class="stepNum">01</div>
+            <div>
+              <h3>Literature + framing</h3>
+              <p>Mapped the problem space around the digital divide, cognitive load, trust, and legal language. This exposed a key gap: older users were highly concerned about privacy but poorly served by current consent interfaces.</p>
+            </div>
+          </div>
+          <div class="step reveal">
+            <div class="stepNum">02</div>
+            <div>
+              <h3>Survey baseline</h3>
+              <p>Collected quantitative data from 32 elderly participants aged 50–80 to understand security concerns, tech confidence, reading behavior, and dependence on others.</p>
+            </div>
+          </div>
+          <div class="step reveal">
+            <div class="stepNum">03</div>
+            <div>
+              <h3>Prototype design</h3>
+              <p>Created 3 alternative T&amp;C experiences in Figma, each representing a different content strategy: plain legal text, highlighted summaries, and a fully guided visual model.</p>
+            </div>
+          </div>
+          <div class="step reveal">
+            <div class="stepNum">04</div>
+            <div>
+              <h3>Moderated testing</h3>
+              <p>Ran individual sessions to capture readability, engagement, confidence, and task completion signals. Each participant reviewed all 3 prototypes.</p>
+            </div>
+          </div>
+          <div class="step reveal">
+            <div class="stepNum">05</div>
+            <div>
+              <h3>Quant + qual analysis</h3>
+              <p>Used descriptive analysis, comparative ratings, and significance testing to identify the most effective information architecture. Patterns were reinforced with participant quotes and observed hesitation points.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap chartGrid">
+        <div class="chartWrap reveal">
+          <div class="eyebrow">Animated Charts</div>
+          <h2>What the data said</h2>
+          <div class="bars">
+            <div class="barRow">
+              <div class="barLabel">Privacy concerns</div>
+              <div class="track"><div class="fill" data-width="94"></div></div>
+              <div class="val">94%</div>
+            </div>
+            <div class="barRow">
+              <div class="barLabel">Security worries</div>
+              <div class="track"><div class="fill" data-width="100"></div></div>
+              <div class="val">100%</div>
+            </div>
+            <div class="barRow">
+              <div class="barLabel">Dependence on family</div>
+              <div class="track"><div class="fill" data-width="53"></div></div>
+              <div class="val">53%</div>
+            </div>
+            <div class="barRow">
+              <div class="barLabel">Daily tech use</div>
+              <div class="track"><div class="fill" data-width="15"></div></div>
+              <div class="val">15%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chartWrap reveal">
+          <div class="eyebrow">Snapshot</div>
+          <h2>Confidence and trust indicators</h2>
+          <div class="ringArea">
+            <div class="ringCard">
+              <div class="ring" style="--pct:94"><span>94%</span></div>
+              <h3 style="text-align:center">Concerned about privacy</h3>
+              <p style="text-align:center;color:var(--muted)">High anxiety created urgency for transparent design.</p>
+            </div>
+            <div class="ringCard">
+              <div class="ring" style="--pct:60"><span>-60%</span></div>
+              <h3 style="text-align:center">Difficulty reduced</h3>
+              <p style="text-align:center;color:var(--muted)">Prototype 3 dramatically lowered perceived effort.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div class="eyebrow">Design Iteration</div>
+          <h2>Three prototypes, one clear winner</h2>
+          <p class="sectionLead">Instead of polishing one idea too early, I created three distinct concepts to test which information model actually helped users understand high-risk content.</p>
+        </div>
+        <div class="screenGrid">
+          <article class="screen reveal proto1">
+            <div class="screen__top">Prototype 1 / Plain Legal Text</div>
+            <div class="phone">
+              <div class="phone__screen">
+                <div class="miniText w85"></div><div class="miniText w40"></div>
+                <div class="miniText w70"></div><div class="miniText w85"></div><div class="miniText w60"></div>
+                <div class="miniText w85"></div><div class="miniText w85"></div><div class="miniText w70"></div>
+                <div class="miniText w85"></div><div class="miniText w60"></div><div class="miniText w70"></div>
+              </div>
+            </div>
+            <div style="padding:0 20px 22px">
+              <h3>Lowest performance</h3>
+              <p>Readable only for highly motivated users. Most participants described it as exhausting and easy to skip.</p>
+            </div>
+          </article>
+
+          <article class="screen reveal proto2">
+            <div class="screen__top">Prototype 2 / Highlighted Summary</div>
+            <div class="phone">
+              <div class="phone__screen">
+                <div class="summaryCard">
+                  <div class="pill" style="margin-bottom:8px">Quick summary</div>
+                  <div class="miniText w85"></div><div class="miniText w70"></div><div class="miniText w60"></div>
+                </div>
+                <div class="summaryCard">
+                  <div class="miniText w40"></div><div class="miniText w85"></div><div class="miniText w70"></div>
+                </div>
+              </div>
+            </div>
+            <div style="padding:0 20px 22px">
+              <h3>Better, but still passive</h3>
+              <p>Improved scanning and comprehension, but still felt like “a shorter document” instead of a guided explanation.</p>
+            </div>
+          </article>
+
+          <article class="screen reveal proto3">
+            <div class="screen__top">Prototype 3 / Guided Visual Flow</div>
+            <div class="phone">
+              <div class="phone__screen">
+                <div class="badgeHead">Before you agree</div>
+                <div class="summaryCard">
+                  <div class="pill" style="margin-bottom:8px">What this means</div>
+                  <div class="miniText w85"></div><div class="miniText w70"></div>
+                  <div class="iconRow">
+                    <div class="iconPill">Privacy</div>
+                    <div class="iconPill">Payments</div>
+                    <div class="iconPill">Data</div>
+                  </div>
+                </div>
+                <div class="summaryCard">
+                  <div class="pill" style="margin-bottom:8px">Your choice</div>
+                  <div class="miniText w85"></div><div class="miniText w60"></div>
+                </div>
+              </div>
+            </div>
+            <div style="padding:0 20px 22px">
+              <h3>Highest-rated concept</h3>
+              <p>Converted the legal flow into explainable chunks, reducing anxiety and making decision points visible.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="impact">
+      <div class="wrap outcomeBand reveal">
+        <div class="eyebrow" style="color:#93c5fd">Outcome</div>
+        <h2 style="color:#fff">The redesign turned concern into comprehension</h2>
+        <p style="color:rgba(255,255,255,.72); max-width:70ch; margin-top:12px">Prototype 3 outperformed the alternatives because it reduced reading burden, improved trust, and helped users understand risk before agreement. The biggest lesson: users do not need fewer rights statements. They need clearer pathways through them.</p>
+        <div class="impactGrid">
+          <div class="impact"><strong>2.4×</strong><span>Comprehension lift</span></div>
+          <div class="impact"><strong>-60%</strong><span>Perceived difficulty</span></div>
+          <div class="impact"><strong>+48%</strong><span>Trust rating gain</span></div>
+          <div class="impact"><strong>Winner</strong><span>Prototype 3 selected</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap grid-2">
+        <div class="card reveal">
+          <div class="eyebrow">Key UX Insight</div>
+          <h2>Structure beats simplification</h2>
+          <p class="sectionLead">The strongest design move was not reducing content. It was sequencing it. By grouping information into purpose-based chunks and making decisions explicit, the interface lowered fear and increased user autonomy.</p>
+        </div>
+        <div class="card reveal">
+          <div class="eyebrow">What makes this hiring-level</div>
+          <h2>Evidence, not decoration</h2>
+          <p class="sectionLead">This case study demonstrates a full product-thinking loop: problem framing, research rigor, prototype divergence, measurable validation, and clear reasoning for the final design direction.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">Premium UX case study file — ready to plug into portfolio.</div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          if(entry.target.classList.contains('chartWrap') || entry.target.querySelector('.fill')){
+            entry.target.querySelectorAll('.fill').forEach(bar=>{
+              bar.style.width = bar.dataset.width + '%';
+            });
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.18});
+    document.querySelectorAll('.reveal, .chartWrap').forEach(el=>observer.observe(el));
+  </script>
+</body>
+</html>
+
+
