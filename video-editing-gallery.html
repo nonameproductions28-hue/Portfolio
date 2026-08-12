@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Video Editing Gallery</title>
-<meta name="description" content="A curated video editing gallery for the No Name Productions portfolio, with hover previews and a viewer for each edit." />
+<meta name="description" content="A curated video editing gallery for design with sid, with hover previews and a viewer for each edit." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -254,6 +254,69 @@ h3 { font-size: 1.08rem; line-height: 1.1; }
   color: var(--ink-soft);
 }
 
+.filterBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 20px;
+  flex-wrap: wrap;
+}
+
+.filterBar__label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.filterChip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.84);
+  color: var(--ink);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.filterChip:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.filterChip.is-active,
+.filterChip[aria-selected="true"] {
+  background: linear-gradient(135deg, var(--accent), #fb923c);
+  color: #fff;
+  border-color: transparent;
+}
+
+.topicSection {
+  padding: 0 0 3rem;
+}
+
+.topicSection.is-hidden {
+  display: none;
+}
+
+.topicSection__header {
+  margin-bottom: 32px;
+}
+
+.topicSection__header p {
+  max-width: 68ch;
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+  line-height: 1.85;
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -456,6 +519,15 @@ h3 { font-size: 1.08rem; line-height: 1.1; }
   .close { top: 8px; right: 8px; }
 }
 
+.reels-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem 1rem 3rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -468,16 +540,15 @@ h3 { font-size: 1.08rem; line-height: 1.1; }
 
 <header class="topbar">
   <div class="wrap topbar__row">
-    <a class="brand" href="index.html" aria-label="No Name Productions Home">
-      <span class="brand__mark" aria-hidden="true"></span>
-      <span class="brand__text">
-        <span class="brand__name">No Name Productions</span>
-        <span class="brand__sub">Creative Studio</span>
-      </span>
+    <a class="brand" href="index.html" aria-label="design with sid Home">
+      <img src="assests/img/logo.svg" alt="design with sid logo" style="height: 48px; width: auto;">
+      <span class="brand__name">Design with Sid</span>
     </a>
 
     <nav class="topbar__crumb" aria-label="Breadcrumb">
       <a href="index.html#work">Work</a>
+      <span>›</span>
+      <a href="index.html#work" style="color:inherit">Video Editing</a>
       <span>›</span>
       <strong>Video Editing Gallery</strong>
     </nav>
@@ -500,44 +571,86 @@ h3 { font-size: 1.08rem; line-height: 1.1; }
         <div class="stat"><strong>Hover</strong><span>Desktop preview playback</span></div>
         <div class="stat"><strong>Viewer</strong><span>Keyboard and touch support</span></div>
       </div>
+      <div class="filterBar" aria-label="Video section filters">
+        <span class="filterBar__label">Select Section</span>
+        <button class="filterChip is-active" type="button" data-section="videos" role="tab" aria-selected="true">Video Edits</button>
+        <button class="filterChip" type="button" data-section="reels" role="tab" aria-selected="false">Reels & Stories</button>
+      </div>
     </div>
   </section>
 
-  <section class="gallery" id="gallery" aria-label="Video editing gallery">
-    <article class="gallery-item landscape" data-title="Sympo" data-format="Landscape social edit">
-      <figure>
-        <video src="assests/img/videos/Sympo.mp4" muted loop preload="metadata" playsinline></video>
-        <figcaption><strong>Sympo</strong><span>Landscape social edit</span></figcaption>
-      </figure>
-    </article>
+  <section class="topicSection" data-section-panel="videos" aria-labelledby="videos-heading">
+    <div class="topicSection__header wrap">
+      <p class="eyebrow">Section 01</p>
+      <h2 id="videos-heading">Video Edits</h2>
+      <p>Landscape and mixed-format video content showcasing editing techniques, pacing, and visual composition.</p>
+    </div>
+    <section class="gallery" id="gallery-videos" aria-label="Video editing gallery">
+      <article class="gallery-item landscape" data-title="Sympo" data-format="Landscape social edit">
+        <figure>
+          <video src="assests/img/videos/Sympo.mp4" muted loop preload="metadata" playsinline></video>
+          <figcaption><strong>Sympo</strong><span>Landscape social edit</span></figcaption>
+        </figure>
+      </article>
 
-    <article class="gallery-item landscape" data-title="Video" data-format="Landscape social edit">
-      <figure>
-        <video src="assests/img/videos/Video.mp4" muted loop preload="metadata" playsinline></video>
-        <figcaption><strong>Video</strong><span>Landscape social edit</span></figcaption>
-      </figure>
-    </article>
+      <article class="gallery-item landscape" data-title="Video" data-format="Landscape social edit">
+        <figure>
+          <video src="assests/img/videos/Video.mp4" muted loop preload="metadata" playsinline></video>
+          <figcaption><strong>Video</strong><span>Landscape social edit</span></figcaption>
+        </figure>
+      </article>
 
-    <article class="gallery-item landscape" data-title="Showreel" data-format="Landscape showreel">
-      <figure>
-        <video src="assests/img/videos/Showreel.mp4" muted loop preload="metadata" playsinline></video>
-        <figcaption><strong>Showreel</strong><span>Landscape showreel</span></figcaption>
-      </figure>
-    </article>
+      <article class="gallery-item landscape" data-title="Showreel" data-format="Landscape showreel">
+        <figure>
+          <video src="assests/img/videos/Showreel.mp4" muted loop preload="metadata" playsinline></video>
+          <figcaption><strong>Showreel</strong><span>Landscape showreel</span></figcaption>
+        </figure>
+      </article>
 
-    <article class="gallery-item landscape" data-title="Malasiya" data-format="Landscape campaign cut">
-      <figure>
-        <video src="assests/img/videos/Malasiya.mp4" muted loop preload="metadata" playsinline></video>
-        <figcaption><strong>Malasiya</strong><span>Landscape campaign cut</span></figcaption>
-      </figure>
-    </article>
+      <article class="gallery-item landscape" data-title="Malasiya" data-format="Landscape campaign cut">
+        <figure>
+          <video src="assests/img/videos/Malasiya.mp4" muted loop preload="metadata" playsinline></video>
+          <figcaption><strong>Malasiya</strong><span>Landscape campaign cut</span></figcaption>
+        </figure>
+      </article>
+    </section>
+  </section>
 
-    <article class="gallery-item portrait" data-title="Ingenious" data-format="Portrait reel">
-      <figure>
-        <video src="assests/img/videos/Ingenious.mp4" muted loop preload="metadata" playsinline></video>
-        <figcaption><strong>Ingenious</strong><span>Portrait reel</span></figcaption>
-      </figure>
-    </article>
+  <section class="topicSection is-hidden" data-section-panel="reels" aria-labelledby="reels-heading">
+    <div class="topicSection__header wrap">
+      <p class="eyebrow">Section 02</p>
+      <h2 id="reels-heading">Reels & Stories</h2>
+      <p>Vertical format video content designed for social platforms. Perfect for mobile viewing and quick consumption.</p>
+    </div>
+    <section class="reels-gallery" id="gallery-reels" aria-label="Video reels gallery">
+      <article class="gallery-item portrait" data-title="Ingenious" data-format="Portrait reel">
+        <figure>
+          <video src="assests/img/videos/Ingenious.mp4" muted loop preload="metadata" playsinline></video>
+          <figcaption><strong>Ingenious</strong><span>Portrait reel</span></figcaption>
+        </figure>
+      </article>
+
+      <article class="gallery-item portrait" data-title="Relux 1" data-format="Portrait reel">
+        <figure>
+          <video src="assests/img/videos/reels/01_Relux (Insta Reel 01).mp4" muted loop preload="metadata" playsinline></video>
+          <figcaption><strong>Relux 1</strong><span>Portrait reel</span></figcaption>
+        </figure>
+      </article>
+
+      <article class="gallery-item portrait" data-title="Relux 2" data-format="Portrait reel">
+        <figure>
+          <video src="assests/img/videos/reels/02_Relux (Insta Reel 02).mp4" muted loop preload="metadata" playsinline></video>
+          <figcaption><strong>Relux 2</strong><span>Portrait reel</span></figcaption>
+        </figure>
+      </article>
+
+      <article class="gallery-item portrait" data-title="Relux 3" data-format="Portrait reel">
+        <figure>
+          <video src="assests/img/videos/reels/03_Relux (Insta Reel 03).mp4" muted loop preload="metadata" playsinline></video>
+          <figcaption><strong>Relux 3</strong><span>Portrait reel</span></figcaption>
+        </figure>
+      </article>
+    </section>
   </section>
 </main>
 
@@ -552,16 +665,38 @@ h3 { font-size: 1.08rem; line-height: 1.1; }
 </div>
 
 <script>
-const items = [...document.querySelectorAll('.gallery-item')];
 const viewer = document.getElementById('viewer');
 const viewerVideo = document.getElementById('viewerVideo');
 const viewerThumbnails = document.getElementById('viewerThumbnails');
 const closeBtn = document.querySelector('.close');
 const prevBtn = document.querySelector('.prev');
 const nextBtn = document.querySelector('.next');
+const filterChips = [...document.querySelectorAll('.filterChip[data-section]')];
+const sectionPanels = [...document.querySelectorAll('.topicSection')];
 
+let items = [];
 let currentIndex = 0;
 let lastFocus = null;
+
+function setActiveSection(sectionName) {
+  filterChips.forEach(chip => {
+    const isActive = chip.dataset.section === sectionName;
+    chip.classList.toggle('is-active', isActive);
+    chip.setAttribute('aria-selected', String(isActive));
+  });
+
+  sectionPanels.forEach(panel => {
+    panel.classList.toggle('is-hidden', panel.dataset.sectionPanel !== sectionName);
+  });
+}
+
+function refreshGallery() {
+  const activeSection = document.querySelector('.topicSection:not(.is-hidden)');
+  const galleryPane = activeSection ? activeSection.querySelector('.gallery, .reels-gallery') : null;
+  items = galleryPane ? [...galleryPane.querySelectorAll('.gallery-item')] : [];
+  currentIndex = 0;
+  initThumbnails();
+}
 
 function createVideoThumbnail(source, seekTime = 0.2) {
   return new Promise((resolve, reject) => {
@@ -720,39 +855,66 @@ function prevVideo() {
   setViewer(currentIndex - 1);
 }
 
-items.forEach((item, index) => {
-  const video = item.querySelector('video');
+function bindGalleryItems() {
+  items.forEach((item, index) => {
+    const video = item.querySelector('video');
 
-  item.setAttribute('tabindex', '0');
-  item.setAttribute('role', 'button');
-  item.setAttribute('aria-label', `Open ${item.dataset.title || 'video'} in fullscreen viewer`);
+    item.setAttribute('tabindex', '0');
+    item.setAttribute('role', 'button');
+    item.setAttribute('aria-label', `Open ${item.dataset.title || 'video'} in fullscreen viewer`);
 
-  item.addEventListener('mouseenter', () => {
-    if (!prefersHover) return;
-    video.currentTime = 0;
-    video.play().catch(() => {});
-  });
+    item.addEventListener('mouseenter', () => {
+      if (!prefersHover) return;
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    });
 
-  item.addEventListener('mouseleave', () => {
-    video.pause();
-    video.currentTime = 0;
-  });
+    item.addEventListener('mouseleave', () => {
+      video.pause();
+      video.currentTime = 0;
+    });
 
-  item.addEventListener('click', () => {
-    currentIndex = index;
-    openViewer(item);
-  });
-
-  item.addEventListener('keydown', event => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      currentIndex = index;
+    item.addEventListener('click', () => {
+      currentIndex = items.indexOf(item);
       openViewer(item);
-    }
+    });
+
+    item.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        currentIndex = items.indexOf(item);
+        openViewer(item);
+      }
+    });
+  });
+}
+
+function generatePosterThumbnails() {
+  items.forEach(item => {
+    const video = item.querySelector('video');
+    const source = video.getAttribute('src');
+    if (!source || video.getAttribute('poster')) return;
+
+    createVideoThumbnail(source).then(dataUrl => {
+      video.setAttribute('poster', dataUrl);
+    }).catch(() => {
+      // Silently fail if thumbnail generation fails
+    });
+  });
+}
+
+refreshGallery();
+bindGalleryItems();
+generatePosterThumbnails();
+
+filterChips.forEach(chip => {
+  chip.addEventListener('click', () => {
+    setActiveSection(chip.dataset.section);
+    refreshGallery();
+    bindGalleryItems();
+    generatePosterThumbnails();
   });
 });
-
-initThumbnails();
 
 closeBtn.addEventListener('click', closeViewer);
 nextBtn.addEventListener('click', nextVideo);
