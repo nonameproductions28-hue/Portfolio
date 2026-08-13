@@ -139,7 +139,7 @@
     <div class="wrap topbar__row">
       <a class="brand" href="index.html"><span><span class="brand__nameMain">No Name</span><span class="brand__nameSub">Productions</span></span></a>
       <div class="crumb">Case Study / <strong>Globast</strong></div>
-      <div style="display:flex;gap:10px"><a class="btn" href="index.html#work">← Work</a><a class="btn btn--primary" href="index.html#contact">Hire Us</a></div>
+      <div style="display:flex;gap:10px"><a class="btn" href="index.html#work">← Work</a><a class="btn" href="https://www.figma.com/proto/zKAzwAhZVWKaIyGp1lS9d8/Globast?node-id=75-730&p=f&viewport=381%2C326%2C0.06&t=OjzilAZ8NA5eybqR-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=114%3A2&page-id=0%3A1" target="_blank" rel="noopener noreferrer">View Prototype ↗</a><a class="btn btn--primary" href="index.html#contact">Hire Us</a></div>
     </div>
   </header>
 
@@ -147,14 +147,17 @@
     <section class="hero">
       <div class="wrap hero__grid">
         <div class="reveal">
-          <div class="eyebrow">Premium Accessibility Case Study</div>
+          <div class="eyebrow">Concept Case Study · Accessibility-First Streaming</div>
           <h1>Globast</h1>
-          <p class="lead">An accessibility-first streaming platform designed for visually and hearing-impaired users. Through iterative testing and inclusive interaction design, the final concept reduced task completion time by <strong>35%</strong> and significantly improved perceived independence while browsing content.</p>
+          <p class="lead">An independent concept exploring an accessibility-first streaming platform for visually and hearing-impaired users. The redesign is built around a specific hypothesis: folding audio description, subtitle depth, and simplified navigation into the core flow — instead of burying them in settings — should cut task time and navigation errors substantially.</p>
           <div class="heroStats">
-            <div class="stat"><span class="stat__num">20</span><span class="stat__label">Participants</span></div>
-            <div class="stat"><span class="stat__num">5</span><span class="stat__label">Core tasks</span></div>
+            <div class="stat"><span class="stat__num">5</span><span class="stat__label">Core tasks mapped</span></div>
             <div class="stat"><span class="stat__num">2</span><span class="stat__label">Primary personas</span></div>
-            <div class="stat"><span class="stat__num">-35%</span><span class="stat__label">Task time</span></div>
+            <div class="stat"><span class="stat__num">3</span><span class="stat__label">Accessibility challenges addressed</span></div>
+            <div class="stat"><span class="stat__num">Target</span><span class="stat__label">-35% task time</span></div>
+          </div>
+          <div style="margin-top:22px">
+            <a class="btn btn--primary" href="https://www.figma.com/proto/zKAzwAhZVWKaIyGp1lS9d8/Globast?node-id=75-730&p=f&viewport=381%2C326%2C0.06&t=OjzilAZ8NA5eybqR-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=114%3A2&page-id=0%3A1" target="_blank" rel="noopener noreferrer">▶ Open the interactive prototype</a>
           </div>
         </div>
 
@@ -163,10 +166,10 @@
           <h2 style="margin-top:14px;font-size:1.55rem">Accessibility was the product, not an add-on</h2>
           <p style="color:rgba(255,255,255,.72); margin-top:10px">Instead of patching mainstream streaming patterns, Globast started from disability-specific needs: voice guidance for visual impairment, subtitle language depth for hearing impairment, and reduced navigation friction for both.</p>
           <div class="featureList">
-            <div class="feature">🎙️ Audio descriptions designed as primary UX support</div>
-            <div class="feature">💬 Multilingual subtitles and clearer caption states</div>
-            <div class="feature">🔎 Simplified discovery, stronger browsing hierarchy</div>
-            <div class="feature">🧭 Navigation built around independence, not assistance</div>
+            <div class="feature">🎙️ Voice assistant in the primary header — built</div>
+            <div class="feature">💬 Multilingual subtitle switching in the player — built</div>
+            <div class="feature">🔎 Simplified discovery, stronger browsing hierarchy — built</div>
+            <div class="feature">🎧 Audio description as a primary control — design target, not yet built</div>
           </div>
         </aside>
       </div>
@@ -195,9 +198,9 @@
     <section class="section" id="research">
       <div class="wrap grid-2">
         <div class="card reveal">
-          <div class="eyebrow">Research</div>
-          <h2>20 participants, mixed accessibility contexts</h2>
-          <p class="sectionLead">The research combined interviews, task-based usability testing, and prototype validation with users across visual and auditory accessibility needs. Two personas were synthesized to anchor decisions without losing nuance.</p>
+          <div class="eyebrow">Research approach</div>
+          <h2>Mixed accessibility contexts</h2>
+          <p class="sectionLead">The intended research approach combines interviews, task-based usability testing, and prototype validation with users across visual and auditory accessibility needs. Two personas were synthesized from accessibility guidelines and existing research to anchor decisions without losing nuance.</p>
           <div class="timeline" style="margin-top:14px">
             <div class="step"><div class="stepNum">01</div><div><h3>Discovery interviews</h3><p>Captured barriers around movie discovery, language access, and sensory friction.</p></div></div>
             <div class="step"><div class="stepNum">02</div><div><h3>Task testing</h3><p>Measured search, filter, play, subtitle, and accessibility-setting workflows.</p></div></div>
@@ -205,16 +208,23 @@
           </div>
         </div>
         <div class="card reveal">
-          <div class="eyebrow">Personas</div>
+          <div class="eyebrow">Illustrative Personas</div>
           <h2>Two different needs, one coherent system</h2>
+          <p class="sectionLead">Composites synthesized from accessibility guidelines and published research, not individual interview subjects — used to anchor decisions without losing nuance.</p>
           <div class="grid-2" style="margin-top:14px">
             <div style="padding:16px;border-radius:20px;background:rgba(124,58,237,.08);border:1px solid var(--line)">
               <h3>Charles</h3>
-              <p>Visual impairment. Needed strong voice support, simplified navigation, and content confidence before playback.</p>
+              <p style="color:var(--muted);font-size:.85rem;margin-top:2px">Visual impairment · relies on screen readers daily</p>
+              <p style="margin-top:8px">Goal: browse and choose something to watch without asking someone to read the screen first.</p>
+              <p style="margin-top:6px">Frustration: audio description buried three menus deep, so he defaults to re-watching known titles rather than discovering new ones.</p>
+              <p style="margin-top:6px">Needed: voice-first navigation, audio description promoted to a primary control, and enough context before playback to choose with confidence.</p>
             </div>
             <div style="padding:16px;border-radius:20px;background:rgba(34,211,238,.08);border:1px solid var(--line)">
               <h3>Ming Yue</h3>
-              <p>Hearing impairment. Needed reliable subtitle language access, clarity, and control without extra friction.</p>
+              <p style="color:var(--muted);font-size:.85rem;margin-top:2px">Hearing impairment · switches between two subtitle languages</p>
+              <p style="margin-top:8px">Goal: follow dialogue and tone accurately without subtitles lagging or cutting off mid-sentence.</p>
+              <p style="margin-top:6px">Frustration: caption settings that reset between titles, forcing the same setup every single session.</p>
+              <p style="margin-top:6px">Needed: persistent subtitle-language memory, adjustable pacing, and captions treated as core UI, not an accessibility afterthought.</p>
             </div>
           </div>
           <div class="insight" style="margin-top:14px"><strong>Design principle:</strong> Globast was shaped around “independent completion.” Every UX decision was evaluated against whether the user could complete the journey alone.</div>
@@ -225,28 +235,29 @@
     <section class="section">
       <div class="wrap chartGrid">
         <div class="chartWrap reveal">
-          <div class="eyebrow">Animated Metrics</div>
-          <h2>Accessibility outcomes</h2>
+          <div class="eyebrow">Design Targets</div>
+          <h2>What this redesign is aimed at</h2>
+          <p class="sectionLead" style="margin-bottom:10px">Illustrative targets based on the friction removed in each flow — not measured field results.</p>
           <div class="bars">
-            <div class="barRow"><div class="barLabel">Task time reduction</div><div class="track"><div class="fill" data-width="35"></div></div><div class="val">35%</div></div>
-            <div class="barRow"><div class="barLabel">Search success</div><div class="track"><div class="fill green" data-width="88"></div></div><div class="val">88%</div></div>
-            <div class="barRow"><div class="barLabel">Accessibility satisfaction</div><div class="track"><div class="fill" data-width="91"></div></div><div class="val">91%</div></div>
-            <div class="barRow"><div class="barLabel">Navigation errors drop</div><div class="track"><div class="fill red" data-width="42"></div></div><div class="val">42%</div></div>
+            <div class="barRow"><div class="barLabel">Task time reduction (target)</div><div class="track"><div class="fill" data-width="35"></div></div><div class="val">35%</div></div>
+            <div class="barRow"><div class="barLabel">Search success (target)</div><div class="track"><div class="fill green" data-width="88"></div></div><div class="val">88%</div></div>
+            <div class="barRow"><div class="barLabel">Accessibility satisfaction (target)</div><div class="track"><div class="fill" data-width="91"></div></div><div class="val">91%</div></div>
+            <div class="barRow"><div class="barLabel">Navigation errors drop (target)</div><div class="track"><div class="fill red" data-width="42"></div></div><div class="val">42%</div></div>
           </div>
         </div>
         <div class="chartWrap reveal">
-          <div class="eyebrow">Signal</div>
-          <h2>What improved most</h2>
+          <div class="eyebrow">Priority</div>
+          <h2>Where the redesign is aimed most</h2>
           <div class="ringArea">
             <div class="ringCard">
               <div class="ring" style="--pct:91; --clr: var(--violet)"><span>91%</span></div>
-              <h3 style="text-align:center">Accessibility satisfaction</h3>
-              <p style="text-align:center;color:var(--muted)">Users strongly preferred the final browsing flow.</p>
+              <h3 style="text-align:center">Accessibility satisfaction (target)</h3>
+              <p style="text-align:center;color:var(--muted)">The redesign's top priority, based on the persona interviews it was built around.</p>
             </div>
             <div class="ringCard">
               <div class="ring" style="--pct:88; --clr: var(--green)"><span>88%</span></div>
-              <h3 style="text-align:center">Search completion</h3>
-              <p style="text-align:center;color:var(--muted)">More users successfully reached content on their own.</p>
+              <h3 style="text-align:center">Search completion (target)</h3>
+              <p style="text-align:center;color:var(--muted)">What the simplified discovery flow is designed to achieve.</p>
             </div>
           </div>
         </div>
@@ -258,56 +269,40 @@
         <div class="sectionHead reveal">
           <div class="eyebrow">Premium Layout</div>
           <h2>Key screens and storytelling flow</h2>
-          <p class="sectionLead">The interface had to feel premium, cinematic, and accessible at the same time. I used dark immersion, strong hierarchy, and obvious control affordances to reduce sensory ambiguity.</p>
+          <p class="sectionLead">Real screens from the working Figma prototype — not mockups. Dark immersion and strong hierarchy carry the visual language; the two accessibility-relevant controls actually built so far are subtitle-language switching and a voice-assistant entry point.</p>
+          <p class="sectionLead" style="margin-top:10px">For the full interactive flow, <a href="https://www.figma.com/proto/zKAzwAhZVWKaIyGp1lS9d8/Globast?node-id=75-730&p=f&viewport=381%2C326%2C0.06&t=OjzilAZ8NA5eybqR-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=114%3A2&page-id=0%3A1" target="_blank" rel="noopener noreferrer" style="color:var(--violet);font-weight:700">open the Figma prototype ↗</a>.</p>
         </div>
         <div class="screenGrid">
           <article class="screen reveal">
-            <div class="screen__top">Home / Guided Discovery</div>
+            <div class="screen__top">Home — Desktop</div>
             <div class="frame">
-              <div style="display:flex;min-height:420px">
-                <aside class="navRail">
-                  <div class="dot">🏠</div>
-                  <div class="dot">🔎</div>
-                  <div class="dot">🎬</div>
-                  <div class="dot">⚙️</div>
-                </aside>
-                <div style="flex:1;padding:16px;background:var(--dark)">
-                  <div class="heroBanner">
-                    <div style="font-size:1.1rem;font-weight:800;color:#fff">Captain America</div>
-                    <div style="font-size:.8rem;color:rgba(255,255,255,.72);max-width:180px;margin-top:8px">Featured content with immediate access to play, audio settings, and content context.</div>
-                    <div style="margin-top:14px"><span class="playBtn">▶ Play now</span></div>
-                  </div>
-                  <div style="font-size:.72rem;color:rgba(255,255,255,.72);font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-top:14px">Recently watched</div>
-                  <div class="movieGrid">
-                    <div class="poster">Dark</div><div class="poster">Nope</div><div class="poster">Tenet</div>
-                  </div>
-                </div>
-              </div>
+              <img src="assests/img/globast/Home.png" alt="Globast desktop home screen with featured title banner and browsing rows" style="width:100%;height:420px;object-fit:cover;object-position:top;display:block" />
             </div>
             <div style="padding:0 20px 22px">
               <h3>Discovery with lower friction</h3>
-              <p>Immediate entry points for watching and clearer visual grouping reduced browsing hesitation.</p>
+              <p>Featured-title banner with an immediate play action, followed by clearly grouped browsing rows.</p>
             </div>
           </article>
 
           <article class="screen reveal">
-            <div class="screen__top">Playback / Accessibility Controls</div>
+            <div class="screen__top">Home — Voice Assistant Entry Point</div>
             <div class="frame">
-              <div style="padding:16px;background:linear-gradient(180deg,#090b16,#151834);min-height:420px">
-                <div style="height:180px;border-radius:20px;background:linear-gradient(135deg,#251d53,#0f1227);display:grid;place-items:center;color:rgba(255,255,255,.8);font-weight:800;font-size:1.1rem">Now playing</div>
-                <div style="margin-top:14px;padding:16px;border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)">
-                  <h3 style="color:#fff">Accessibility panel</h3>
-                  <div style="display:grid;gap:10px;margin-top:12px">
-                    <div style="padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.08);color:#fff;font-size:.82rem">Audio description / On</div>
-                    <div style="padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.08);color:#fff;font-size:.82rem">Subtitle language / Chinese</div>
-                    <div style="padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.08);color:#fff;font-size:.82rem">Voice navigation / Enabled</div>
-                  </div>
-                </div>
-              </div>
+              <img src="assests/img/globast/Home-2.png" alt="Globast mobile home screen with a voice assistant icon in the top navigation" style="width:100%;height:420px;object-fit:cover;object-position:top;display:block" />
             </div>
             <div style="padding:0 20px 22px">
-              <h3>Controls that don’t hide</h3>
-              <p>Accessibility settings were promoted to first-class controls rather than buried secondary preferences.</p>
+              <h3>Voice access, not buried in settings</h3>
+              <p>A dedicated voice-assistant icon sits in the primary header, next to search — a first step toward hands-free navigation, not yet the full voice-control system the concept targets.</p>
+            </div>
+          </article>
+
+          <article class="screen reveal">
+            <div class="screen__top">Playback — Subtitle Language</div>
+            <div class="frame">
+              <img src="assests/img/globast/Movies play screen-1.png" alt="Globast playback screen with subtitles switched to Chinese" style="width:100%;display:block" />
+            </div>
+            <div style="padding:0 20px 22px">
+              <h3>Subtitle language, demonstrated</h3>
+              <p>The "Audio & Subtitle" control sits directly in the player bar. Shown here switched from English to Chinese — the one accessibility-relevant interaction fully working in the current build.</p>
             </div>
           </article>
         </div>
@@ -316,14 +311,14 @@
 
     <section class="section" id="impact">
       <div class="wrap impactBand reveal">
-        <div class="eyebrow" style="color:#c4b5fd">Impact</div>
-        <h2 style="color:#fff">Accessibility improved when the product was designed around independence</h2>
-        <p style="color:rgba(255,255,255,.72); max-width:72ch; margin-top:12px">The final Globast concept proved that accessibility support should not behave like an extra settings layer. When content discovery, playback, and adaptation controls are integrated into the core journey, confidence and completion both improve.</p>
+        <div class="eyebrow" style="color:#c4b5fd">Target Impact</div>
+        <h2 style="color:#fff">Accessibility should not behave like an extra settings layer</h2>
+        <p style="color:rgba(255,255,255,.72); max-width:72ch; margin-top:12px">The Globast concept is built on that premise: when content discovery, playback, and adaptation controls are integrated into the core journey instead of buried in settings, confidence and completion should both improve. The figures below are the concept's design targets, not results from a fielded study.</p>
         <div class="impactGrid" style="margin-top:18px">
-          <div class="impact"><strong>-35%</strong><span>Task completion time</span></div>
-          <div class="impact"><strong>91%</strong><span>Accessibility satisfaction</span></div>
-          <div class="impact"><strong>88%</strong><span>Search success rate</span></div>
-          <div class="impact"><strong>-42%</strong><span>Navigation error rate</span></div>
+          <div class="impact"><strong>-35%</strong><span>Task completion time (target)</span></div>
+          <div class="impact"><strong>91%</strong><span>Accessibility satisfaction (target)</span></div>
+          <div class="impact"><strong>88%</strong><span>Search success rate (target)</span></div>
+          <div class="impact"><strong>-42%</strong><span>Navigation error rate (target)</span></div>
         </div>
       </div>
     </section>
