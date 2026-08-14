@@ -150,6 +150,10 @@
     window.location.href = `mailto:hello@nonameproductions.com?subject=${subject}&body=${body}`;
   });
 
+  $('[data-open-resume]')?.addEventListener('click', () => {
+    window.location.href = 'resume.html';
+  });
+
   const form = $('#contactForm');
   const msg = $('#formMsg');
   form?.addEventListener('submit', (e) => {

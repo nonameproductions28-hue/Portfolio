@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="assests/img/logo/favicon_32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assests/img/logo/favicon_16.png">
+<link rel="apple-touch-icon" href="assests/img/logo/icon_180_apple_touch.png">
 <title>Digital Canvas</title>
-<meta name="description" content="A curated Digital Canvas of social media posters and isometric illustrations for the No Name Productions graphic design portfolio." />
+<meta name="description" content="A curated Digital Canvas of social media posters and isometric illustrations for No Name Productions' graphic design showcase." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -321,6 +324,16 @@ h3 { font-size: 1.2rem; line-height: 1.08; }
   padding: 1rem 1rem 3rem;
 }
 
+/* Use a poster-style grid for consistent cards in each section */
+.topicSection[data-section-panel="posters"] .gallery,
+.topicSection[data-section-panel="isometrics"] .gallery,
+.topicSection[data-section-panel="manipulation"] .gallery {
+  column-count: unset;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
 .gallery-item {
   break-inside: avoid;
   margin-bottom: 1rem;
@@ -480,18 +493,30 @@ h3 { font-size: 1.2rem; line-height: 1.08; }
 }
 
 @media (max-width: 1100px) {
-  .gallery { column-count: 3; }
+  .topicSection[data-section-panel="posters"] .gallery,
+  .topicSection[data-section-panel="isometrics"] .gallery,
+  .topicSection[data-section-panel="manipulation"] .gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 800px) {
-  .gallery { column-count: 2; }
+  .topicSection[data-section-panel="posters"] .gallery,
+  .topicSection[data-section-panel="isometrics"] .gallery,
+  .topicSection[data-section-panel="manipulation"] .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .stats { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 520px) {
   .lightbox__thumbnails { padding: 14px; }
   .lightbox__thumbnail { width: 66px; height: 66px; }
-  .gallery { column-count: 1; }
+  .topicSection[data-section-panel="posters"] .gallery,
+  .topicSection[data-section-panel="isometrics"] .gallery,
+  .topicSection[data-section-panel="manipulation"] .gallery {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
   .hero__panel { padding: 22px; }
   .lightbox { padding: 16px; }
   .lightbox .close,
@@ -499,6 +524,27 @@ h3 { font-size: 1.2rem; line-height: 1.08; }
   .lightbox .prev,
   .lightbox .next { width: 42px; height: 42px; }
   .topbar__row { flex-wrap: wrap; padding: 12px 0; }
+}
+
+/* Dropdown menu open state */
+.dropdown__menu.is-open { display: block; }
+.dropdown__toggle[aria-expanded="true"] { box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+
+/* hide dropdown menu by default; shown when .is-open is added or on hover */
+.dropdown__menu { display: none; }
+.dropdown:hover .dropdown__menu { display: block; }
+
+/* visual indicator for active carousel item inside dropdown */
+.dropdown__menu .filterChip.is-active {
+  background: linear-gradient(135deg, var(--accent), #9f67ff);
+  color: #fff;
+  border-color: transparent;
+}
+.dropdown__menu .filterChip.is-active::after {
+  content: '\2713';
+  margin-left: 8px;
+  font-weight: 700;
+  display: inline-block;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -514,15 +560,13 @@ h3 { font-size: 1.2rem; line-height: 1.08; }
 <header class="topbar">
   <div class="wrap topbar__row">
     <a class="brand" href="index.html" aria-label="No Name Productions Home">
-      <span class="brand__mark" aria-hidden="true"></span>
-      <span class="brand__text">
-        <span class="brand__name">No Name Productions</span>
-        <span class="brand__sub">Creative Studio</span>
-      </span>
+      <img src="assests/img/logo/wordmark_transparent.png" alt="No Name Productions" style="height: 32px; width: auto; object-fit: contain;">
     </a>
 
     <nav class="topbar__crumb" aria-label="Breadcrumb">
       <a href="index.html#work">Work</a>
+      <span>›</span>
+      <a href="index.html#work" style="color:inherit">Graphic Design</a>
       <span>›</span>
       <strong>Digital Canvas</strong>
     </nav>
@@ -541,14 +585,22 @@ h3 { font-size: 1.2rem; line-height: 1.08; }
       <h1>Digital Canvas</h1>
       <p>A split showcase of social media posters and isometric illustrations. Use the section buttons to switch between the two groups, similar to the filter chips on the selected work section in the home page.</p>
       <div class="stats" aria-label="Gallery summary">
-        <div class="stat"><strong>17</strong><span>Total visuals</span></div>
-        <div class="stat"><strong>2</strong><span>Selectable sections</span></div>
+        <div class="stat"><strong>4</strong><span>Selectable sections</span></div>
         <div class="stat"><strong>Accessible</strong><span>Keyboard lightbox support</span></div>
       </div>
       <div class="filterBar" aria-label="Digital Canvas section filters">
         <span class="filterBar__label">Select Section</span>
         <button class="filterChip is-active" type="button" data-section="posters" role="tab" aria-selected="true">Social Media Posters</button>
         <button class="filterChip" type="button" data-section="isometrics" role="tab" aria-selected="false">Isometric Illustrations</button>
+        <button class="filterChip" type="button" data-section="manipulation" role="tab" aria-selected="false">Photo Manipulation</button>
+        <div class="dropdown" style="position:relative;">
+          <button class="top-btn dropdown__toggle" type="button" aria-haspopup="true" aria-expanded="false">Carousel Posts ▾</button>
+          <div class="dropdown__menu" role="menu" aria-label="Carousel posts menu" style="position:absolute; right:0; top:44px; background:rgba(255,255,255,0.98); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow-soft); padding:8px; z-index:100;">
+            <button class="filterChip" type="button" data-section="carousel1" role="menuitem">Carousel 1</button>
+            <button class="filterChip" type="button" data-section="carousel2" role="menuitem">Carousel 2</button>
+            <button class="filterChip" type="button" data-section="carousel3" role="menuitem">Carousel 3</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -674,6 +726,274 @@ h3 { font-size: 1.2rem; line-height: 1.08; }
       </div>
     </section>
   </section>
+  <section class="topicSection is-hidden" data-section-panel="manipulation" aria-labelledby="manipulation-heading">
+    <div class="topicSection__header wrap">
+      <p class="eyebrow">Section 03</p>
+      <h2 id="manipulation-heading">Photo Manipulation</h2>
+      <p>Photo manipulation and composite artwork selected from the portfolio assets.</p>
+    </div>
+    <section class="gallery" id="gallery-manipulation" aria-label="Photo manipulation gallery">
+       <div class="gallery-item">
+        <figure>
+          <img src="assests/img/manipulation/Almond Chocolate.jpg" loading="lazy" width="600" height="790" alt="Almond chocolate photo manipulation">
+          <figcaption><strong>Almond Chocolate</strong><span>Photo manipulation</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/manipulation/Blueberry.jpg" loading="lazy" width="600" height="800" alt="Blueberry photo manipulation">
+          <figcaption><strong>Blueberry</strong><span>Photo manipulation</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/manipulation/Fanta.jpg" loading="lazy" width="600" height="800" alt="Fanta photo manipulation">
+          <figcaption><strong>Fanta</strong><span>Photo manipulation</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/manipulation/Pringles.jpg" loading="lazy" width="600" height="800" alt="Pringles photo manipulation">
+          <figcaption><strong>Pringles</strong><span>Photo manipulation</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/manipulation/Sprite.jpg" loading="lazy" width="600" height="800" alt="Sprite photo manipulation">
+          <figcaption><strong>Sprite</strong><span>Photo manipulation</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/manipulation/Starbucks.jpg" loading="lazy" width="600" height="800" alt="Starbucks photo manipulation">
+          <figcaption><strong>Starbucks</strong><span>Photo manipulation</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/manipulation/Tropical Juice.jpg" loading="lazy" width="600" height="800" alt="Tropical Juice photo manipulation">
+          <figcaption><strong>Tropical Juice</strong><span>Photo manipulation</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/manipulation/Yogurt.jpg" loading="lazy" width="600" height="800" alt="Yogurt photo manipulation">
+          <figcaption><strong>Yogurt</strong><span>Photo manipulation</span></figcaption>
+        </figure>
+      </div>
+
+    </section>
+  </section>
+  <section class="topicSection is-hidden" data-section-panel="carousel1" aria-labelledby="carousel1-heading">
+    <div class="topicSection__header wrap">
+      <p class="eyebrow">Section 04</p>
+      <h2 id="carousel1-heading">Carousel 1</h2>
+      <p>A selection of carousel-style posts from the portfolio.</p>
+    </div>
+    <section class="gallery" id="gallery-carousel1" aria-label="Carousel 1 gallery">
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 1/carousel (1).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-1</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 1/carousel (2).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-2</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 1/carousel (3).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-3</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 1/carousel (4).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-4</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 1/carousel (5).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-5</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 1/carousel (6).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-6</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 1/carousel (7).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-7</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 1/carousel (8).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-8</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 1/carousel (9).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-9</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 1/carousel (10).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-10</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+
+    </section>
+  </section>
+  <section class="topicSection is-hidden" data-section-panel="carousel2" aria-labelledby="carousel2-heading">
+    <div class="topicSection__header wrap">
+      <p class="eyebrow">Section 04</p>
+      <h2 id="carousel2-heading">Carousel 2</h2>
+      <p>A selection of carousel-style posts from the portfolio.</p>
+    </div>
+    <section class="gallery" id="gallery-carousel2" aria-label="Carousel 2 gallery">
+    <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 2/carousel (1).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-1</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 2/carousel (2).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-2</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 2/carousel (3).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-3</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 2/carousel (4).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-4</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 2/carousel (5).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-5</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+2          <img src="assests/img/carousel/carousel 1/carousel (6).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-6</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 2/carousel (7).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-7</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+       <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 2/carousel (8).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-8</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+
+    </section>
+  </section>
+  <section class="topicSection is-hidden" data-section-panel="carousel3" aria-labelledby="carousel3-heading">
+    <div class="topicSection__header wrap">
+      <p class="eyebrow">Section 04</p>
+      <h2 id="carousel3-heading">Carousel 3</h2>
+      <p>A selection of carousel-style posts from the portfolio.</p>
+    </div>
+    <section class="gallery" id="gallery-carousel3" aria-label="Carousel 3 gallery">
+    <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 3/carousel (1).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-1</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 3/carousel (2).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-2</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 3/carousel (3).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-3</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 3/carousel (4).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-4</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 3/carousel (5).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-5</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 3/carousel (6).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-6</strong><span>Carousel post</span></figcaption>
+        </figure> 
+      </div>
+      <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 3/carousel (7).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-7</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+       <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 3/carousel (8).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-8</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+       <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 3/carousel (9).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-9</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+       <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 3/carousel (10).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-10</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+       <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 3/carousel (11).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-11</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+       <div class="gallery-item">
+        <figure>
+          <img src="assests/img/carousel/carousel 3/carousel (12).jpg" loading="lazy" width="600" height="800" alt="Carousel 1 - slide 1">
+          <figcaption><strong>Carousel1-12</strong><span>Carousel post</span></figcaption>
+        </figure>
+      </div>
+
+    </section>
+  </section>
 </main>
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Image viewer">
@@ -689,13 +1009,8 @@ h3 { font-size: 1.2rem; line-height: 1.08; }
 </div>
 
 <script>
-const galleryItems = [...document.querySelectorAll('.gallery-item')].map(item => {
-  const image = item.querySelector('img');
-  const title = item.querySelector('figcaption strong')?.textContent || image?.alt || '';
-  const meta = item.querySelector('figcaption span')?.textContent || '';
-  return { item, image, title, meta };
-});
-const images = galleryItems.map(entry => entry.image);
+let galleryItems = [];
+let images = [];
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
 const lightboxThumbnails = document.getElementById('lightboxThumbnails');
@@ -708,6 +1023,9 @@ const backBtn = document.getElementById('backBtn');
 const filterChips = [...document.querySelectorAll('.filterChip[data-section]')];
 const sectionPanels = [...document.querySelectorAll('.topicSection[data-section-panel]')];
 const galleryPanes = [...document.querySelectorAll('.gallery')];
+
+  const carouselToggle = document.querySelector('.dropdown__toggle');
+  const carouselMenu = document.querySelector('.dropdown__menu');
 
 let currentIndex = 0;
 let lastFocus = null;
@@ -816,19 +1134,87 @@ function updateFullscreenButton() {
   fullscreenBtn.textContent = isFullscreen ? '⤡' : '⤢';
 }
 
-galleryPanes.forEach(galleryPane => {
-  galleryPane.addEventListener('click', event => {
-    const target = event.target.closest('.gallery-item img');
-    if (!target) return;
-    currentIndex = images.indexOf(target);
-    openModal(target);
+function refreshGallery() {
+  const activeSection = document.querySelector('.topicSection:not(.is-hidden)');
+  const galleryPane = activeSection ? activeSection.querySelector('.gallery') : null;
+  const items = galleryPane ? [...galleryPane.querySelectorAll('.gallery-item')] : [];
+  galleryItems = items.map(item => {
+    const image = item.querySelector('img');
+    const title = item.querySelector('figcaption strong')?.textContent || image?.alt || '';
+    const meta = item.querySelector('figcaption span')?.textContent || '';
+    return { item, image, title, meta };
+  });
+  images = galleryItems.map(entry => entry.image);
+  initThumbnails();
+}
+
+// initialise gallery for the default visible section
+refreshGallery();
+
+filterChips.forEach(chip => {
+  chip.addEventListener('click', () => {
+    setActiveSection(chip.dataset.section);
+    // refresh gallery list for the newly active section
+    refreshGallery();
+    if (carouselToggle && carouselMenu) {
+      carouselToggle.setAttribute('aria-expanded', 'false');
+      carouselMenu.classList.remove('is-open');
+    }
   });
 });
 
-initThumbnails();
+// ensure selecting a dropdown menu item always closes the dropdown
+if (carouselMenu) {
+  carouselMenu.addEventListener('click', (e) => {
+    const btn = e.target.closest('.filterChip[data-section]');
+    if (!btn) return;
+    // set section and refresh gallery (filterChips handler will also run)
+    setActiveSection(btn.dataset.section);
+    refreshGallery();
+    if (carouselToggle) {
+      carouselToggle.setAttribute('aria-expanded', 'false');
+    }
+    carouselMenu.classList.remove('is-open');
+  });
+}
 
-filterChips.forEach(chip => {
-  chip.addEventListener('click', () => setActiveSection(chip.dataset.section));
+// Dropdown toggle behaviour
+if (carouselToggle && carouselMenu) {
+  carouselToggle.addEventListener('click', (e) => {
+    const isOpen = carouselToggle.getAttribute('aria-expanded') === 'true';
+    carouselToggle.setAttribute('aria-expanded', String(!isOpen));
+    carouselMenu.classList.toggle('is-open', !isOpen);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!carouselToggle.contains(e.target) && !carouselMenu.contains(e.target)) {
+      carouselToggle.setAttribute('aria-expanded', 'false');
+      carouselMenu.classList.remove('is-open');
+    }
+  });
+}
+
+// also open/close dropdown on hover and update ARIA
+const carouselDropdown = carouselToggle ? carouselToggle.closest('.dropdown') : null;
+if (carouselDropdown && carouselToggle && carouselMenu) {
+  carouselDropdown.addEventListener('mouseenter', () => {
+    carouselToggle.setAttribute('aria-expanded', 'true');
+    carouselMenu.classList.add('is-open');
+  });
+  carouselDropdown.addEventListener('mouseleave', () => {
+    carouselToggle.setAttribute('aria-expanded', 'false');
+    carouselMenu.classList.remove('is-open');
+  });
+}
+
+// delegate gallery clicks so the current `images` array (per-section) is used
+document.addEventListener('click', event => {
+  const galleryPane = event.target.closest('.gallery');
+  if (!galleryPane) return;
+  const target = event.target.closest('.gallery-item img');
+  if (!target) return;
+  currentIndex = images.indexOf(target);
+  openModal(target);
 });
 
 closeBtn.addEventListener('click', closeModal);

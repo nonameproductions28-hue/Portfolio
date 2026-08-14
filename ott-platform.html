@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CINEMA - Accessible OTT Platform</title>
-    <meta name="description" content="CINEMA is an accessibility-first OTT platform prototype with keyboard navigation, assistive settings, and WCAG-aware interactions.">
+    <link rel="icon" type="image/png" sizes="32x32" href="assests/img/logo/favicon_32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assests/img/logo/favicon_16.png">
+    <link rel="apple-touch-icon" href="assests/img/logo/icon_180_apple_touch.png">
+    <title>CINEMA — Accessible OTT Prototype · No Name Productions</title>
+    <meta name="description" content="An interactive prototype by No Name Productions exploring accessibility-first OTT design: keyboard navigation, assistive settings, and WCAG-aware interactions across a full multi-screen streaming app.">
     <style>
         * {
             margin: 0;
@@ -1009,6 +1012,30 @@
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <style>
+        body{ padding-top:44px; }
+        .sidebar{ top:44px !important; height:calc(100vh - 44px) !important; }
+        .prototypeBanner{
+            position:fixed; top:0; left:0; right:0; height:44px; z-index:2000;
+            display:flex; align-items:center; justify-content:space-between; gap:12px;
+            padding:0 16px; background:#050812; border-bottom:2px solid var(--accent);
+            font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+        }
+        .prototypeBanner__text{ color:var(--text-muted); font-size:.82rem; }
+        .prototypeBanner__text strong{ color:#fff; }
+        .prototypeBanner a{
+            color:var(--accent); font-size:.82rem; font-weight:700; text-decoration:none;
+            white-space:nowrap;
+        }
+        .prototypeBanner a:hover{ text-decoration:underline; }
+        @media (max-width:640px){ .prototypeBanner__text span{ display:none; } }
+    </style>
+
+    <div class="prototypeBanner" role="banner">
+        <span class="prototypeBanner__text"><strong>Interaction prototype</strong> <span>— a UI/accessibility case study by No Name Productions, not a live streaming service.</span></span>
+        <a href="index.html#work">← Back to portfolio</a>
+    </div>
 
     <div class="layout">
         <!-- Sidebar Navigation -->
